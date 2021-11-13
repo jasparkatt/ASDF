@@ -33,20 +33,20 @@ class App(tk.Tk):
         self.species = ('Brown Trout', 'Rainbow Trout', 'Brook Trout', 'Steelhead', 'Lake Run Brown Trout', 'Carp', 'Smallmouth Bass',
                         'Largemouth Bass', 'Bluegill', 'Pumpkinseed', 'Perch', 'Walleye', 'Northern Pike', 'Musky', 'Bullhead')
         self.specieslabel_text = tk.StringVar()
-        self.specieslabel = ttk.Label(self, text='Select Species:', foreground='black', background='#FFEBF2', style='Data.TLabel')
+        self.specieslabel = ttk.Label(self, text='Select A Species:', foreground='black', background='#FFEBF2', style='Data.TLabel')
         self.specieslabel.grid(column=0, row=1, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
         self.specieslabel_combo = ttk.Combobox(self, textvariable=self.specieslabel_text)
         self.specieslabel_combo['values'] = self.species
         self.specieslabel_combo['state'] = 'readonly'
-        self.specieslabel_combo.grid(column=1, row=1, sticky=tk.E, padx=5, pady=5)
+        self.specieslabel_combo.grid(column=1, row=1, sticky=tk.EW, padx=5, pady=5)
         self.specieslabel_combo.bind('<<ComboboxSelected>>', species_selected)
 
         # stream name
         self.streamlabel_text = tk.StringVar()
         self.streamlabel = ttk.Label(self, text='Enter Stream Name:', foreground='black', background='#FFEBF2',style='Data.TLabel')
-        self.streamlabel.grid(column=0, row=2, sticky=tk.W, padx=5, pady=5, ipady=3, ipadx=3)
+        self.streamlabel.grid(column=0, row=3, sticky=tk.W, padx=5, pady=5, ipady=3, ipadx=3)
         self.streamlabel_entry = ttk.Entry(self, takefocus=0, cursor='hand1', textvariable=self.streamlabel_text)
-        self.streamlabel_entry.grid(column=1, row=2, sticky=tk.E, padx=5, pady=5)
+        self.streamlabel_entry.grid(column=1, row=3, sticky=tk.EW, padx=5, pady=5)
 
         # County name
         def county_selected(event):
@@ -95,13 +95,13 @@ class App(tk.Tk):
                     'Menominee',
                     'Milwaukee')
         self.countylabel = ttk.Label(self, text='Enter County Name:', foreground='black', background='#FFEBF2', style='Data.TLabel')
-        self.countylabel.grid(column=0, row=3, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
+        self.countylabel.grid(column=0, row=2, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
         self.countylabel_combo = ttk.Combobox(
             self, textvariable=self.countylabel_text)
         self.countylabel_combo['values'] = self.county
         self.countylabel_combo['state'] = 'readonly'
         self.countylabel_combo.grid(
-            column=1, row=3, sticky=tk.E, padx=5, pady=5)
+            column=1, row=2, sticky=tk.EW, padx=5, pady=5)
         self.countylabel_combo.bind('<<ComboboxSelected>>', county_selected)
 
         
