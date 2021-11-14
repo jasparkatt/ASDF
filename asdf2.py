@@ -1,6 +1,10 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import font
 from tkinter.constants import EW, NS, NSEW
+
+
+
 
 
 def topheader_frame(container):
@@ -17,9 +21,9 @@ def leftside_frame(container):
 
 # create our rightside frame
 def rightside_frame(container):
-    right_labelframe = ttk.LabelFrame(container, text='Place Data', labelanchor='n',borderwidth=4)
+    right_labelframe = ttk.LabelFrame(container, text='Place Data', labelanchor='n', borderwidth=4)
+    return right_labelframe
 
-    return right_labelframe    
 # create our main app window
 def create_main_window():
     #create root
@@ -28,15 +32,18 @@ def create_main_window():
     root.geometry('600x600+15+15')
     root.iconbitmap('./assets/favicon_sa.ico')
     root.resizable(True, True)
-    root.configure(bg='#F0F0F0')
-    
+    root.configure(bg='#FFEBF2')
+    # create our style library
+    style = ttk.Style()
+    style.theme_use('winnative')
+    # the below is automagically applied to any labelframe label txt
+    style.configure('TLabelframe.Label', font=('Fira Code', 10))
+
     #add our other frames
     top_frame = topheader_frame(root)
     top_frame.pack(side='top',expand=0,fill='both',ipady=15,ipadx=15,pady=3,padx=3)
-
     right_frame = rightside_frame(root)
     right_frame.pack(side='right',expand=1,fill='both',ipady=2,ipadx=2,pady=3,padx=3)
-
     left_frame = leftside_frame(root)
     left_frame.pack(side='left',expand=1,fill='both',ipady=2, ipadx=2, pady=3, padx=3)
     # run mainlooop on the root 
