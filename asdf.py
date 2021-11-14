@@ -3,14 +3,13 @@ from tkinter import StringVar, ttk
 from tkinter.messagebox import showerror, showinfo, askretrycancel
 
 
-
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
         # set some params for main 'App' window
         self.title('ASDF')
         self.geometry('350x350+15+25')
-        self.resizable(True,True)
+        self.resizable(True, True)
         self.iconbitmap('./assets/favicon_sa.ico')
         self.configure(bg='#FFEBF2')
         # set App window grid
@@ -19,10 +18,10 @@ class App(tk.Tk):
         self.columnconfigure(2, weight=1)
 
         #add label frame
-        self.mainlabelframe = ttk.LabelFrame(self)   
+        self.mainlabelframe = ttk.LabelFrame(self)
         self.mainlabelframe.grid(row=0, columnspan=3, sticky='NSEW', padx=2, pady=2, ipadx=4, ipady=4)
-        self.heading = ttk.Label(self.mainlabelframe, foreground='black',style='Heading.TLabel', text='Fishing Spots')
-        self.heading.grid(column=1, row=0, rowspan=1, pady=4, padx=4, sticky=tk.NS)
+        self.heading = ttk.Label(self.mainlabelframe, foreground='black', style='Heading.TLabel', text='Fishing Spots')
+        self.heading.grid(column=1, row=0, rowspan=1,pady=4, padx=4, sticky=tk.NS)
 
         # data entry label and entry box creation
         # Species caught
@@ -43,8 +42,8 @@ class App(tk.Tk):
 
         # stream name
         self.streamlabel_text = tk.StringVar()
-        self.streamlabel = ttk.Label(self, text='Enter Stream Name:', foreground='black', background='#FFEBF2',style='Data.TLabel')
-        self.streamlabel.grid(column=0, row=3, sticky=tk.W, padx=5, pady=5, ipady=3, ipadx=3)
+        self.streamlabel = ttk.Label(self, text='Enter Stream Name:',foreground='black', background='#FFEBF2', style='Data.TLabel')
+        self.streamlabel.grid(column=0, row=3, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
         self.streamlabel_entry = ttk.Entry(self, takefocus=0, cursor='hand1', textvariable=self.streamlabel_text)
         self.streamlabel_entry.grid(column=1, row=3, sticky=tk.EW, padx=5, pady=5)
 
@@ -53,58 +52,25 @@ class App(tk.Tk):
             msg = f'You selected {self.countylabel_text.get()}!'
             showinfo(title='Result', message=msg)
         self.countylabel_text = tk.StringVar()
-        self.county = ('Adams',
-                    'Ashland',
-                    'Barron',
-                    'Bayfield',
-                    'Brown',
-                    'Buffalo',
-                    'Burnett',
-                    'Calumet',
-                    'Chippewa',
-                    'Clark',
-                    'Columbia',
-                    'Crawford',
-                    'Dane',
-                    'Dodge',
-                    'Door',
-                    'Douglas',
-                    'Dunn',
-                    'Eau Claire',
-                    'Florence',
-                    'Fond du Lac',
-                    'Forest',
-                    'Grant',
-                    'Green',
-                    'Green Lake',
-                    'Iowa',
-                    'Iron',
-                    'Jackson',
-                    'Jefferson',
-                    'Juneau',
-                    'Kenosha',
-                    'Kewaunee',
-                    'La Crosse',
-                    'Lafayette',
-                    'Langlade',
-                    'Lincoln',
-                    'Manitowoc',
-                    'Marathon',
-                    'Marinette',
-                    'Marquette',
-                    'Menominee',
-                    'Milwaukee')
-        self.countylabel = ttk.Label(self, text='Enter County Name:', foreground='black', background='#FFEBF2', style='Data.TLabel')
+        self.county = ('Adams','Ashland','Barron','Bayfield','Brown','Buffalo','Burnett',
+                       'Calumet','Chippewa','Clark','Columbia','Crawford','Dane','Dodge',
+                       'Door','Douglas','Dunn','Eau Claire','Florence','Fond du Lac','Forest',
+                       'Grant','Green','Green Lake','Iowa','Iron','Jackson','Jefferson','Juneau',
+                       'Kenosha','Kewaunee','La Crosse','Lafayette','Langlade','Lincoln','Manitowoc',
+                       'Marathon','Marinette','Marquette','Menominee','Milwaukee','Monroe','Oconto',
+                       'Oneida', 'Outagamie', 'Ozaukee', 'Pepin', 'Pierce', 'Polk', 'Portage', 'Price',
+                       'Racine','Richland','Rock','Rusk','Saint Croix','Sauk','Sawyer','Shawano','Sheboygan',
+                       'Taylor','Trempealeau','Vernon','Vilas','Walworth','Washburn','Washington',
+                       'Waukesha', 'Waupaca', 'Waushara', 'Winnebago', 'Wood'
+                       )
+        self.countylabel = ttk.Label(self, text='Enter County Name:',foreground='black', background='#FFEBF2', style='Data.TLabel')
         self.countylabel.grid(column=0, row=2, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
-        self.countylabel_combo = ttk.Combobox(
-            self, textvariable=self.countylabel_text)
+        self.countylabel_combo = ttk.Combobox(self, textvariable=self.countylabel_text)
         self.countylabel_combo['values'] = self.county
         self.countylabel_combo['state'] = 'readonly'
-        self.countylabel_combo.grid(
-            column=1, row=2, sticky=tk.EW, padx=5, pady=5)
+        self.countylabel_combo.grid(column=1, row=2, sticky=tk.EW, padx=5, pady=5)
         self.countylabel_combo.bind('<<ComboboxSelected>>', county_selected)
 
-        
         # style library
         self.style = ttk.Style(self)
         self.style.theme_use('winnative')
