@@ -8,7 +8,7 @@ class App(tk.Tk):
         super().__init__()
         # set some params for main 'App' window
         self.title('ASDF')
-        self.geometry('350x350+15+25')
+        self.geometry('350x550+15+25')
         self.resizable(True, True)
         self.iconbitmap('./assets/favicon_sa.ico')
         self.configure(bg='#FFEBF2')
@@ -42,10 +42,10 @@ class App(tk.Tk):
 
         # stream name
         self.streamlabel_text = tk.StringVar()
-        self.streamlabel = ttk.Label(self, text='Enter Stream Name:',foreground='black', background='#FFEBF2', style='Data.TLabel')
-        self.streamlabel.grid(column=0, row=3, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
+        self.streamlabel = ttk.Label(self, text='Enter A Stream Name:',foreground='black', background='#FFEBF2', style='Data.TLabel')
+        self.streamlabel.grid(column=0, row=4, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
         self.streamlabel_entry = ttk.Entry(self, takefocus=0, cursor='hand1', textvariable=self.streamlabel_text)
-        self.streamlabel_entry.grid(column=1, row=3, sticky=tk.EW, padx=5, pady=5)
+        self.streamlabel_entry.grid(column=1, row=4, sticky=tk.EW, padx=5, pady=5)
 
         # County name
         def county_selected(event):
@@ -70,6 +70,29 @@ class App(tk.Tk):
         self.countylabel_combo['state'] = 'readonly'
         self.countylabel_combo.grid(column=1, row=2, sticky=tk.EW, padx=5, pady=5)
         self.countylabel_combo.bind('<<ComboboxSelected>>', county_selected)
+        # add a break
+        self.breakframe = tk.Frame(self, width=350, height=15, bd=3, relief="ridge", background='Cadet Blue')
+        self.breakframe.grid(row=3,columnspan=3)        
+        # add watertype dropdown box
+
+        def watertype_selected(event):
+            msg = f'You selected {self.watertypelabel_text.get()}!'
+            showinfo(title='Result', message=msg)
+
+        self.watertypes = ('Warm', 'Cool', 'Cold', 'Variable')
+        self.watertypelabel_text = tk.StringVar()
+        self.watertypelabel = ttk.Label(
+            self, text='Select A Water Type:', foreground='black', background='#FFEBF2', style='Data.TLabel')
+        self.watertypelabel.grid(column=0, row=5, sticky=tk.W,
+                               padx=5, pady=5, ipady=3, ipadx=3)
+        self.watertypelabel_combo = ttk.Combobox(
+            self, textvariable=self.watertypelabel_text)
+        self.watertypelabel_combo['values'] = self.watertypes
+        self.watertypelabel_combo['state'] = 'readonly'
+        self.watertypelabel_combo.grid(
+            column=1, row=5, sticky=tk.EW, padx=5, pady=5)
+        self.watertypelabel_combo.bind('<<ComboboxSelected>>', watertype_selected)
+        
 
         # style library
         self.style = ttk.Style(self)
