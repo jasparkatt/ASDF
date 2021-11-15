@@ -6,20 +6,25 @@ from tkinter.constants import EW, NS, NSEW
 
 def topheader_frame(container):
     #add label frame
-    top_labelframe = ttk.LabelFrame(container, text='ASDF Home', labelanchor='n', borderwidth=4)    
+    top_labelframe = ttk.LabelFrame(container, text='ASDF', labelanchor='n', borderwidth=4)    
     # return the toplevel frame
     return top_labelframe
 
 # create our 'footer' frame at bottom
 def bottom_frame(container):
-    bottom_labelframe = ttk.LabelFrame(container, borderwidth=4, text='A 2021 Left-Handed Production', labelanchor='s')
+    bottom_labelframe = ttk.LabelFrame(container, borderwidth=4, text='A 2021 Left-Handed Production', labelanchor='s', style='Bottom.TLabelframe')
     return bottom_labelframe
 
 # create our left side frame
 def leftside_frame(container):
     # add our labelframe
     left_labelframe = ttk.LabelFrame(container, text='Water Data', labelanchor='n',borderwidth=4)
-    
+    # enter water body name
+    streamlabel_text = tk.StringVar()
+    streamlabel = ttk.Label(left_labelframe, text='Enter A Stream Name:',foreground='black', background='#FFEBF2', style='Data.TLabel')
+    streamlabel.grid(column=0, row=4, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
+    streamlabel_entry = ttk.Entry(left_labelframe, takefocus=0, cursor='hand1', textvariable=streamlabel_text)
+    streamlabel_entry.grid(column=1, row=4, sticky=tk.EW, padx=5, pady=5)    
         
     return left_labelframe
 
@@ -34,7 +39,7 @@ def rightside_frame(container):
 def create_main_window():
     #create root
     root = tk.Tk()
-    root.title('AGO Login')
+    root.title('ASDF Log')
     root.geometry('600x600+15+15')
     root.iconbitmap('./assets/favicon_sa.ico')
     root.resizable(True, True)
@@ -43,9 +48,10 @@ def create_main_window():
     style = ttk.Style()
     style.theme_use('winnative')
     # the below is automagically applied to any labelframe label txt
-    style.configure('TLabelframe.Label', font=('Fira Code', 9))
-    style.configure('Bottom.TLabelframe.Label', font=('Palatino Linotype', 8))
-
+    style.configure('TLabelframe.Label', font=('Red Hat Text', 7, 'italic'))
+    style.configure('Bottom.TLabelframe.Label', font=('Palatino Linotype', 12))
+    style.configure('TLabel', font=('Fira Mono', 9))
+    style.configure('Data.TLabel', font=('Roboto Mono', 9))
     #add our other frames
     # maintain this order of adding frames to keep footer correct
     top_frame = topheader_frame(root)
