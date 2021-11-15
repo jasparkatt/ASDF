@@ -22,9 +22,10 @@ def leftside_frame(container):
     # enter water body name
     streamlabel_text = tk.StringVar()
     streamlabel = ttk.Label(left_labelframe, text='Enter A Stream Name:',foreground='black', background='#FFEBF2', style='Data.TLabel')
-    streamlabel.grid(column=0, row=4, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
+    streamlabel.grid(column=0, row=1, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
     streamlabel_entry = ttk.Entry(left_labelframe, takefocus=0, cursor='hand1', textvariable=streamlabel_text)
-    streamlabel_entry.grid(column=1, row=4, sticky=tk.EW, padx=5, pady=5)    
+    streamlabel_entry.grid(column=1, row=1, sticky=tk.EW, padx=5, pady=5)
+    # add county selector    
         
     return left_labelframe
 
@@ -48,10 +49,10 @@ def create_main_window():
     style = ttk.Style()
     style.theme_use('winnative')
     # the below is automagically applied to any labelframe label txt
-    style.configure('TLabelframe.Label', font=('Red Hat Text', 7, 'italic'))
-    style.configure('Bottom.TLabelframe.Label', font=('Palatino Linotype', 12))
+    style.configure('TLabelframe.Label', font=('Red Hat Text',10))
+    style.configure('Bottom.TLabelframe.Label', font=('Book Antiqua', 8))
     style.configure('TLabel', font=('Fira Mono', 9))
-    style.configure('Data.TLabel', font=('Roboto Mono', 9))
+    style.configure('Data.TLabel', font=('Cutive Mono', 11))
     #add our other frames
     # maintain this order of adding frames to keep footer correct
     top_frame = topheader_frame(root)
