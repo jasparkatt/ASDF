@@ -34,6 +34,8 @@ def leftside_frame(container):
 # create our rightside frame
 def rightside_frame(container):
     right_labelframe = ttk.LabelFrame(container, text='Place Data', labelanchor='n', borderwidth=4)
+    right_labelframe.columnconfigure(0, weight=1)
+    right_labelframe.columnconfigure(1, weight=1)
     return right_labelframe
 
 
