@@ -85,7 +85,7 @@ def rightside_frame(container):
     countylabel_combo = ttk.Combobox(right_labelframe, textvariable=countylabel_text)
     countylabel_combo['values'] = county
     countylabel_combo['state'] = 'readonly'
-    countylabel_combo.grid(column=1, row=1, sticky=tk.EW, padx=5, pady=5)
+    countylabel_combo.grid(column=1, row=1, sticky=tk.EW)
     countylabel_combo.bind('<<ComboboxSelected>>', county_selected)
     
     #
