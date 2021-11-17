@@ -13,7 +13,7 @@ def topheader_frame(container):
     return top_labelframe
 
 # create our 'footer' frame at bottom
-
+# add submit and exit buttons to bottom frame
 
 def bottom_frame(container):
     bottom_labelframe = ttk.LabelFrame(
@@ -62,11 +62,11 @@ def rightside_frame(container):
     right_labelframe.columnconfigure(0, weight=1)
     right_labelframe.columnconfigure(1, weight=1)
     # add county select chunk
-    def mssg_selected(event):
-        msg = f'You selected {mssglabel_text.get()}!'
+    def county_selected(event):
+        msg = f'You selected {countylabel_text.get()}!'
         showinfo(title='Result', message=msg)
 
-    mssglabel_text = tk.StringVar()
+    countylabel_text = tk.StringVar()
     county = ('Adams','Ashland','Barron','Bayfield','Brown','Buffalo','Burnett',
                        'Calumet','Chippewa','Clark','Columbia','Crawford','Dane','Dodge',
                        'Door','Douglas','Dunn','Eau Claire','Florence','Fond du Lac','Forest',
@@ -80,29 +80,44 @@ def rightside_frame(container):
                        )
     countylabel = ttk.Label(right_labelframe, text='Enter County Name:',foreground='black', background='#FFEBF2', style='Data.TLabel')
     countylabel.grid(column=0, row=1, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
-    countylabel_combo = ttk.Combobox(right_labelframe, textvariable=mssglabel_text)
+    countylabel_combo = ttk.Combobox(right_labelframe, textvariable=countylabel_text)
     countylabel_combo['values'] = county
     countylabel_combo['state'] = 'readonly'
     countylabel_combo.grid(column=1, row=1, sticky=tk.EW)
-    countylabel_combo.bind('<<ComboboxSelected>>', mssg_selected)
+    countylabel_combo.bind('<<ComboboxSelected>>', county_selected)
     
     # create combo box for access type i.e. public, row, private
-    def mssg_selected(event):
-        msg = f'You selected {mssglabel_text.get()}!'
+    def access_selected(event):
+        msg = f'You selected {accesslabel_text.get()}!'
         showinfo(title='Result', message=msg)
 
-    mssglabel_text = tk.StringVar()
+    accesslabel_text = tk.StringVar()
     access = ('Public-DNR','Public-County','Public-Other','ROW-Bridge','Private')
     accesslabel = ttk.Label(right_labelframe, text='Enter Access Type',foreground='black', background='#FFEBF2', style='Data.TLabel')
     accesslabel.grid(column=0, row=2, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
-    accesslabel_combo = ttk.Combobox(right_labelframe, textvariable=mssglabel_text)
+    accesslabel_combo = ttk.Combobox(right_labelframe, textvariable=accesslabel_text)
     accesslabel_combo['values'] = access
     accesslabel_combo['state'] = 'readonly'
     accesslabel_combo.grid(column=1, row=2, sticky=tk.EW)
-    accesslabel_combo.bind('<<ComboboxSelected>>', mssg_selected)
+    accesslabel_combo.bind('<<ComboboxSelected>>', access_selected)
 
     # combo box for ownership type i.e public, private, state, county, local, nonprofit etc
+    def ownership_selected(event):
+        msg = f'You selected {ownershiptype_text.get()}!'
+        showinfo(title='Result', message=msg)
+
+    ownershiptype_text = tk.StringVar()
+    ownership = ('Public-State', 'Public-County', 'Public-Local','Private-Permission','Private-With Easement','Private-Public(i.e.MFL Open)')
+    ownershiplabel = ttk.Label(right_labelframe, text='Enter Owner Type',foreground='black', background='#FFEBF2', style='Data.TLabel')
+    ownershiplabel.grid(column=0, row=3, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
+    ownershiplabel_combo = ttk.Combobox(right_labelframe,textvariable=ownershiptype_text)
+    ownershiplabel_combo['values'] = ownership
+    ownershiplabel_combo['state'] = 'readonly'
+    ownershiplabel_combo.grid(column=1, row=3, sticky=tk.EW)
+    ownershiplabel_combo.bind('<<ComboboxSelected>>', ownership_selected)
+    
     # create a entry box for name of acces. i.e CTY HWY T access or HWY 21 access on w br of wh
+    
     return right_labelframe
 
 
@@ -117,7 +132,7 @@ def create_main_window():
     root.configure(bg='#FFEBF2')
     # create our style library
     style = ttk.Style()
-    style.theme_use('vista')
+    style.theme_use('xpnative')
     # the below is automagically applied to any labelframe label txt
     style.configure('TLabelframe.Label', font=('Red Hat Text', 11))    
     style.configure('TLabel', font=('Fira Mono', 9))
@@ -130,7 +145,7 @@ def create_main_window():
                    ipady=15, ipadx=15, pady=3, padx=3)
     footer_frame = bottom_frame(root)
     footer_frame.pack(side='bottom', expand=0, fill='x',
-                      ipady=15, ipadx=15, pady=3, padx=3)
+                      ipady=20, ipadx=20, pady=3, padx=3)
     right_frame = rightside_frame(root)
     right_frame.pack(side='right', expand=1, fill='both',
                      ipady=3, ipadx=3, pady=3, padx=3)
