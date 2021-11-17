@@ -36,6 +36,7 @@ def leftside_frame(container):
     streamlabel.grid(column=0, row=1, sticky=tk.W)
     streamlabel_entry = ttk.Entry(left_labelframe, takefocus=0, cursor='hand1', textvariable=streamlabel_text)
     streamlabel_entry.grid(column=1, row=1, sticky=tk.EW)
+    
     # add species type
     def species_selected(event):
         msg = f'You selected {specieslabel_text.get()}!'
@@ -63,12 +64,12 @@ def rightside_frame(container):
         container, text='Place Data', labelanchor='n', borderwidth=4)
     right_labelframe.columnconfigure(0, weight=1)
     right_labelframe.columnconfigure(1, weight=1)
-    # add species select chunk
-    def county_selected(event):
-        msg = f'You selected {countylabel_text.get()}!'
+    # add county select chunk
+    def mssg_selected(event):
+        msg = f'You selected {mssglabel_text.get()}!'
         showinfo(title='Result', message=msg)
 
-    countylabel_text = tk.StringVar()
+    mssglabel_text = tk.StringVar()
     county = ('Adams','Ashland','Barron','Bayfield','Brown','Buffalo','Burnett',
                        'Calumet','Chippewa','Clark','Columbia','Crawford','Dane','Dodge',
                        'Door','Douglas','Dunn','Eau Claire','Florence','Fond du Lac','Forest',
@@ -82,13 +83,29 @@ def rightside_frame(container):
                        )
     countylabel = ttk.Label(right_labelframe, text='Enter County Name:',foreground='black', background='#FFEBF2', style='Data.TLabel')
     countylabel.grid(column=0, row=1, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
-    countylabel_combo = ttk.Combobox(right_labelframe, textvariable=countylabel_text)
+    countylabel_combo = ttk.Combobox(right_labelframe, textvariable=mssglabel_text)
     countylabel_combo['values'] = county
     countylabel_combo['state'] = 'readonly'
     countylabel_combo.grid(column=1, row=1, sticky=tk.EW)
-    countylabel_combo.bind('<<ComboboxSelected>>', county_selected)
+    countylabel_combo.bind('<<ComboboxSelected>>', mssg_selected)
     
-    #
+    # create combo box for access type i.e. public, row, private
+    def mssg_selected(event):
+        msg = f'You selected {mssglabel_text.get()}!'
+        showinfo(title='Result', message=msg)
+
+    mssglabel_text = tk.StringVar()
+    access = ('Public-DNR','Public-County','Public-Other','ROW-Bridge','Private')
+    accesslabel = ttk.Label(right_labelframe, text='Enter Access Type',foreground='black', background='#FFEBF2', style='Data.TLabel')
+    accesslabel.grid(column=0, row=2, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
+    accesslabel_combo = ttk.Combobox(right_labelframe, textvariable=mssglabel_text)
+    accesslabel_combo['values'] = access
+    accesslabel_combo['state'] = 'readonly'
+    accesslabel_combo.grid(column=1, row=2, sticky=tk.EW)
+    accesslabel_combo.bind('<<ComboboxSelected>>', mssg_selected)
+
+    # combo box for ownership type i.e public, private, state, county, local, nonprofit etc
+    # create a entry box for name of acces. i.e CTY HWY T access or HWY 21 access on w br of wh
     return right_labelframe
 
 
