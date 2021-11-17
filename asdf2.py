@@ -117,6 +117,7 @@ def rightside_frame(container):
     ownershiplabel_combo.bind('<<ComboboxSelected>>', ownership_selected)
     
     # create a entry box for name of acces. i.e CTY HWY T access or HWY 21 access on w br of wh
+    # create a datepicker from tkcalender. need to pip install it first
     
     return right_labelframe
 
