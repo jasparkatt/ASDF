@@ -20,9 +20,8 @@ def bottom_frame(container):
         container, borderwidth=4, text='A 2021 Left-Handed Production', labelanchor='s', style='Bottom.TLabelframe')
     return bottom_labelframe
 
-# create our left side frame
 
-
+# water data left side frame
 def leftside_frame(container):
     # add our labelframe
     left_labelframe = ttk.LabelFrame(
@@ -33,7 +32,7 @@ def leftside_frame(container):
     # enter water body name
     streamlabel_text = tk.StringVar()
     streamlabel = ttk.Label(left_labelframe, text='Water Fished(Name):',foreground='black', background='#FFEBF2', style='Data.TLabel')
-    streamlabel.grid(column=0, row=1, sticky=tk.W)
+    streamlabel.grid(column=0, row=1, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
     streamlabel_entry = ttk.Entry(left_labelframe, takefocus=0, cursor='hand1', textvariable=streamlabel_text)
     streamlabel_entry.grid(column=1, row=1, sticky=tk.EW)
     
@@ -56,9 +55,7 @@ def leftside_frame(container):
 
     return left_labelframe
 
-# create our rightside frame
-
-
+# create place data right side frame
 def rightside_frame(container):
     right_labelframe = ttk.LabelFrame(
         container, text='Place Data', labelanchor='n', borderwidth=4)
