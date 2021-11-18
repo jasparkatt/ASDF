@@ -8,7 +8,7 @@ from tkcalendar import DateEntry, Calendar
 def topheader_frame(container):
     # add label frame
     top_labelframe = ttk.LabelFrame(
-        container, text='Log Book', labelanchor='n', borderwidth=4)
+        container, text='Log Book', labelanchor='n', style='Top.TLabelframe')
     # return the toplevel frame
     return top_labelframe
 
@@ -25,7 +25,7 @@ def bottom_frame(container):
 def leftside_frame(container):
     # add our labelframe
     left_labelframe = ttk.LabelFrame(
-        container, text='Water Data', labelanchor='n', borderwidth=4)
+        container, text='Water Data', labelanchor='n')
     left_labelframe.columnconfigure(0, weight=1)
     left_labelframe.columnconfigure(1, weight=1)
 
@@ -79,7 +79,7 @@ def leftside_frame(container):
 # create place data right side frame
 def rightside_frame(container):
     right_labelframe = ttk.LabelFrame(
-        container, text='Place Data', labelanchor='n', borderwidth=4)
+        container, text='Place Data', labelanchor='n')
     right_labelframe.columnconfigure(0, weight=1)
     right_labelframe.columnconfigure(1, weight=1)
     # add county select chunk
@@ -163,9 +163,10 @@ def create_main_window():
     # create our style library
     style = ttk.Style()
     style.theme_use('vista')
-    # the below is automagically applied to any labelframe label txt
+    # the below is automagically applied to any labelframe label txt    
     style.configure('TLabelframe.Label', font=('Red Hat Text', 11))    
     style.configure('TLabel', font=('Fira Mono', 9))
+    style.configure('Bottom.TLabelframe', bd=4, bc='Black')
     style.configure('Bottom.TLabelframe.Label', font=('Book Antiqua', 9))
     style.configure('Data.TLabel', font=('Roboto Mono', 9))
     # add our other frames
