@@ -6,13 +6,13 @@ from tkinter.constants import EW, NS, NSEW
 
 def topheader_frame(container):
     #add label frame
-    top_labelframe = ttk.LabelFrame(container, text='ASDF Home', labelanchor='n', borderwidth=4)    
+    top_labelframe = ttk.LabelFrame(container, text='ASDF Home', labelanchor='n', borderwidth=2)    
     # return the toplevel frame
     return top_labelframe
 
 # create our 'footer' frame at bottom
 def bottom_frame(container):
-    bottom_labelframe = ttk.LabelFrame(container, borderwidth=4, text='Footnotes & Thankyous', labelanchor='s')
+    bottom_labelframe = ttk.LabelFrame(container, borderwidth=2, text='Footnotes & Thankyous', labelanchor='s')
     return bottom_labelframe
 
 # create our left side frame
