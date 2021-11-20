@@ -31,7 +31,7 @@ def leftside_frame(container):
 
     # enter water body name
     streamlabel_text = tk.StringVar()
-    streamlabel = ttk.Label(left_labelframe, text='Water Fished(Name):',foreground='black', background='#FFEBF2', style='Data.TLabel')
+    streamlabel = ttk.Label(left_labelframe, text='Water Fished(Name):',foreground='black', background='', style='Data.TLabel')
     streamlabel.grid(column=0, row=1, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
     streamlabel_entry = ttk.Entry(left_labelframe, takefocus=0, cursor='hand1', textvariable=streamlabel_text)
     streamlabel_entry.grid(column=1, row=1, sticky=tk.EW)
@@ -45,7 +45,7 @@ def leftside_frame(container):
     watertypes = ('Cold','Cool','Warm','Cold-Cool','Cool-Warm')
     watertype_text = tk.StringVar()
     watertypelabel = ttk.Label(left_labelframe, text='Water Type(Temp):',
-                             foreground='black', background='#FFEBF2', style='Data.TLabel')
+                             foreground='black', background='', style='Data.TLabel')
     watertypelabel.grid(column=0, row=3, sticky=tk.W,
                       padx=5, pady=5, ipady=3, ipadx=3)
     watertypelabel_combo = ttk.Combobox(
@@ -66,7 +66,7 @@ def leftside_frame(container):
     species = ('Brown Trout', 'Rainbow Trout', 'Brook Trout', 'Steelhead', 'Lake Run Brown Trout', 'Carp', 'Smallmouth Bass',
                'Largemouth Bass', 'Bluegill', 'Pumpkinseed', 'Perch', 'Walleye', 'Northern Pike', 'Musky', 'Bullhead')
     specieslabel_text = tk.StringVar()
-    specieslabel = ttk.Label(left_labelframe,text='Select Species Caught:', foreground='black', background='#FFEBF2', style='Data.TLabel')
+    specieslabel = ttk.Label(left_labelframe,text='Select Species Caught:', foreground='black', background='', style='Data.TLabel')
     specieslabel.grid(column=0, row=2, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
     specieslabel_combo = ttk.Combobox(left_labelframe, textvariable=specieslabel_text)
     specieslabel_combo['values'] = species
@@ -99,7 +99,7 @@ def rightside_frame(container):
                        'Taylor','Trempealeau','Vernon','Vilas','Walworth','Washburn','Washington',
                        'Waukesha', 'Waupaca', 'Waushara', 'Winnebago', 'Wood'
                        )
-    countylabel = ttk.Label(right_labelframe, text='Enter County Name:',foreground='black', background='#FFEBF2', style='Data.TLabel')
+    countylabel = ttk.Label(right_labelframe, text='Enter County Name:',foreground='black', background='', style='Data.TLabel')
     countylabel.grid(column=0, row=1, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
     countylabel_combo = ttk.Combobox(right_labelframe, textvariable=countylabel_text)
     countylabel_combo['values'] = county
@@ -114,7 +114,7 @@ def rightside_frame(container):
 
     accesslabel_text = tk.StringVar()
     access = ('Public-DNR','Public-County','Public-Other','ROW-Bridge','Private')
-    accesslabel = ttk.Label(right_labelframe, text='Enter Access Type:',foreground='black', background='#FFEBF2', style='Data.TLabel')
+    accesslabel = ttk.Label(right_labelframe, text='Enter Access Type:',foreground='black', background='', style='Data.TLabel')
     accesslabel.grid(column=0, row=2, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
     accesslabel_combo = ttk.Combobox(right_labelframe, textvariable=accesslabel_text)
     accesslabel_combo['values'] = access
@@ -129,7 +129,7 @@ def rightside_frame(container):
 
     ownershiptype_text = tk.StringVar()
     ownership = ('Public-State', 'Public-County', 'Public-Local','Private-Permission','Private-With Easement','Private-Public(i.e.MFL Open)')
-    ownershiplabel = ttk.Label(right_labelframe, text='Enter Owner Type:',foreground='black', background='#FFEBF2', style='Data.TLabel')
+    ownershiplabel = ttk.Label(right_labelframe, text='Enter Owner Type:',foreground='black', background='', style='Data.TLabel')
     ownershiplabel.grid(column=0, row=3, sticky=tk.W,padx=5, pady=5, ipady=3, ipadx=3)
     ownershiplabel_combo = ttk.Combobox(right_labelframe,textvariable=ownershiptype_text)
     ownershiplabel_combo['values'] = ownership
@@ -140,7 +140,7 @@ def rightside_frame(container):
     # create a entry box for name of acces. i.e CTY HWY T access or HWY 21 access on w br of wh
     accessnamelabel_text = tk.StringVar()
     accesslabel = ttk.Label(right_labelframe, text='Enter Access Name:',
-                            foreground='black', background='#FFEBF2', style='Data.TLabel')
+                            foreground='black', background='', style='Data.TLabel')
     accesslabel.grid(column=0, row=4, sticky=tk.W,
                      padx=5, pady=5, ipady=3, ipadx=3)
     accesslabel_entry = ttk.Entry(
@@ -159,10 +159,10 @@ def create_main_window():
     root.geometry('800x600+295+55')
     root.iconbitmap('./assets/favicon_sa.ico')
     root.resizable(True, True)
-    root.configure(bg='#FFEBF2')
+    root.configure(bg='',relief='raised')
     # create our style library
     style = ttk.Style()
-    style.theme_use('vista')
+    style.theme_use('default')
     # the below is automagically applied to any labelframe label txt    
     style.configure('TLabelframe.Label', font=('Red Hat Text', 11))    
     style.configure('TLabel', font=('Fira Mono', 9))
