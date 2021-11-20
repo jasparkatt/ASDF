@@ -88,7 +88,8 @@ def create_main_window():
     #create our new style library
     style = ttk.Style()
     style.theme_create('style', parent='alt', 
-    settings = { 'TLabelframe': {
+    settings = { 
+    'TLabelframe': {
         'configure': {
             'background': 'white',
             'relief': 'solid', # has to be 'solid' to color 
@@ -104,10 +105,12 @@ def create_main_window():
     },
     'TLabel': {
         'configure': {
-            'font':'Fira Code',
-            'foreground':'black'
+            'font': ('Fira Code',9),
+            'foreground': 'black'
         }
-    }    
+    }
+
+    
 })
     style.theme_use('style')
 

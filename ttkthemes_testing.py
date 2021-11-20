@@ -104,7 +104,7 @@ def create_main_window():
     },
     'TLabel': {
         'configure': {
-            'font':'Fira Code',
+            'font':('Fira Code',9),
             'foreground':'black'
         }
     }    
