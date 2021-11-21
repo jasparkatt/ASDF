@@ -4,6 +4,7 @@ from tkinter import font
 from tkinter.constants import EW, NS, NSEW
 from tkinter.messagebox import showerror, showinfo, askretrycancel
 from tkcalendar import DateEntry, Calendar
+from ttkbootstrap import Style
 
 def topheader_frame(container):
     # add label frame
@@ -161,8 +162,8 @@ def create_main_window():
     root.resizable(True, True)
     root.configure(bg='',relief='raised')
     # create our style library
-    style = ttk.Style()
-    style.theme_use('default')
+    style = Style(theme='spiritfallsdk4',
+                  themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
     # the below is automagically applied to any labelframe label txt    
     style.configure('TLabelframe.Label', font=('Red Hat Text', 11))    
     style.configure('TLabel', font=('Fira Mono', 9))
