@@ -1,0 +1,184 @@
+{
+	"themes": [
+		{
+			"name": "spiritfallslt",
+			"font": "Helvetica 10",
+			"type": "light",
+			"colors": {
+				"primary": "#150951",
+				"secondary": "#1d6d76",
+				"success": "#007700",
+				"info": "#a800a8",
+				"warning": "#d86510",
+				"danger": "#f5010a",
+				"bg": "#f5f5f5",
+				"fg": "#330033",
+				"selectbg": "#fd7e00",
+				"selectfg": "#eaf4ff",
+				"border": "#001c37",
+				"inputfg": "#000e1c",
+				"inputbg": "#ddeeff"
+			}
+		},
+		{
+			"name": "spiritfallsdk",
+			"font": "Tahoma 10",
+			"type": "dark",
+			"colors": {
+				"primary": "#375a7f",
+				"secondary": "#444444",
+				"success": "#00bc8c",
+				"info": "#3498db",
+				"warning": "#f39c12",
+				"danger": "#e74c3c",
+				"bg": "#002828",
+				"fg": "#ffffff",
+				"selectbg": "#444444",
+				"selectfg": "#ffffff",
+				"border": "#222222",
+				"inputfg": "#333333",
+				"inputbg": "#adb5bd"
+			}
+		},
+		{
+			"name": "spiritfallsdk2",
+			"font": "Tahoma 10",
+			"type": "dark",
+			"colors": {
+				"primary": "#242eaa",
+				"secondary": "#444444",
+				"success": "#00bc8c",
+				"info": "#3498db",
+				"warning": "#f39c12",
+				"danger": "#e74c3c",
+				"bg": "#789dbb",
+				"fg": "#ffffff",
+				"selectbg": "#444444",
+				"selectfg": "#ffffff",
+				"border": "#8f1e5d",
+				"inputfg": "#333333",
+				"inputbg": "#adb5bd"
+			}
+		},
+		{
+			"name": "spiritfallslt2",
+			"font": "Helvetica 10",
+			"type": "light",
+			"colors": {
+				"primary": "#01665e",
+				"secondary": "#5ab4ac",
+				"success": "#d8b365",
+				"info": "#3498db",
+				"warning": "#f39c12",
+				"danger": "#e74c3c",
+				"bg": "#ffffec",
+				"fg": "#212529",
+				"selectbg": "#95a5a6",
+				"selectfg": "#ffffff",
+				"border": "#2e3849",
+				"inputfg": "#212529",
+				"inputbg": "#ecf0f1"
+			}
+		},
+		{
+			"name": "spiritfallslt3",
+			"font": "Helvetica 10",
+			"type": "light",
+			"colors": {
+				"primary": "#00274f",
+				"secondary": "#0053a6",
+				"success": "#0d86ff",
+				"info": "#5badff",
+				"warning": "#f58f52",
+				"danger": "#e74c3c",
+				"bg": "#ffffff",
+				"fg": "#212529",
+				"selectbg": "#8e95dd",
+				"selectfg": "#ffffff",
+				"border": "#2d3495",
+				"inputfg": "#212529",
+				"inputbg": "#ecf0f1"
+			}
+		},
+		{
+			"name": "spiritfallslt4",
+			"font": "Helvetica 10",
+			"type": "light",
+			"colors": {
+				"primary": "#000055",
+				"secondary": "#006f00",
+				"success": "#62c11c",
+				"info": "#a800a8",
+				"warning": "#ff8040",
+				"danger": "#e1031e",
+				"bg": "#ffffff",
+				"fg": "#212529",
+				"selectbg": "#95a5a6",
+				"selectfg": "#ffffff",
+				"border": "#000040",
+				"inputfg": "#212529",
+				"inputbg": "#ecf0f1"
+			}
+		},
+		{
+			"name": "spiritfallsdk3",
+			"font": "Helvetica 10",
+			"type": "dark",
+			"colors": {
+				"primary": "#605984",
+				"secondary": "#005b00",
+				"success": "#678132",
+				"info": "#6c91c8",
+				"warning": "#d0b148",
+				"danger": "#ee114e",
+				"bg": "#000017",
+				"fg": "#ffffff",
+				"selectbg": "#444444",
+				"selectfg": "#ffffff",
+				"border": "#009393",
+				"inputfg": "#333333",
+				"inputbg": "#adb5bd"
+			}
+		},
+		{
+			"name": "spiritfallslt5",
+			"font": "Helvetica 10",
+			"type": "light",
+			"colors": {
+				"primary": "#208fff",
+				"secondary": "#56c6fc",
+				"success": "#18bc9c",
+				"info": "#fea7f5",
+				"warning": "#fed37a",
+				"danger": "#fd887b",
+				"bg": "#d5eaff",
+				"fg": "#000204",
+				"selectbg": "#a4a0b1",
+				"selectfg": "#eaf4ff",
+				"border": "#3f0959",
+				"inputfg": "#000204",
+				"inputbg": "#e1e1ff"
+			}
+		},
+		{
+			"name": "obridge",
+			"font": "Helvetica 10",
+			"type": "light",
+			"colors": {
+				"primary": "#1b1b1b",
+				"secondary": "#676767",
+				"success": "#b1b1b1",
+				"info": "#9595ff",
+				"warning": "#bbc817",
+				"danger": "#ff0000",
+				"bg": "#F0F5FF",
+				"fg": "#212529",
+				"selectbg": "#707476",
+				"selectfg": "#ffffff",
+				"border": "#000000",
+				"inputfg": "#212529",
+				"inputbg": "#c6c9ca"
+			}
+		}
+	]
+}
