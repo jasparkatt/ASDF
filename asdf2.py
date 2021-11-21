@@ -236,7 +236,7 @@ def create_main_window():
     root.configure(bg='#FFEBF2')
     # create our style library
     style = Style(
-        theme='newdark', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
+        theme='mitchellrd', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
     # the below is automagically applied to any labelframe label txt
     style.configure('TLabelframe.Label', font=('Fira Code', 11, 'italic'))
     style.configure('TLabel', font=('Fira Code', 9, 'italic'))
