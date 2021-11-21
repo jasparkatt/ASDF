@@ -20,7 +20,7 @@ def topheader_frame(container):
 
 def bottom_frame(container):
     bottom_labelframe = ttk.LabelFrame(
-        container, text='A 2021 Left-Handed Production', labelanchor='s', style='Bottom.TLabelframe')
+        container, text='A 2021 Left-Handed Production', labelanchor='n', style='Bottom.TLabelframe')
     bottom_labelframe.columnconfigure(0, weight=0)
     bottom_labelframe.columnconfigure(1, weight=1)
     bottom_labelframe.columnconfigure(2, weight=0)
@@ -224,6 +224,17 @@ def rightside_frame(container):
 
     return right_labelframe
 
+#create our table frame
+
+
+def tableside_frame(container):
+    table_labelframe = ttk.LabelFrame(
+        container, text='Table Data', labelanchor='n')
+    # add data from all the diff data entry, display as a table using treeview
+    
+    #table_labelframe.columnconfigure(0, weight=1)
+    #table_labelframe.columnconfigure(1, weight=1)
+    return table_labelframe
 
 # create our main app window
 def create_main_window():
@@ -236,7 +247,7 @@ def create_main_window():
     root.configure(bg='#FFEBF2')
     # create our style library
     style = Style(
-        theme='mitchellrd', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
+        theme='obridge', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
     # the below is automagically applied to any labelframe label txt
     style.configure('TLabelframe.Label', font=('Fira Code', 11, 'italic'))
     style.configure('TLabel', font=('Fira Code', 9, 'italic'))
@@ -254,12 +265,16 @@ def create_main_window():
     footer_frame = bottom_frame(root)
     footer_frame.pack(side='bottom', expand=0, fill='x',
                       ipady=3, ipadx=3, pady=5, padx=3)
+    table_frame = tableside_frame(root)
+    table_frame.pack(side='bottom', expand=1, fill='both',
+                     ipady=3, ipadx=3, pady=5, padx=5)
     right_frame = rightside_frame(root)
     right_frame.pack(side='right', expand=1, fill='both',
                      ipady=3, ipadx=3, pady=5, padx=5)
     left_frame = leftside_frame(root)
     left_frame.pack(side='left', expand=1, fill='both',
                     ipady=3, ipadx=3, pady=5, padx=5)
+    
 
     # run mainlooop on the root
     root.mainloop()
