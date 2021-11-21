@@ -72,7 +72,28 @@ def leftside_frame(container):
     watertypelabel_combo['values'] = watertypes
     watertypelabel_combo['state'] = 'readonly'
     watertypelabel_combo.grid(column=1, row=3, sticky=tk.EW, padx=5, pady=5)
-    watertypelabel_combo.bind('<<ComboboxSelected>>', watertype_selected)
+    watertypelabel_combo.bind('<<ComboboxSelected>>',
+                              watertype_selected)  # enter water type
+
+    def waterclass_selected(event):
+        msg = f'You selected {waterclass_text.get()}!'
+        showinfo(title='Result', message=msg)
+
+    waterclass = ('Class 1', 'Class 2', 'Class 3', 'Non-Trout Water')
+    waterclass_text = tk.StringVar()
+    waterclasslabel = ttk.Label(
+        left_labelframe, text='Water Class(Trout?):', style='Data.TLabel')
+    waterclasslabel.grid(column=0, row=5, sticky=tk.W,
+                        padx=5, pady=5, ipady=3, ipadx=3)
+    waterclasslabel_combo = ttk.Combobox(
+        left_labelframe, textvariable=waterclass_text)
+    waterclasslabel_combo['values'] = waterclass
+    waterclasslabel_combo['state'] = 'readonly'
+    waterclasslabel_combo.grid(column=1, row=5, sticky=tk.EW, padx=5, pady=5)
+    waterclasslabel_combo.bind('<<ComboboxSelected>>', waterclass_selected)
+
+
+
 
     # add species type
 
@@ -107,11 +128,11 @@ def leftside_frame(container):
 
     datebutton_label = ttk.Label(
         left_labelframe, text='Select Date:', style='Data.TLabel')
-    datebutton_label.grid(column=0, row=5, sticky=tk.W,
+    datebutton_label.grid(column=0, row=6, sticky=tk.W,
                           padx=5, pady=5, ipady=3, ipadx=3)
     date_button = ttk.Button(
         left_labelframe, style='info.Outline.TButton', text='Pick Date', command=pickadate)
-    date_button.grid(column=1, row=5, sticky=tk.EW,
+    date_button.grid(column=1, row=6, sticky=tk.EW,
                      padx=5, pady=5, ipadx=1, ipady=1)
 
     return left_labelframe
@@ -215,7 +236,7 @@ def create_main_window():
     root.configure(bg='#FFEBF2')
     # create our style library
     style = Style(
-        theme='obridge', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
+        theme='newdark', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
     # the below is automagically applied to any labelframe label txt
     style.configure('TLabelframe.Label', font=('Fira Code', 11, 'italic'))
     style.configure('TLabel', font=('Fira Code', 9, 'italic'))
