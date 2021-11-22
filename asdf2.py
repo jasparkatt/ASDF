@@ -26,12 +26,12 @@ def bottom_frame(container):
     bottom_labelframe.columnconfigure(2, weight=0)
     # add an exit button
     close_button = ttk.Button(
-        bottom_labelframe, style='primary.Outline.TButton', text='Exit', command=container.destroy)
+        bottom_labelframe, style='warning.Outline.TButton', text='Exit', command=container.destroy)
     close_button.grid(column=0, row=1, sticky=tk.E,
                       padx=3, pady=3, ipadx=1, ipady=1)
     #add submit button
     submit_button = ttk.Button(
-        bottom_labelframe, style='primary.Outline.TButton', text='Submit', command=container.destroy)
+        bottom_labelframe, style='secondary.Outline.TButton', text='Submit', command=container.destroy)
     submit_button.grid(column=2, row=1, sticky=tk.W,
                        padx=3, pady=3, ipady=1, ipadx=1)
 
@@ -243,11 +243,10 @@ def create_main_window():
     root.title('ASDF')
     root.geometry('800x600+295+55')
     root.iconbitmap('./assets/favicon_sa.ico')
-    root.resizable(True, True)
-    root.configure(bg='#FFEBF2')
+    root.resizable(True, True)    
     # create our style library
     style = Style(
-        theme='obridge', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
+        theme='springdork', themes_file='C:/Users/jon.galloy/VisualStudioCodeProjects/ASDF/themes/ttkbootstrap_themes_dark.json')
     # the below is automagically applied to any labelframe label txt
     style.configure('TLabelframe.Label', font=('Fira Code', 11, 'italic'))
     style.configure('TLabel', font=('Fira Code', 9, 'italic'))
