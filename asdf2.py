@@ -131,7 +131,7 @@ def leftside_frame(container):
     datebutton_label.grid(column=0, row=6, sticky=tk.W,
                           padx=5, pady=5, ipady=3, ipadx=3)
     date_button = ttk.Button(
-        left_labelframe, style='secondary.Outline.TButton', text='Pick Date', command=pickadate)
+        left_labelframe, style='success.Outline.TButton', text='Pick Date', command=pickadate)
     date_button.grid(column=1, row=6, sticky=tk.EW,
                      padx=5, pady=5, ipadx=1, ipady=1)
 
