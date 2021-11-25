@@ -31,7 +31,7 @@ def bottom_frame(container):
                       padx=3, pady=3, ipadx=1, ipady=1)
     #add submit button
     submit_button = ttk.Button(
-        bottom_labelframe, style='secondary.Outline.TButton', text='Submit', command=container.destroy)
+        bottom_labelframe, style='warning.Outline.TButton', text='Submit', command=container.destroy)
     submit_button.grid(column=2, row=1, sticky=tk.W,
                        padx=3, pady=3, ipady=1, ipadx=1)
 
@@ -119,19 +119,20 @@ def leftside_frame(container):
     # add calendar date picker
     def pickadate():
         top = tk.Toplevel(container)
+        top.geometry('278x154+3+3')
         ttk.Label(top, text='Choose date').pack(padx=10, pady=10)
-        cal = DateEntry(top, width=12, background='darkblue',
+        cal = DateEntry(top, width=12, background='grey',
                         foreground='white', borderwidth=2, year=2010)
         cal.pack(padx=10, pady=10)
-        ttk.Button(top, style='primary.Outline.TButton', text='exit',
-                   command=top.destroy).pack(pady=3, padx=3)
+        ttk.Button(top, style='warning.Outline.TButton', text='exit',
+                   command=top.destroy).pack(pady=3, padx=3,side='bottom')
 
     datebutton_label = ttk.Label(
         left_labelframe, text='Select Date:', style='Data.TLabel')
     datebutton_label.grid(column=0, row=6, sticky=tk.W,
                           padx=5, pady=5, ipady=3, ipadx=3)
     date_button = ttk.Button(
-        left_labelframe, style='success.Outline.TButton', text='Pick Date', command=pickadate)
+        left_labelframe, style='warning.Outline.TButton', text='Pick Date', command=pickadate)
     date_button.grid(column=1, row=6, sticky=tk.EW,
                      padx=5, pady=5, ipadx=1, ipady=1)
 
@@ -246,7 +247,7 @@ def create_main_window():
     root.resizable(True, True)    
     # create our style library
     style = Style(
-        theme='springdork', themes_file='C:/Users/jon.galloy/VisualStudioCodeProjects/ASDF/themes/ttkbootstrap_themes_dark.json')
+        theme='dark1', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
     # the below is automagically applied to any labelframe label txt
     style.configure('TLabelframe.Label', font=('Fira Code', 11, 'italic'))
     style.configure('TLabel', font=('Fira Code', 9, 'italic'))
@@ -254,7 +255,7 @@ def create_main_window():
 
     # style.configure('Bottom.TLabelframe', bd=4, bc='Black')
     style.configure('Bottom.TLabelframe.Label',
-                    font=('Georgia Pro', 8, 'italic'))
+                    font=('Georgia Pro', 9, 'italic'))
 
     # add our other frames
     # maintain this order of adding frames to keep footer correct

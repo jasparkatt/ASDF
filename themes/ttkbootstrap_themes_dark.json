@@ -40,66 +40,6 @@
             }
         },
         {
-            "name": "spiritfallslt2",
-            "font": "Helvetica 10",
-            "type": "light",
-            "colors": {
-                "primary": "#01665e",
-                "secondary": "#5ab4ac",
-                "success": "#d8b365",
-                "info": "#3498db",
-                "warning": "#f39c12",
-                "danger": "#e74c3c",
-                "bg": "#ffffec",
-                "fg": "#212529",
-                "selectbg": "#95a5a6",
-                "selectfg": "#ffffff",
-                "border": "#2e3849",
-                "inputfg": "#212529",
-                "inputbg": "#ecf0f1"
-            }
-        },
-        {
-            "name": "spiritfallslt3",
-            "font": "Helvetica 10",
-            "type": "light",
-            "colors": {
-                "primary": "#00274f",
-                "secondary": "#0053a6",
-                "success": "#0d86ff",
-                "info": "#5badff",
-                "warning": "#f58f52",
-                "danger": "#e74c3c",
-                "bg": "#ffffff",
-                "fg": "#212529",
-                "selectbg": "#8e95dd",
-                "selectfg": "#ffffff",
-                "border": "#2d3495",
-                "inputfg": "#212529",
-                "inputbg": "#ecf0f1"
-            }
-        },
-        {
-            "name": "spiritfallslt4",
-            "font": "Helvetica 10",
-            "type": "light",
-            "colors": {
-                "primary": "#000055",
-                "secondary": "#006f00",
-                "success": "#62c11c",
-                "info": "#a800a8",
-                "warning": "#ff8040",
-                "danger": "#e1031e",
-                "bg": "#ffffff",
-                "fg": "#212529",
-                "selectbg": "#95a5a6",
-                "selectfg": "#ffffff",
-                "border": "#000040",
-                "inputfg": "#212529",
-                "inputbg": "#ecf0f1"
-            }
-        },
-        {
             "name": "spiritfallsdk3",
             "font": "Helvetica 10",
             "type": "dark",
@@ -117,26 +57,6 @@
                 "border": "#009393",
                 "inputfg": "#333333",
                 "inputbg": "#adb5bd"
-            }
-        },
-        {
-            "name": "spiritfallslt5",
-            "font": "Helvetica 10",
-            "type": "light",
-            "colors": {
-                "primary": "#208fff",
-                "secondary": "#56c6fc",
-                "success": "#18bc9c",
-                "info": "#fea7f5",
-                "warning": "#fed37a",
-                "danger": "#fd887b",
-                "bg": "#d5eaff",
-                "fg": "#000204",
-                "selectbg": "#a4a0b1",
-                "selectfg": "#eaf4ff",
-                "border": "#3f0959",
-                "inputfg": "#000204",
-                "inputbg": "#e1e1ff"
             }
         },
         {
@@ -177,6 +97,66 @@
                 "border": "#7f6b00",
                 "inputfg": "#212529",
                 "inputbg": "#c6c9ca"
+            }
+        },
+        {
+            "name": "light1",
+            "font": "Helvetica 10",
+            "type": "light",
+            "colors": {
+                "primary": "#002e5b",
+                "secondary": "#1d4615",
+                "success": "#5b9d1a",
+                "info": "#8947da",
+                "warning": "#e47e23",
+                "danger": "#e74c3c",
+                "bg": "#a6ffff",
+                "fg": "#000055",
+                "selectbg": "#95a5a6",
+                "selectfg": "#eaeaff",
+                "border": "#003737",
+                "inputfg": "#003737",
+                "inputbg": "#edf8f8"
+            }
+        },
+        {
+            "name": "dark1",
+            "font": "Helvetica 10",
+            "type": "dark",
+            "colors": {
+                "primary": "#5080b3",
+                "secondary": "#444444",
+                "success": "#00bc8c",
+                "info": "#3498db",
+                "warning": "#d2691e",
+                "danger": "#e74c3c",
+                "bg": "#251e1a",
+                "fg": "#F0F8FF",
+                "selectbg": "#d2691e",
+                "selectfg": "#F0F8FF",
+                "border": "#0f062b",
+                "inputfg": "#333333",
+                "inputbg": "#adb5bd"
+            }
+        },
+        {
+            "name": "dark2",
+            "font": "Helvetica 10",
+            "type": "dark",
+            "colors": {
+                "primary": "#375a7f",
+                "secondary": "#444444",
+                "success": "#00bc8c",
+                "info": "#3498db",
+                "warning": "#f39c12",
+                "danger": "#e74c3c",
+                "bg": "#04213b",
+                "fg": "#e6edf4",
+                "selectbg": "#444444",
+                "selectfg": "#e6edf4",
+                "border": "#222222",
+                "inputfg": "#04213b",
+                "inputbg": "#e6edf4"
             }
         }
     ]
