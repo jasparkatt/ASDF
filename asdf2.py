@@ -5,6 +5,10 @@ from tkinter.constants import END, EW, NS, NSEW
 from tkinter.messagebox import showerror, showinfo, askretrycancel
 from tkcalendar import DateEntry, Calendar
 from ttkbootstrap import Style
+from settings import *
+
+# define our globals for entry boxes(so we can clear them)
+
 
 
 def topheader_frame(container):
@@ -26,12 +30,12 @@ def bottom_frame(container):
     bottom_labelframe.columnconfigure(2, weight=0)
     # add an exit button
     close_button = ttk.Button(
-        bottom_labelframe, style='success.Outline.TButton', text='Exit', command=container.destroy)
+        bottom_labelframe, style='danger.Outline.TButton', text='Exit', command=container.destroy)
     close_button.grid(column=0, row=1, sticky=tk.E,
                       padx=3, pady=3, ipadx=1, ipady=1)
     #add submit button
     submit_button = ttk.Button(
-        bottom_labelframe, style='warning.Outline.TButton', text='Submit', command=container.destroy)
+        bottom_labelframe, style='success.Outline.TButton', text='Submit', command=container.destroy)
     submit_button.grid(column=2, row=1, sticky=tk.W,
                        padx=3, pady=3, ipady=1, ipadx=1)
 
@@ -128,7 +132,7 @@ def leftside_frame(container):
         cal = DateEntry(top, width=12, background='grey',
                         foreground='white', borderwidth=2, year=2010)
         cal.pack(padx=10, pady=10)
-        ttk.Button(top, style='info.Outline.TButton', text='exit',
+        ttk.Button(top, style='danger.Outline.TButton', text='exit',
                    command=top.destroy).pack(pady=3, padx=3,side='bottom')
 
     datebutton_label = ttk.Label(
@@ -136,7 +140,7 @@ def leftside_frame(container):
     datebutton_label.grid(column=0, row=6, sticky=tk.W,
                           padx=5, pady=5, ipady=3, ipadx=3)
     date_button = ttk.Button(
-        left_labelframe, style='success.Outline.TButton', text='Pick Date', command=pickadate)
+        left_labelframe, style='info.Outline.TButton', text='Pick Date', command=pickadate)
     date_button.grid(column=1, row=6, sticky=tk.EW,
                      padx=5, pady=5, ipadx=1, ipady=1)
 
@@ -151,11 +155,9 @@ def rightside_frame(container):
     right_labelframe = ttk.LabelFrame(
         container, text='Place Data', labelanchor='n')
     right_labelframe.columnconfigure(0, weight=1)
-    right_labelframe.columnconfigure(1, weight=1)
+    right_labelframe.columnconfigure(1, weight=1)    
     
-    def clear_fields():
-        accesslabel_entry.delete(0, END)
-
+    
 
     # add county select chunk
     def county_selected(event):
@@ -232,11 +234,9 @@ def rightside_frame(container):
         right_labelframe, takefocus=0, cursor='hand1', textvariable=accessnamelabel_text)
     accesslabel_entry.grid(column=1, row=4, sticky=tk.EW, padx=5, pady=5)
     # create a datepicker from tkcalender. need to pip install it first
-    # need to create global variables for the the things to be 'cleared' so the button funct can reach all of them
-    clear_fields_button = ttk.Button(right_labelframe, text="Clear Fields", command=clear_fields)
-    clear_fields_button.grid(column=1, row=5, sticky=tk.EW,
-                     padx=5, pady=5, ipadx=1, ipady=1)
 
+    # need to create global variables for the the things to be 'cleared' so the button funct can reach all of them
+    
     return right_labelframe
 
 #create our table frame
@@ -259,10 +259,11 @@ def create_main_window():
     root.title('ASDF')
     root.geometry('800x600+295+55')
     root.iconbitmap('./assets/favicon_sa.ico')
-    root.resizable(True, True)    
+    root.resizable(True, True) 
+       
     # create our style library
     style = Style(
-        theme='springdork', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
+        theme='dark1', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
     # the below is automagically applied to any labelframe label txt
     style.configure('TLabelframe.Label', font=('Fira Code', 11, 'italic'))
     style.configure('TLabel', font=('Fira Code', 9, 'italic'))
@@ -272,6 +273,7 @@ def create_main_window():
     style.configure('Bottom.TLabelframe.Label',
                     font=('Georgia Pro', 9, 'italic'))
 
+    
     # add our other frames
     # maintain this order of adding frames to keep footer correct
     top_frame = topheader_frame(root)
@@ -292,6 +294,7 @@ def create_main_window():
     
 
     # run mainlooop on the root
+
     root.mainloop()
 
 

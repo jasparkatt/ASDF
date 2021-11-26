@@ -4,3 +4,6 @@ extensions.json
 frametesting.py
 ttkthemes_testing.py
 asdf_Treeview.py
+__pycache__
+.env
+settings.py
