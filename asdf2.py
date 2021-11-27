@@ -6,6 +6,7 @@ from tkinter.messagebox import showerror, showinfo, askretrycancel
 from tkcalendar import DateEntry, Calendar
 from ttkbootstrap import Style
 from settings import *
+import psycopg2
 
 # define our globals for entry boxes(so we can clear them)
 
@@ -28,6 +29,7 @@ def bottom_frame(container):
     bottom_labelframe.columnconfigure(0, weight=0)
     bottom_labelframe.columnconfigure(1, weight=1)
     bottom_labelframe.columnconfigure(2, weight=0)
+
     # add an exit button
     close_button = ttk.Button(
         bottom_labelframe, style='danger.Outline.TButton', text='Exit', command=container.destroy)
@@ -54,8 +56,11 @@ def leftside_frame(container):
 
     
 
+    
+
     # enter water body name
     streamlabel_text = tk.StringVar()
+    
     streamlabel = ttk.Label(
         left_labelframe, text='Water Fished(Name):', style='Data.TLabel')
     streamlabel.grid(column=0, row=1, sticky=tk.W,
@@ -243,12 +248,14 @@ def rightside_frame(container):
 
 
 def tableside_frame(container):
+    
     table_labelframe = ttk.LabelFrame(
         container, text='Table Data', labelanchor='n')
-    # add data from all the diff data entry, display as a table using treeview
-    
+    # add data from all the diff data entry, display as a table using treeview    
     #table_labelframe.columnconfigure(0, weight=1)
     #table_labelframe.columnconfigure(1, weight=1)
+    
+
     return table_labelframe
 
 # create our main app window
@@ -259,8 +266,7 @@ def create_main_window():
     root.title('ASDF')
     root.geometry('800x600+295+55')
     root.iconbitmap('./assets/favicon_sa.ico')
-    root.resizable(True, True) 
-       
+    root.resizable(True, True)   
     # create our style library
     style = Style(
         theme='dark1', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
