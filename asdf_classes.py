@@ -10,6 +10,7 @@ from ttkbootstrap import Style
 from settings import *
 import psycopg2
 
+
 class topheader_frame(ttk.LabelFrame):
     def __init__(self,master):
         ttk.LabelFrame.__init__(self,master, text='ASDF Log', labelanchor='n',style='Top.TLabelframe')
@@ -210,11 +211,12 @@ class rightside_frame(ttk.LabelFrame):
         self.accesslabel_entry = ttk.Entry(
             self, takefocus=0, cursor='hand1', textvariable=self.accessnamelabel_text)
         self.accesslabel_entry.grid(column=1, row=4, sticky=tk.EW, padx=5, pady=5)
-
 class tableside_frame(ttk.LabelFrame):
     def __init__(self,master):
         ttk.LabelFrame.__init__(self, master,text='Table Data', labelanchor='n')
-
+        self.columnconfigure(0,weight=1)
+        self.columnconfigure(1,weight=1)
+        
 
 class App(tk.Tk):
     
