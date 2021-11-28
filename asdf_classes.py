@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import font
 from tkinter.constants import CENTER, E, END, LEFT
 from tkinter.messagebox import showinfo
 from ttkbootstrap import Style
@@ -25,10 +26,11 @@ class App(tk.Tk):
         theme='spiritfallsdk3', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
         # the below is automagically applied to any labelframe label txt
         self.style.configure('TLabelframe.Label', font=('Fira Code', 11, 'italic'))
-        self.style.configure('TLabel', font=('Fira Code', 9, 'italic'))
-        self.style.configure('Data.TLabel', font=('Fira Mono', 8, 'bold'))
+        self.style.configure('Data.TLabel', font=('Fira Code', 8, 'italic'))
         self.style.configure('Outline.TButton', font=('Overpass Mono', 10))
         self.style.configure('Bottom.TLabelframe.Label',font=('Georgia Pro', 9, 'italic'))
+        # example below that works....remove
+        # self.style.configure('custom.TEntry', background='green', foreground='white', font=('Helvetica', 24))
 
         def clear_entryboxes():
             self.streamlabel_entry.delete(0, END)
@@ -71,7 +73,7 @@ class App(tk.Tk):
         self.streamlabel.grid(column=2, row=0, sticky=tk.EW,
                      padx=5, pady=5, ipady=3, ipadx=3)
         self.streamlabel_entry = ttk.Entry(
-            self, takefocus=0, cursor='hand1', textvariable=self.streamlabel_text)
+            self, takefocus=0, cursor='hand1', textvariable=self.streamlabel_text, style='custom.TEntry')
         self.streamlabel_entry.grid(column=3, row=0, sticky=tk.EW, padx=5, pady=5)
 
         # enter water type
