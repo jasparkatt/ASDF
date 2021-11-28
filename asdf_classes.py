@@ -4,6 +4,7 @@ from tkinter import font
 from tkinter.constants import CENTER, E, END, LEFT
 from tkinter.messagebox import showinfo
 from ttkbootstrap import Style
+from tkcalendar import DateEntry, Calendar
 # our root window
 
 
@@ -12,7 +13,7 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title('Data Entry')
-        self.geometry('743x240+295+55')
+        self.geometry('743x255+295+55')
         self.resizable(True, True)
         self.iconbitmap('./assets/favicon.ico')
         # grid
@@ -23,7 +24,7 @@ class App(tk.Tk):
 
         # style from ttkbootstrap
         self.style = Style(
-        theme='spiritfallsdk3', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
+        theme='spiritfallslt', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
         # the below is automagically applied to any labelframe label txt
         self.style.configure('TLabelframe.Label', font=('Fira Code', 11, 'italic'))
         self.style.configure('Data.TLabel', font=('Fira Code', 8, 'italic'))
@@ -180,6 +181,17 @@ class App(tk.Tk):
         self.accesslabel_entry.grid(column=1, row=3, sticky=tk.EW, padx=5, pady=5)
     # create a datepicker from tkcalender. need to pip install it first
 
+        # add calendar date picker
+        def pickadate():
+            top = tk.Toplevel()
+            top.geometry('278x154+3+3')
+            ttk.Label(top, text='Choose date').pack(padx=10, pady=10)
+            cal = DateEntry(top, width=12, background='grey',
+                        foreground='white', borderwidth=2, year=2010)
+            cal.pack(padx=10, pady=10)
+            ttk.Button(top, style='danger.Outline.TButton', text='Exit',
+                   command=top.destroy).pack(pady=3, padx=3,side='bottom')
+
 
         # add an exit button
         self.close_button = ttk.Button(
@@ -188,9 +200,9 @@ class App(tk.Tk):
                       padx=5, pady=5, ipady=3, ipadx=3)
 
         # add clear boxes button
-        self.clear_button = ttk.Button(
-            self,style='info.Outline.TButton', text='Pick Date', command=clear_entryboxes)
-        self.clear_button.grid(column=1, row=4, sticky=tk.EW,columnspan=2,
+        self.date_button = ttk.Button(
+            self,style='secondary.Outline.TButton', text='Pick Date', command=pickadate)
+        self.date_button.grid(column=1, row=4, sticky=tk.EW,columnspan=2,
                        padx=5, pady=5)
 
         # add date picker button
