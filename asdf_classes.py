@@ -11,7 +11,7 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title('Data Entry')
-        self.geometry('730x230+295+55')
+        self.geometry('743x200+295+55')
         self.resizable(True, True)
         self.iconbitmap('./assets/favicon.ico')
         # grid
@@ -22,12 +22,12 @@ class App(tk.Tk):
 
         # style from ttkbootstrap
         self.style = Style(
-        theme='springdork', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
+        theme='spiritfallsdk3', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
         # the below is automagically applied to any labelframe label txt
         self.style.configure('TLabelframe.Label', font=('Fira Code', 11, 'italic'))
         self.style.configure('TLabel', font=('Fira Code', 9, 'italic'))
         self.style.configure('Data.TLabel', font=('Fira Mono', 8, 'bold'))
-        self.style.configure('Exit.TButton', font=('Overpass Mono', 9))
+        self.style.configure('Outline.TButton', font=('Overpass Mono', 10))
         self.style.configure('Bottom.TLabelframe.Label',font=('Georgia Pro', 9, 'italic'))
 
         def clear_entryboxes():
@@ -192,7 +192,7 @@ class App(tk.Tk):
                        padx=5, pady=5)                  
         #add submit button
         self.submit_button = ttk.Button(
-            self, style='success.Outline.TButton', text='Submit', command=self.destroy)
+            self, style='warning.Outline.TButton', text='Submit', command=self.destroy)
         self.submit_button.grid(column=3, row=4, sticky=tk.E,
                        padx=5, pady=5)
 
