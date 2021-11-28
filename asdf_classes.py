@@ -38,9 +38,8 @@ class App(tk.Tk):
         conn = sqlite3.connect('./db/ASDF.db')
         c = conn.cursor()
         # create initial table then comment out but keep it.
-        
+
         # c.execute("""CREATE TABLE asdf_master (
-        #     TRIP_ID INTEGER PRIMARY KEY,
         #     COUNTY_NM TEXT,
         #     OWNER_TY TEXT,
         #     ACCESS_TY TEXT,
@@ -52,18 +51,40 @@ class App(tk.Tk):
         #     DATE TEXT
         #     )""")
 
-        #commit to and close DB 
-        conn.commit()
-        conn.close()   
+        # define our submit func for the submit button
+
+        def submit():
+            conn = sqlite3.connect('./db/ASDF.db')
+            c = conn.cursor()
+
+            #insert new data into our table
+            c.execute("INSERT INTO asdf_master VALUES (:countylabel_combo, :ownershiplabel_combo, :accesslabel_combo, :accesslabel_entry, :streamlabel_entry, :watertypelabel_combo, :waterclasslabel_combo, :specieslabel_combo, :cal)",
+                {
+                    'countylabel_combo': self.countylabel_combo.get(),
+                    'ownershiplabel_combo': self.ownershiplabel_combo.get(),
+                    'accesslabel_combo': self.accesslabel_combo.get(),
+                    'accesslabel_entry': self.accesslabel_entry.get(),
+                    'streamlabel_entry': self.streamlabel_entry.get(),
+                    'watertypelabel_combo': self.watertypelabel_combo.get(),
+                    'waterclasslabel_combo': self.waterclasslabel_combo.get(),
+                    'specieslabel_combo': self.specieslabel_combo.get(),
+                    'cal': self.cal.get()
+                })
+
+        #     #commit changes and close conn
+            conn.commit()
+            conn.close()
+
+
         
         def clear_entryboxes():
             self.streamlabel_entry.delete(0, END)
             self.accesslabel_entry.delete(0,END)
 
 
-        def county_selected(event):
-            msg = f'You selected {self.countylabel_text.get()}!'
-            showinfo(title='Result', message=msg)
+        # def county_selected(event):
+        #     msg = f'You selected {self.countylabel_text.get()}!'
+        #     showinfo(title='Result', message=msg)
 
         self.countylabel_text = tk.StringVar()
         self.county = ('Adams', 'Ashland', 'Barron', 'Bayfield', 'Brown', 'Buffalo', 'Burnett',
@@ -86,7 +107,7 @@ class App(tk.Tk):
         self.countylabel_combo['values'] = self.county
         self.countylabel_combo['state'] = 'readonly'
         self.countylabel_combo.grid(column=1, row=0, sticky=tk.EW, padx=5, pady=5)
-        self.countylabel_combo.bind('<<ComboboxSelected>>', county_selected)
+        self.countylabel_combo.bind('<<ComboboxSelected>>')
 
 
         # enter water body name
@@ -101,9 +122,9 @@ class App(tk.Tk):
         self.streamlabel_entry.grid(column=3, row=0, sticky=tk.EW, padx=5, pady=5)
 
         # enter water type
-        def watertype_selected(event):
-            msg = f'You selected {self.watertype_text.get()}!'
-            showinfo(title='Result', message=msg)
+        # def watertype_selected(event):
+        #     msg = f'You selected {self.watertype_text.get()}!'
+        #     showinfo(title='Result', message=msg)
 
         self.watertypes = ('Cold', 'Cool', 'Warm', 'Cold-Cool', 'Cool-Warm')
         self.watertype_text = tk.StringVar()
@@ -116,12 +137,11 @@ class App(tk.Tk):
         self.watertypelabel_combo['values'] = self.watertypes
         self.watertypelabel_combo['state'] = 'readonly'
         self.watertypelabel_combo.grid(column=3, row=2, sticky=tk.EW, padx=5, pady=5)
-        self.watertypelabel_combo.bind('<<ComboboxSelected>>',
-                              watertype_selected)  # enter water type
+        self.watertypelabel_combo.bind('<<ComboboxSelected>>')  # enter water type
 
-        def waterclass_selected(event):
-            msg = f'You selected {self.waterclass_text.get()}!'
-            showinfo(title='Result', message=msg)
+        # def waterclass_selected(event):
+        #     msg = f'You selected {self.waterclass_text.get()}!'
+        #     showinfo(title='Result', message=msg)
 
         self.waterclass = ('Class 1', 'Class 2', 'Class 3', 'Non-Trout Water')
         self.waterclass_text = tk.StringVar()
@@ -134,12 +154,12 @@ class App(tk.Tk):
         self.waterclasslabel_combo['values'] = self.waterclass
         self.waterclasslabel_combo['state'] = 'readonly'
         self.waterclasslabel_combo.grid(column=3, row=3, sticky=tk.EW, padx=5, pady=5)
-        self.waterclasslabel_combo.bind('<<ComboboxSelected>>', waterclass_selected)
+        self.waterclasslabel_combo.bind('<<ComboboxSelected>>')
 
         # tkinter stuff for species select
-        def species_selected(event):
-            msg = f'You selected {self.specieslabel_text.get()}!'
-            showinfo(title='Result', message=msg)
+        # def species_selected(event):
+        #     msg = f'You selected {self.specieslabel_text.get()}!'
+        #     showinfo(title='Result', message=msg)
 
     
         self.species = ('Brown Trout', 'Rainbow Trout', 'Brook Trout', 'Steelhead', 'Lake Run Brown Trout', 'Carp', 'Smallmouth Bass',
@@ -154,12 +174,12 @@ class App(tk.Tk):
         self.specieslabel_combo['values'] = self.species
         self.specieslabel_combo['state'] = 'readonly'
         self.specieslabel_combo.grid(column=3, row=1, sticky=tk.EW, padx=5, pady=5)
-        self.specieslabel_combo.bind('<<ComboboxSelected>>', species_selected)
+        self.specieslabel_combo.bind('<<ComboboxSelected>>')
 
         # create combo box for access type i.e. public, row, private
-        def access_selected(event):
-            msg = f'You selected {self.accesslabel_text.get()}!'
-            showinfo(title='Result', message=msg)
+        # def access_selected(event):
+        #     msg = f'You selected {self.accesslabel_text.get()}!'
+        #     showinfo(title='Result', message=msg)
 
         self.accesslabel_text = tk.StringVar()
         self.access = ('Public-DNR', 'Public-County',
@@ -173,12 +193,12 @@ class App(tk.Tk):
         self.accesslabel_combo['values'] = self.access
         self.accesslabel_combo['state'] = 'readonly'
         self.accesslabel_combo.grid(column=1, row=2, sticky=tk.EW, padx=5, pady=5)
-        self.accesslabel_combo.bind('<<ComboboxSelected>>', access_selected)
+        self.accesslabel_combo.bind('<<ComboboxSelected>>')
 
     # combo box for ownership type i.e public, private, state, county, local, nonprofit etc
-        def ownership_selected(event):
-            msg = f'You selected {self.ownershiptype_text.get()}!'
-            showinfo(title='Result', message=msg)
+        # def ownership_selected(event):
+        #     msg = f'You selected {self.ownershiptype_text.get()}!'
+        #     showinfo(title='Result', message=msg)
 
         self.ownershiptype_text = tk.StringVar()
         self.ownership = ('Public-State', 'Public-County', 'Public-Local',
@@ -191,7 +211,7 @@ class App(tk.Tk):
         self.ownershiplabel_combo['values'] = self.ownership
         self.ownershiplabel_combo['state'] = 'readonly'
         self.ownershiplabel_combo.grid(column=1, row=1, sticky=tk.EW, padx=5, pady=5)
-        self.ownershiplabel_combo.bind('<<ComboboxSelected>>', ownership_selected)
+        self.ownershiplabel_combo.bind('<<ComboboxSelected>>')
 
     # create a entry box for name of acces. i.e CTY HWY T access or HWY 21 access on w br of wh
         self.accessnamelabel_text = tk.StringVar()
@@ -206,14 +226,15 @@ class App(tk.Tk):
 
         # add calendar date picker
         def pickadate():
-            top = tk.Toplevel()
-            top.geometry('278x154+3+3')
-            ttk.Label(top, text='Choose date').pack(padx=10, pady=10)
-            cal = DateEntry(top, width=12, background='grey',
+            self.top = tk.Toplevel()
+            self.top.geometry('278x154+3+3')
+            ttk.Label(self.top, text='Choose date').pack(padx=10, pady=10)
+            self.cal = DateEntry(self.top, width=12, background='grey',
                         foreground='white', borderwidth=2, year=2010)
-            cal.pack(padx=10, pady=10)
-            ttk.Button(top, style='danger.Outline.TButton', text='Exit',
-                   command=top.destroy).pack(pady=3, padx=3,side='bottom')
+            self.cal.pack(padx=10, pady=10)
+            self.cal.bind("<<DateEntrySelected>>")
+            ttk.Button(self.top, style='danger.Outline.TButton', text='Exit',
+                   command=self.top.destroy).pack(pady=3, padx=3,side='bottom')
 
 
         # add an exit button
@@ -235,9 +256,13 @@ class App(tk.Tk):
                        padx=5, pady=5)                                 
         #add submit button
         self.submit_button = ttk.Button(
-            self, style='primary.Outline.TButton', text='Submit', command=self.destroy)
+            self, style='primary.Outline.TButton', text='Submit', command=submit)
         self.submit_button.grid(column=3, row=5, sticky=tk.E,
                        padx=5, pady=5)
+
+        #commit to and close DB 
+        conn.commit()
+        conn.close()               
 
 if __name__ == "__main__":
     app = App()
