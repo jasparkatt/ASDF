@@ -11,7 +11,7 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title('Data Entry')
-        self.geometry('743x200+295+55')
+        self.geometry('743x240+295+55')
         self.resizable(True, True)
         self.iconbitmap('./assets/favicon.ico')
         # grid
@@ -181,19 +181,25 @@ class App(tk.Tk):
 
         # add an exit button
         self.close_button = ttk.Button(
-            self, style='warning.Outline.TButton', text='Exit', command=self.destroy)
-        self.close_button.grid(column=0, row=4, sticky=tk.W,
+            self, style='danger.Outline.TButton', text='Exit', command=self.destroy)
+        self.close_button.grid(column=0, row=5, sticky=tk.W,
                       padx=5, pady=5, ipady=3, ipadx=3)
 
         # add clear boxes button
         self.clear_button = ttk.Button(
-            self,style='secondary.Outline.TButton', text='Clear Boxes', command=clear_entryboxes)
+            self,style='info.Outline.TButton', text='Pick Date', command=clear_entryboxes)
         self.clear_button.grid(column=1, row=4, sticky=tk.EW,columnspan=2,
-                       padx=5, pady=5)                  
+                       padx=5, pady=5)
+
+        # add date picker button
+        self.clear_button = ttk.Button(
+            self,style='success.Outline.TButton', text='Clear Boxes', command=clear_entryboxes)
+        self.clear_button.grid(column=1, row=5, sticky=tk.EW,columnspan=2,
+                       padx=5, pady=5)                                 
         #add submit button
         self.submit_button = ttk.Button(
-            self, style='warning.Outline.TButton', text='Submit', command=self.destroy)
-        self.submit_button.grid(column=3, row=4, sticky=tk.E,
+            self, style='primary.Outline.TButton', text='Submit', command=self.destroy)
+        self.submit_button.grid(column=3, row=5, sticky=tk.E,
                        padx=5, pady=5)
 
 if __name__ == "__main__":
