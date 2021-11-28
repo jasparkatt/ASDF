@@ -78,9 +78,8 @@ class App(tk.Tk):
             conn.commit()
             conn.close()
 
-        # def county_selected(event):
-        #     msg = f'You selected {self.countylabel_text.get()}!'
-        #     showinfo(title='Result', message=msg)
+        
+        # create combobox for county selection
 
         self.countylabel_text = tk.StringVar()
         self.county = ('Adams', 'Ashland', 'Barron', 'Bayfield', 'Brown', 'Buffalo', 'Burnett',
@@ -118,9 +117,6 @@ class App(tk.Tk):
         self.streamlabel_entry.grid(column=3, row=0, sticky=tk.EW, padx=5, pady=5)
 
         # enter water type
-        # def watertype_selected(event):
-        #     msg = f'You selected {self.watertype_text.get()}!'
-        #     showinfo(title='Result', message=msg)
 
         self.watertypes = ('Cold', 'Cool', 'Warm', 'Cold-Cool', 'Cool-Warm')
         self.watertype_text = tk.StringVar()
@@ -135,9 +131,7 @@ class App(tk.Tk):
         self.watertypelabel_combo.grid(column=3, row=2, sticky=tk.EW, padx=5, pady=5)
         self.watertypelabel_combo.bind('<<ComboboxSelected>>')  # enter water type
 
-        # def waterclass_selected(event):
-        #     msg = f'You selected {self.waterclass_text.get()}!'
-        #     showinfo(title='Result', message=msg)
+        #  waterclass combo box
 
         self.waterclass = ('Class 1', 'Class 2', 'Class 3', 'Non-Trout Water')
         self.waterclass_text = tk.StringVar()
@@ -153,10 +147,6 @@ class App(tk.Tk):
         self.waterclasslabel_combo.bind('<<ComboboxSelected>>')
 
         # tkinter stuff for species select
-        # def species_selected(event):
-        #     msg = f'You selected {self.specieslabel_text.get()}!'
-        #     showinfo(title='Result', message=msg)
-
     
         self.species = ('Brown Trout', 'Rainbow Trout', 'Brook Trout', 'Steelhead', 'Lake Run Brown Trout', 'Carp', 'Smallmouth Bass',
                'Largemouth Bass', 'Bluegill', 'Pumpkinseed', 'Perch', 'Walleye', 'Northern Pike', 'Musky', 'Bullhead')
@@ -173,10 +163,7 @@ class App(tk.Tk):
         self.specieslabel_combo.bind('<<ComboboxSelected>>')
 
         # create combo box for access type i.e. public, row, private
-        # def access_selected(event):
-        #     msg = f'You selected {self.accesslabel_text.get()}!'
-        #     showinfo(title='Result', message=msg)
-
+        
         self.accesslabel_text = tk.StringVar()
         self.access = ('Public-DNR', 'Public-County',
               'Public-Other', 'ROW-Bridge', 'Private')
@@ -192,10 +179,7 @@ class App(tk.Tk):
         self.accesslabel_combo.bind('<<ComboboxSelected>>')
 
     # combo box for ownership type i.e public, private, state, county, local, nonprofit etc
-        # def ownership_selected(event):
-        #     msg = f'You selected {self.ownershiptype_text.get()}!'
-        #     showinfo(title='Result', message=msg)
-
+        
         self.ownershiptype_text = tk.StringVar()
         self.ownership = ('Public-State', 'Public-County', 'Public-Local',
                  'Private-Permission', 'Private-With Easement', 'Private-Public(i.e.MFL Open)')
@@ -209,7 +193,8 @@ class App(tk.Tk):
         self.ownershiplabel_combo.grid(column=1, row=1, sticky=tk.EW, padx=5, pady=5)
         self.ownershiplabel_combo.bind('<<ComboboxSelected>>')
 
-    # create a entry box for name of acces. i.e CTY HWY T access or HWY 21 access on w br of wh
+    # create a entry box for name of acces.
+
         self.accessnamelabel_text = tk.StringVar()
         self.accesslabel = ttk.Label(self, text='Enter Access Name:',
                             style='Data.TLabel')
@@ -218,9 +203,8 @@ class App(tk.Tk):
         self.accesslabel_entry = ttk.Entry(
             self, takefocus=0, cursor='hand1', textvariable=self.accessnamelabel_text)
         self.accesslabel_entry.grid(column=1, row=3, sticky=tk.EW, padx=5, pady=5)
-    # create a datepicker from tkcalender. need to pip install it first
-
-        # add calendar date picker
+    # create a datepicker from tkcalender.
+    # add calendar date picker
         def pickadate():
             self.top = tk.Toplevel()
             self.top.geometry('278x154+3+3')
@@ -239,17 +223,12 @@ class App(tk.Tk):
         self.close_button.grid(column=0, row=5, sticky=tk.W,
                       padx=5, pady=5, ipady=3, ipadx=3)
 
-        # add clear boxes button
+        # add date picker button
         self.date_button = ttk.Button(
             self,style='secondary.Outline.TButton', text='Pick Date', command=pickadate)
         self.date_button.grid(column=1, row=4, sticky=tk.EW,columnspan=2,
                        padx=5, pady=5)
-
-        # add date picker button
-        # self.clear_button = ttk.Button(
-        #     self,style='success.Outline.TButton', text='Clear Boxes', command=clear_entryboxes)
-        # self.clear_button.grid(column=1, row=5, sticky=tk.EW,columnspan=2,
-        #                padx=5, pady=5)                                 
+                                 
         #add submit button
         self.submit_button = ttk.Button(
             self, style='primary.Outline.TButton', text='Submit', command=submit)
