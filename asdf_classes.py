@@ -4,7 +4,8 @@ from tkinter import font
 from tkinter.constants import CENTER, E, END, LEFT
 from tkinter.messagebox import showinfo
 from ttkbootstrap import Style
-from tkcalendar import DateEntry, Calendar
+from tkcalendar import DateEntry
+import sqlite3
 # our root window
 
 
@@ -32,7 +33,29 @@ class App(tk.Tk):
         self.style.configure('Bottom.TLabelframe.Label',font=('Georgia Pro', 9, 'italic'))
         # example below that works....remove
         # self.style.configure('custom.TEntry', background='green', foreground='white', font=('Helvetica', 24))
+        # create sqlite3 db and connect to it
 
+        conn = sqlite3.connect('./db/ASDF.db')
+        c = conn.cursor()
+        # create initial table then comment out but keep it.
+        
+        # c.execute("""CREATE TABLE asdf_master (
+        #     TRIP_ID INTEGER PRIMARY KEY,
+        #     COUNTY_NM TEXT,
+        #     OWNER_TY TEXT,
+        #     ACCESS_TY TEXT,
+        #     ACCESS_NM TEXT,
+        #     WATER_NM TEXT,
+        #     WATER_TY TEXT,
+        #     WATER_CL TEXT,
+        #     SPECIES TEXT,
+        #     DATE TEXT
+        #     )""")
+
+        #commit to and close DB 
+        conn.commit()
+        conn.close()   
+        
         def clear_entryboxes():
             self.streamlabel_entry.delete(0, END)
             self.accesslabel_entry.delete(0,END)
