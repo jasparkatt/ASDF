@@ -70,17 +70,13 @@ class App(tk.Tk):
                     'specieslabel_combo': self.specieslabel_combo.get(),
                     'cal': self.cal.get()
                 })
+            
+            self.streamlabel_entry.delete(0, END)
+            self.accesslabel_entry.delete(0,END)    
 
         #     #commit changes and close conn
             conn.commit()
             conn.close()
-
-
-        
-        def clear_entryboxes():
-            self.streamlabel_entry.delete(0, END)
-            self.accesslabel_entry.delete(0,END)
-
 
         # def county_selected(event):
         #     msg = f'You selected {self.countylabel_text.get()}!'
@@ -250,10 +246,10 @@ class App(tk.Tk):
                        padx=5, pady=5)
 
         # add date picker button
-        self.clear_button = ttk.Button(
-            self,style='success.Outline.TButton', text='Clear Boxes', command=clear_entryboxes)
-        self.clear_button.grid(column=1, row=5, sticky=tk.EW,columnspan=2,
-                       padx=5, pady=5)                                 
+        # self.clear_button = ttk.Button(
+        #     self,style='success.Outline.TButton', text='Clear Boxes', command=clear_entryboxes)
+        # self.clear_button.grid(column=1, row=5, sticky=tk.EW,columnspan=2,
+        #                padx=5, pady=5)                                 
         #add submit button
         self.submit_button = ttk.Button(
             self, style='primary.Outline.TButton', text='Submit', command=submit)
