@@ -50,6 +50,25 @@ class App(tk.Tk):
         #     SPECIES TEXT,
         #     DATE TEXT
         #     )""")
+        
+        # define our delete record func for delete button
+
+        # define our query record func for qeury button
+
+        def queryrecord():
+            conn = sqlite3.connect('./db/ASDF.db')
+            c = conn.cursor()
+
+            # do our query sql here
+            c.execute("SELECT *, rowid FROM asdf_master")
+            records = c.fetchall()
+            # QA QC print statement. WIll need to figure out how to return this to a treeveiw here.
+            print(records)
+
+
+            #commit changes and close conn
+            conn.commit()
+            conn.close()
 
         # define our submit func for the submit button
 
@@ -74,7 +93,7 @@ class App(tk.Tk):
             self.streamlabel_entry.delete(0, END)
             self.accesslabel_entry.delete(0,END)    
 
-        #     #commit changes and close conn
+        #commit changes and close conn
             conn.commit()
             conn.close()
 
@@ -220,19 +239,27 @@ class App(tk.Tk):
         # add an exit button
         self.close_button = ttk.Button(
             self, style='danger.Outline.TButton', text='Exit', command=self.destroy)
-        self.close_button.grid(column=0, row=5, sticky=tk.W,
-                      padx=5, pady=5, ipady=3, ipadx=3)
+        self.close_button.grid(column=0, row=5, sticky=tk.EW,
+                      padx=5, pady=5)
 
         # add date picker button
         self.date_button = ttk.Button(
             self,style='secondary.Outline.TButton', text='Pick Date', command=pickadate)
-        self.date_button.grid(column=1, row=4, sticky=tk.EW,columnspan=2,
+        self.date_button.grid(column=0, row=4, sticky=tk.EW,
                        padx=5, pady=5)
+
+        # add a query button
+        self.query_button = ttk.Button(
+            self, style='primary.Outline.TButton', text='Select Records', command=queryrecord)
+        self.query_button.grid(column=3, row=4, sticky=tk.EW,columnspan=2,
+                       padx=5, pady=5)
+                            
+        # add a delete button               
                                  
         #add submit button
         self.submit_button = ttk.Button(
-            self, style='primary.Outline.TButton', text='Submit', command=submit)
-        self.submit_button.grid(column=3, row=5, sticky=tk.E,
+            self, style='primary.Outline.TButton', text='Submit Records', command=submit)
+        self.submit_button.grid(column=3, row=5, sticky=tk.EW,
                        padx=5, pady=5)
 
         #commit to and close DB 
