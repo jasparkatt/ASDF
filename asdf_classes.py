@@ -6,8 +6,8 @@ from tkinter.messagebox import showinfo
 from ttkbootstrap import Style
 from tkcalendar import DateEntry
 import sqlite3
-# our root window
 
+# our root window
 
 class App(tk.Tk):
 
@@ -25,7 +25,7 @@ class App(tk.Tk):
 
         # style from ttkbootstrap
         self.style = Style(
-        theme='springdork', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
+        theme='obridge', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
         # the below is automagically applied to any labelframe label txt
         self.style.configure('TLabelframe.Label', font=('Fira Code', 11, 'italic'))
         self.style.configure('Data.TLabel', font=('Fira Code', 8, 'italic'))
@@ -38,6 +38,7 @@ class App(tk.Tk):
 
         conn = sqlite3.connect('./db/ASDF.db')
         c = conn.cursor()
+
         # create initial table then comment out but keep it.
 
         c.execute("""CREATE TABLE IF NOT EXISTS asdf_master (
@@ -56,13 +57,13 @@ class App(tk.Tk):
 
         # define our query record func for qeury button
         def totreeview():
+            self.tree.delete(*self.tree.get_children())
             conn = sqlite3.connect('./db/ASDF.db')
             c = conn.cursor()
 
             c.execute("SELECT *,rowid FROM asdf_master ORDER BY rowid")
             for row in c:
                 self.tree.insert("",tk.END,values=(row[9], row[0], row[1], row[2],row[3], row[4], row[5],row[6], row[7], row[8]))
-
 
             conn.commit()
             conn.close()
@@ -267,10 +268,17 @@ class App(tk.Tk):
         self.query_button.grid(column=3, row=4, sticky=tk.EW,columnspan=2,
                        padx=5, pady=5)
 
+        #add submit button
+        self.submit_button = ttk.Button(
+            self, style='primary.Outline.TButton', text='Submit Records', command=submit)
+        self.submit_button.grid(column=3, row=5, sticky=tk.EW,
+                       padx=5, pady=5)               
+        
         #create our treeview for the totreevirw func
-        columns = ('ROWID', 'COUNTY_NM', 'OWNER_TY', 'ACCESS_TY', 'ACCESS_NM', 'WATER_NM', 'WATER_TY', 'WATER_CL', 'SPECIES', 'DATE')
-        self.tree = ttk.Treeview(columns=columns, show='headings')
+        self.columns = ('ROWID', 'COUNTY_NM', 'OWNER_TY', 'ACCESS_TY', 'ACCESS_NM', 'WATER_NM', 'WATER_TY', 'WATER_CL', 'SPECIES', 'DATE')
+        self.tree = ttk.Treeview(columns=self.columns, show='headings')
         #declare our treeview headers
+        #self.tree.rowconfigure(7,weight=1)
         self.tree.heading('ROWID',text='ID')
         self.tree.heading('COUNTY_NM',text='County')
         self.tree.heading('OWNER_TY',text='Owner Type')
@@ -281,16 +289,17 @@ class App(tk.Tk):
         self.tree.heading('WATER_CL',text='Water Class')
         self.tree.heading('SPECIES',text='Fish Caught')
         self.tree.heading('DATE',text='Date')
-        
-        self.tree.grid(row=6,columnspan=4,sticky=tk.NSEW,padx=3,pady=3,ipadx=2,ipady=2)               
+        #self.tree.configure(xscrollcommand = self.treescrollbar.set)
+        self.tree.grid(row=6,columnspan=4,sticky=tk.NSEW,padx=5,pady=5,ipadx=3,ipady=3)
+
+        # add horz and vert scroll bars to treeview  
+        self.treescrollbar = ttk.Scrollbar(self, orient='horizontal', command=self.tree.xview)
+        self.tree.configure(xscrollcommand = self.treescrollbar.set)
+        self.treescrollbar.grid(row=7,columnspan=4,sticky=tk.EW, rowspan=1)             
                             
         # add a delete button               
                                  
-        #add submit button
-        self.submit_button = ttk.Button(
-            self, style='primary.Outline.TButton', text='Submit Records', command=submit)
-        self.submit_button.grid(column=3, row=5, sticky=tk.EW,
-                       padx=5, pady=5)
+        
 
         #commit to and close DB 
         conn.commit()
