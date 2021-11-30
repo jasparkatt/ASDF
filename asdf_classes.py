@@ -14,7 +14,7 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title('Data Entry')
-        self.geometry('950x525+5+5')
+        self.geometry('950x485+5+5')
         self.resizable(True, True)
         self.iconbitmap('./assets/favicon.ico')
         # grid
@@ -32,6 +32,9 @@ class App(tk.Tk):
         self.style.configure('Data.TLabel', font=('Fira Code', 8, 'italic'))
         self.style.configure('Outline.TButton', font=('Overpass Mono', 10))
         self.style.configure('Bottom.TLabelframe.Label',font=('Georgia Pro', 9, 'italic'))
+        self.style.configure('mystyle.Treeview',anchor='center',font=('Roboto Mono', 10))
+        self.style.configure('mystyle.Treeview.Heading',anchor='center',font=('Tahoma', 10,'bold'))
+
         # example below that works....remove
         # self.style.configure('custom.TEntry', background='green', foreground='white', font=('Helvetica', 24))
 
@@ -277,7 +280,9 @@ class App(tk.Tk):
         
         #create our treeview for the totreevirw func
         self.columns = ('ROWID', 'COUNTY_NM', 'OWNER_TY', 'ACCESS_TY', 'ACCESS_NM', 'WATER_NM', 'WATER_TY', 'WATER_CL', 'SPECIES', 'DATE')
-        self.tree = ttk.Treeview(columns=self.columns, show='headings')
+        self.tree = ttk.Treeview(columns=self.columns, show='headings',style='mystyle.Treeview')
+        for self.column in self.columns:
+            self.tree.column(self.column, anchor=CENTER)
 
         #declare our treeview headers        
         self.tree.heading('ROWID',text='ID')
@@ -294,7 +299,7 @@ class App(tk.Tk):
 
         # add horz and vert scroll bars to treeview  
         self.treescrollbarh = ttk.Scrollbar(self, orient='horizontal', command=self.tree.xview)
-        self.tree.configure(xscrollcommand = self.treescrollbarh.set)
+        self.tree.configure(xscrollcommand = self.treescrollbarh.set,height=8)
         self.treescrollbarh.grid(row=7,columnspan=4,sticky=tk.EW, rowspan=1)
 
         self.treescrollbarv = ttk.Scrollbar(self, orient='vertical', command=self.tree.yview)
