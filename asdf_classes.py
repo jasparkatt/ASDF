@@ -22,6 +22,7 @@ class App(tk.Tk):
         self.columnconfigure(1,weight=1)
         self.columnconfigure(2,weight=1)
         self.columnconfigure(3,weight=1)
+        #self.columnconfigure(4,weight=1)
 
         # style from ttkbootstrap
         self.style = Style(
@@ -243,7 +244,7 @@ class App(tk.Tk):
             self.top.geometry('278x154+3+3')
             ttk.Label(self.top, text='Choose date').pack(padx=10, pady=10)
             self.cal = DateEntry(self.top, width=12, background='grey',
-                        foreground='white', borderwidth=2, year=2010)
+                        foreground='white', borderwidth=2, year=2018)
             self.cal.pack(padx=10, pady=10)
             self.cal.bind("<<DateEntrySelected>>")
             ttk.Button(self.top, style='danger.Outline.TButton', text='Exit',
@@ -277,8 +278,8 @@ class App(tk.Tk):
         #create our treeview for the totreevirw func
         self.columns = ('ROWID', 'COUNTY_NM', 'OWNER_TY', 'ACCESS_TY', 'ACCESS_NM', 'WATER_NM', 'WATER_TY', 'WATER_CL', 'SPECIES', 'DATE')
         self.tree = ttk.Treeview(columns=self.columns, show='headings')
-        #declare our treeview headers
-        #self.tree.rowconfigure(7,weight=1)
+
+        #declare our treeview headers        
         self.tree.heading('ROWID',text='ID')
         self.tree.heading('COUNTY_NM',text='County')
         self.tree.heading('OWNER_TY',text='Owner Type')
@@ -289,13 +290,16 @@ class App(tk.Tk):
         self.tree.heading('WATER_CL',text='Water Class')
         self.tree.heading('SPECIES',text='Fish Caught')
         self.tree.heading('DATE',text='Date')
-        #self.tree.configure(xscrollcommand = self.treescrollbar.set)
         self.tree.grid(row=6,columnspan=4,sticky=tk.NSEW,padx=5,pady=5,ipadx=3,ipady=3)
 
         # add horz and vert scroll bars to treeview  
-        self.treescrollbar = ttk.Scrollbar(self, orient='horizontal', command=self.tree.xview)
-        self.tree.configure(xscrollcommand = self.treescrollbar.set)
-        self.treescrollbar.grid(row=7,columnspan=4,sticky=tk.EW, rowspan=1)             
+        self.treescrollbarh = ttk.Scrollbar(self, orient='horizontal', command=self.tree.xview)
+        self.tree.configure(xscrollcommand = self.treescrollbarh.set)
+        self.treescrollbarh.grid(row=7,columnspan=4,sticky=tk.EW, rowspan=1)
+
+        self.treescrollbarv = ttk.Scrollbar(self, orient='vertical', command=self.tree.yview)
+        self.tree.configure(yscrollcommand = self.treescrollbarv.set)
+        self.treescrollbarv.grid(column=5,columnspan=5, sticky=tk.NS,row=6,rowspan=5)            
                             
         # add a delete button               
                                  
