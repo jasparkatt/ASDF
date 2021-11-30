@@ -4,7 +4,7 @@ from tkinter import font
 from tkinter.constants import CENTER, E, END, LEFT
 from ttkbootstrap import Style
 from tkcalendar import DateEntry
-import sqlite3
+
 
 # our root window
 
