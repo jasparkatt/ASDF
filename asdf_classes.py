@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import font
 from tkinter.constants import CENTER, E, END, LEFT
-from tkinter.messagebox import showinfo
 from ttkbootstrap import Style
 from tkcalendar import DateEntry
 import sqlite3
@@ -26,13 +25,13 @@ class App(tk.Tk):
 
         # style from ttkbootstrap
         self.style = Style(
-        theme='obridge', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
+        theme='light3', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
         # the below is automagically applied to any labelframe label txt
-        self.style.configure('TLabelframe.Label', font=('Fira Code', 11, 'italic'))
-        self.style.configure('Data.TLabel', font=('Fira Code', 8, 'italic'))
+        #self.style.configure('TLabelframe.Label', font=('Fira Code', 11, 'italic'))
+        #self.style.configure('Data.TLabel', font=('Fira Code', 8, 'italic'))
         self.style.configure('Outline.TButton', font=('Overpass Mono', 10))
-        self.style.configure('Bottom.TLabelframe.Label',font=('Georgia Pro', 9, 'italic'))
-        self.style.configure('mystyle.Treeview',anchor='center',font=('Roboto Mono', 10))
+        #self.style.configure('Bottom.TLabelframe.Label',font=('Georgia Pro', 9, 'italic'))
+        self.style.configure('mystyle.Treeview',anchor='center',font=('Roboto Mono', 9))
         self.style.configure('mystyle.Treeview.Heading',anchor='center',font=('Tahoma', 10,'bold'))
 
         # example below that works....remove
@@ -282,9 +281,9 @@ class App(tk.Tk):
         self.columns = ('ROWID', 'COUNTY_NM', 'OWNER_TY', 'ACCESS_TY', 'ACCESS_NM', 'WATER_NM', 'WATER_TY', 'WATER_CL', 'SPECIES', 'DATE')
         self.tree = ttk.Treeview(columns=self.columns, show='headings',style='mystyle.Treeview')
         for self.column in self.columns:
-            self.tree.column(self.column, anchor=CENTER)
+            self.tree.column(self.column, anchor=CENTER, width=230)
 
-        #declare our treeview headers        
+        #declare our treeview headers       
         self.tree.heading('ROWID',text='ID')
         self.tree.heading('COUNTY_NM',text='County')
         self.tree.heading('OWNER_TY',text='Owner Type')
