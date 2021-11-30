@@ -25,7 +25,7 @@ class App(tk.Tk):
 
         # style from ttkbootstrap
         self.style = Style(
-        theme='spiritfallslt', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
+        theme='springdork', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
         # the below is automagically applied to any labelframe label txt
         self.style.configure('TLabelframe.Label', font=('Fira Code', 11, 'italic'))
         self.style.configure('Data.TLabel', font=('Fira Code', 8, 'italic'))
@@ -268,7 +268,7 @@ class App(tk.Tk):
                        padx=5, pady=5)
 
         #create our treeview for the totreevirw func
-        columns = ('COUNTY_NM', 'OWNER_TY', 'ACCESS_TY', 'ACCESS_NM', 'WATER_NM', 'WATER_TY', 'WATER_CL', 'SPECIES', 'DATE', 'ROWID')
+        columns = ('ROWID', 'COUNTY_NM', 'OWNER_TY', 'ACCESS_TY', 'ACCESS_NM', 'WATER_NM', 'WATER_TY', 'WATER_CL', 'SPECIES', 'DATE')
         self.tree = ttk.Treeview(columns=columns, show='headings')
         #declare our treeview headers
         self.tree.heading('ROWID',text='ID')
