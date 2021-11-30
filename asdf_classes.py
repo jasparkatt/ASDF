@@ -14,7 +14,7 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title('Data Entry')
-        self.geometry('743x255+295+55')
+        self.geometry('950x525+5+5')
         self.resizable(True, True)
         self.iconbitmap('./assets/favicon.ico')
         # grid
@@ -33,42 +33,55 @@ class App(tk.Tk):
         self.style.configure('Bottom.TLabelframe.Label',font=('Georgia Pro', 9, 'italic'))
         # example below that works....remove
         # self.style.configure('custom.TEntry', background='green', foreground='white', font=('Helvetica', 24))
-        # create sqlite3 db and connect to it
+
+        # create func to connect to sqlite3 db and initialize table if needed
 
         conn = sqlite3.connect('./db/ASDF.db')
         c = conn.cursor()
         # create initial table then comment out but keep it.
 
-        # c.execute("""CREATE TABLE asdf_master (
-        #     COUNTY_NM TEXT,
-        #     OWNER_TY TEXT,
-        #     ACCESS_TY TEXT,
-        #     ACCESS_NM TEXT,
-        #     WATER_NM TEXT,
-        #     WATER_TY TEXT,
-        #     WATER_CL TEXT,
-        #     SPECIES TEXT,
-        #     DATE TEXT
-        #     )""")
+        c.execute("""CREATE TABLE IF NOT EXISTS asdf_master (
+            COUNTY_NM TEXT,
+            OWNER_TY TEXT,
+            ACCESS_TY TEXT,
+            ACCESS_NM TEXT,
+            WATER_NM TEXT,
+            WATER_TY TEXT,
+            WATER_CL TEXT,
+            SPECIES TEXT,
+            DATE TEXT
+            )""")
         
         # define our delete record func for delete button
 
         # define our query record func for qeury button
-
-        def queryrecord():
+        def totreeview():
             conn = sqlite3.connect('./db/ASDF.db')
             c = conn.cursor()
 
-            # do our query sql here
-            c.execute("SELECT *, rowid FROM asdf_master")
-            records = c.fetchall()
-            # QA QC print statement. WIll need to figure out how to return this to a treeveiw here.
-            print(records)
+            c.execute("SELECT *,rowid FROM asdf_master ORDER BY rowid")
+            for row in c:
+                self.tree.insert("",tk.END,values=(row[9], row[0], row[1], row[2],row[3], row[4], row[5],row[6], row[7], row[8]))
 
 
-            #commit changes and close conn
             conn.commit()
             conn.close()
+
+        # this func below dupes the totreeview func. Turn this into something else.
+        # def queryrecord():
+        #     conn = sqlite3.connect('./db/ASDF.db')
+        #     c = conn.cursor()
+
+        #     # do our query sql here
+        #     c.execute("SELECT *, rowid FROM asdf_master")
+        #     records = c.fetchall()
+        #     # QA QC print statement. WIll need to figure out how to return this to a treeveiw here.
+        #     print(records)
+
+
+        #     #commit changes and close conn
+        #     conn.commit()
+        #     conn.close()
 
         # define our submit func for the submit button
 
@@ -250,9 +263,26 @@ class App(tk.Tk):
 
         # add a query button
         self.query_button = ttk.Button(
-            self, style='primary.Outline.TButton', text='Select Records', command=queryrecord)
+            self, style='primary.Outline.TButton', text='Select Records', command=totreeview)
         self.query_button.grid(column=3, row=4, sticky=tk.EW,columnspan=2,
                        padx=5, pady=5)
+
+        #create our treeview for the totreevirw func
+        columns = ('COUNTY_NM', 'OWNER_TY', 'ACCESS_TY', 'ACCESS_NM', 'WATER_NM', 'WATER_TY', 'WATER_CL', 'SPECIES', 'DATE', 'ROWID')
+        self.tree = ttk.Treeview(columns=columns, show='headings')
+        #declare our treeview headers
+        self.tree.heading('ROWID',text='ID')
+        self.tree.heading('COUNTY_NM',text='County')
+        self.tree.heading('OWNER_TY',text='Owner Type')
+        self.tree.heading('ACCESS_TY',text='Access Type')
+        self.tree.heading('ACCESS_NM',text='Access Name')
+        self.tree.heading('WATER_NM',text='Water Name')
+        self.tree.heading('WATER_TY',text='Water Type')
+        self.tree.heading('WATER_CL',text='Water Class')
+        self.tree.heading('SPECIES',text='Fish Caught')
+        self.tree.heading('DATE',text='Date')
+        
+        self.tree.grid(row=6,columnspan=4,sticky=tk.NSEW,padx=3,pady=3,ipadx=2,ipady=2)               
                             
         # add a delete button               
                                  
