@@ -4,7 +4,8 @@ from tkinter import font
 from tkinter.constants import CENTER, E, END, LEFT
 from ttkbootstrap import Style
 from tkcalendar import DateEntry
-
+from settings import *
+import psycopg2
 
 # our root window
 
@@ -26,15 +27,10 @@ class App(tk.Tk):
         # style from ttkbootstrap
         self.style = Style(
         theme='light3', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
-        # the below is automagically applied to any labelframe label txt
-        #self.style.configure('TLabelframe.Label', font=('Fira Code', 11, 'italic'))
-        #self.style.configure('Data.TLabel', font=('Fira Code', 8, 'italic'))
+        # some configuration settings
         self.style.configure('Outline.TButton', font=('Overpass Mono', 10))
-        #self.style.configure('Bottom.TLabelframe.Label',font=('Georgia Pro', 9, 'italic'))
         self.style.configure('mystyle.Treeview',anchor='center',font=('Roboto Mono', 9))
         self.style.configure('mystyle.Treeview.Heading',anchor='center',font=('Tahoma', 10,'bold'))
-
-        # example below that works....remove
         # self.style.configure('custom.TEntry', background='green', foreground='white', font=('Helvetica', 24))
 
         # create func to connect to sqlite3 db and initialize table if needed
