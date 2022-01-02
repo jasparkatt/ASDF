@@ -179,6 +179,26 @@
 				"inputfg": "#1d3421",
 				"inputbg": "#fcfce9"
 			}
+		},
+		{
+			"name": "shack",
+			"font": "Helvetica 10",
+			"type": "light",
+			"colors": {
+				"primary": "#003e3e",
+				"secondary": "#007979",
+				"success": "#44b73e",
+				"info": "#7488be",
+				"warning": "#ff8811",
+				"danger": "#e10000",
+				"bg": "#f4faff",
+				"fg": "#333357",
+				"selectbg": "#489191",
+				"selectfg": "#ffffff",
+				"border": "#312f4f",
+				"inputfg": "#004242",
+				"inputbg": "#e6e3e6"
+			}
 		}
 	]
 }

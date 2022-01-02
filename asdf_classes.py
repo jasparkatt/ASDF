@@ -24,15 +24,15 @@ class App(tk.Tk):
         #self.columnconfigure(4,weight=1)
 
         # style from ttkbootstrap
-        self.style = Style(
+        style = Style(
         theme='light3', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
         # the below is automagically applied to any labelframe label txt
         #self.style.configure('TLabelframe.Label', font=('Fira Code', 11, 'italic'))
-        #self.style.configure('Data.TLabel', font=('Fira Code', 8, 'italic'))
-        self.style.configure('Outline.TButton', font=('Overpass Mono', 10))
+        style.configure('Data.TLabel', font=('Fira Code', 8, 'italic'))
+        style.configure('Outline.TButton', font=('Overpass Mono', 10))
         #self.style.configure('Bottom.TLabelframe.Label',font=('Georgia Pro', 9, 'italic'))
-        self.style.configure('mystyle.Treeview',anchor='center',font=('Roboto Mono', 9))
-        self.style.configure('mystyle.Treeview.Heading',anchor='center',font=('Tahoma', 10,'bold'))
+        style.configure('mystyle.Treeview',anchor='center',font=('Roboto Mono', 9))
+        style.configure('mystyle.Treeview.Heading',anchor='center',font=('Cousine', 10,'bold'))
 
         # example below that works....remove
         # self.style.configure('custom.TEntry', background='green', foreground='white', font=('Helvetica', 24))
@@ -96,19 +96,19 @@ class App(tk.Tk):
             #insert new data into our table
             c.execute("INSERT INTO asdf_master VALUES (:countylabel_combo, :ownershiplabel_combo, :accesslabel_combo, :accesslabel_entry, :streamlabel_entry, :watertypelabel_combo, :waterclasslabel_combo, :specieslabel_combo, :cal)",
                 {
-                    'countylabel_combo': self.countylabel_combo.get(),
-                    'ownershiplabel_combo': self.ownershiplabel_combo.get(),
-                    'accesslabel_combo': self.accesslabel_combo.get(),
-                    'accesslabel_entry': self.accesslabel_entry.get(),
-                    'streamlabel_entry': self.streamlabel_entry.get(),
-                    'watertypelabel_combo': self.watertypelabel_combo.get(),
-                    'waterclasslabel_combo': self.waterclasslabel_combo.get(),
-                    'specieslabel_combo': self.specieslabel_combo.get(),
+                    'countylabel_combo': countylabel_combo.get(),
+                    'ownershiplabel_combo': ownershiplabel_combo.get(),
+                    'accesslabel_combo': accesslabel_combo.get(),
+                    'accesslabel_entry': accesslabel_entry.get(),
+                    'streamlabel_entry': streamlabel_entry.get(),
+                    'watertypelabel_combo': watertypelabel_combo.get(),
+                    'waterclasslabel_combo': waterclasslabel_combo.get(),
+                    'specieslabel_combo': specieslabel_combo.get(),
                     'cal': self.cal.get()
                 })
             
-            self.streamlabel_entry.delete(0, END)
-            self.accesslabel_entry.delete(0,END)    
+            streamlabel_entry.delete(0, END)
+            accesslabel_entry.delete(0,END)    
 
         #commit changes and close conn
             conn.commit()
@@ -117,8 +117,8 @@ class App(tk.Tk):
         
         # create combobox for county selection
 
-        self.countylabel_text = tk.StringVar()
-        self.county = ('Adams', 'Ashland', 'Barron', 'Bayfield', 'Brown', 'Buffalo', 'Burnett',
+        countylabel_text = tk.StringVar()
+        county = ('Adams', 'Ashland', 'Barron', 'Bayfield', 'Brown', 'Buffalo', 'Burnett',
                        'Calumet', 'Chippewa', 'Clark', 'Columbia', 'Crawford', 'Dane', 'Dodge',
                        'Door', 'Douglas', 'Dunn', 'Eau Claire', 'Florence', 'Fond du Lac', 'Forest',
                        'Grant', 'Green', 'Green Lake', 'Iowa', 'Iron', 'Jackson', 'Jefferson', 'Juneau',
@@ -129,116 +129,116 @@ class App(tk.Tk):
                        'Taylor', 'Trempealeau', 'Vernon', 'Vilas', 'Walworth', 'Washburn', 'Washington',
                        'Waukesha', 'Waupaca', 'Waushara', 'Winnebago', 'Wood'
               )
-        self.countylabel = ttk.Label(
+        countylabel = ttk.Label(
             self, text='Enter County Name:', style='Data.TLabel')
-        self.countylabel.grid(column=0, row=0, sticky=tk.EW,
+        countylabel.grid(column=0, row=0, sticky=tk.EW,
                      padx=5, pady=5, ipady=3, ipadx=3)
-        self.countylabel_combo = ttk.Combobox(
-            self, textvariable=self.countylabel_text)
-        self.countylabel_combo['values'] = self.county
-        self.countylabel_combo['state'] = 'readonly'
-        self.countylabel_combo.grid(column=1, row=0, sticky=tk.EW, padx=5, pady=5)
-        self.countylabel_combo.bind('<<ComboboxSelected>>')
+        countylabel_combo = ttk.Combobox(
+            self, textvariable=countylabel_text)
+        countylabel_combo['values'] = county
+        countylabel_combo['state'] = 'readonly'
+        countylabel_combo.grid(column=1, row=0, sticky=tk.EW, padx=5, pady=5)
+        countylabel_combo.bind('<<ComboboxSelected>>')
 
 
         # enter water body name
-        self.streamlabel_text = tk.StringVar()
+        streamlabel_text = tk.StringVar()
     
-        self.streamlabel = ttk.Label(
+        streamlabel = ttk.Label(
             self, text='Water Fished(Name):', style='Data.TLabel')
-        self.streamlabel.grid(column=2, row=0, sticky=tk.EW,
+        streamlabel.grid(column=2, row=0, sticky=tk.EW,
                      padx=5, pady=5, ipady=3, ipadx=3)
-        self.streamlabel_entry = ttk.Entry(
-            self, takefocus=0, cursor='hand1', textvariable=self.streamlabel_text, style='custom.TEntry')
-        self.streamlabel_entry.grid(column=3, row=0, sticky=tk.EW, padx=5, pady=5)
+        streamlabel_entry = ttk.Entry(
+            self, takefocus=0, cursor='hand1', textvariable=streamlabel_text, style='custom.TEntry')
+        streamlabel_entry.grid(column=3, row=0, sticky=tk.EW, padx=5, pady=5)
 
         # enter water type
 
-        self.watertypes = ('Cold', 'Cool', 'Warm', 'Cold-Cool', 'Cool-Warm')
-        self.watertype_text = tk.StringVar()
-        self.watertypelabel = ttk.Label(
+        watertypes = ('Cold', 'Cool', 'Warm', 'Cold-Cool', 'Cool-Warm')
+        watertype_text = tk.StringVar()
+        watertypelabel = ttk.Label(
             self, text='Water Type(Temp):', style='Data.TLabel')
-        self.watertypelabel.grid(column=2, row=2, sticky=tk.EW,
+        watertypelabel.grid(column=2, row=2, sticky=tk.EW,
                         padx=5, pady=5, ipady=3, ipadx=3)
-        self.watertypelabel_combo = ttk.Combobox(
-            self, textvariable=self.watertype_text)
-        self.watertypelabel_combo['values'] = self.watertypes
-        self.watertypelabel_combo['state'] = 'readonly'
-        self.watertypelabel_combo.grid(column=3, row=2, sticky=tk.EW, padx=5, pady=5)
-        self.watertypelabel_combo.bind('<<ComboboxSelected>>')  # enter water type
+        watertypelabel_combo = ttk.Combobox(
+            self, textvariable=watertype_text)
+        watertypelabel_combo['values'] = watertypes
+        watertypelabel_combo['state'] = 'readonly'
+        watertypelabel_combo.grid(column=3, row=2, sticky=tk.EW, padx=5, pady=5)
+        watertypelabel_combo.bind('<<ComboboxSelected>>')  # enter water type
 
         #  waterclass combo box
 
-        self.waterclass = ('Class 1', 'Class 2', 'Class 3', 'Non-Trout Water')
-        self.waterclass_text = tk.StringVar()
-        self.waterclasslabel = ttk.Label(
+        waterclass = ('Class 1', 'Class 2', 'Class 3', 'Non-Trout Water')
+        waterclass_text = tk.StringVar()
+        waterclasslabel = ttk.Label(
             self, text='Water Class(Trout?):', style='Data.TLabel')
-        self.waterclasslabel.grid(column=2, row=3, sticky=tk.EW,
+        waterclasslabel.grid(column=2, row=3, sticky=tk.EW,
                         padx=5, pady=5, ipady=3, ipadx=3)
-        self.waterclasslabel_combo = ttk.Combobox(
-            self, textvariable=self.waterclass_text)
-        self.waterclasslabel_combo['values'] = self.waterclass
-        self.waterclasslabel_combo['state'] = 'readonly'
-        self.waterclasslabel_combo.grid(column=3, row=3, sticky=tk.EW, padx=5, pady=5)
-        self.waterclasslabel_combo.bind('<<ComboboxSelected>>')
+        waterclasslabel_combo = ttk.Combobox(
+            self, textvariable=waterclass_text)
+        waterclasslabel_combo['values'] = waterclass
+        waterclasslabel_combo['state'] = 'readonly'
+        waterclasslabel_combo.grid(column=3, row=3, sticky=tk.EW, padx=5, pady=5)
+        waterclasslabel_combo.bind('<<ComboboxSelected>>')
 
         # tkinter stuff for species select
     
-        self.species = ('Brown Trout', 'Rainbow Trout', 'Brook Trout', 'Steelhead', 'Lake Run Brown Trout', 'Carp', 'Smallmouth Bass',
+        species = ('Brown Trout', 'Rainbow Trout', 'Brook Trout', 'Steelhead', 'Lake Run Brown Trout', 'Carp', 'Smallmouth Bass',
                'Largemouth Bass', 'Bluegill', 'Pumpkinseed', 'Perch', 'Walleye', 'Northern Pike', 'Musky', 'Bullhead')
-        self.specieslabel_text = tk.StringVar()
-        self.specieslabel = ttk.Label(
+        specieslabel_text = tk.StringVar()
+        specieslabel = ttk.Label(
             self, text='Select Species Caught:', style='Data.TLabel')
-        self.specieslabel.grid(column=2, row=1, sticky=tk.EW,
+        specieslabel.grid(column=2, row=1, sticky=tk.EW,
                       padx=5, pady=5, ipady=3, ipadx=3)
-        self.specieslabel_combo = ttk.Combobox(
-            self, textvariable=self.specieslabel_text)
-        self.specieslabel_combo['values'] = self.species
-        self.specieslabel_combo['state'] = 'readonly'
-        self.specieslabel_combo.grid(column=3, row=1, sticky=tk.EW, padx=5, pady=5)
-        self.specieslabel_combo.bind('<<ComboboxSelected>>')
+        specieslabel_combo = ttk.Combobox(
+            self, textvariable=specieslabel_text)
+        specieslabel_combo['values'] = species
+        specieslabel_combo['state'] = 'readonly'
+        specieslabel_combo.grid(column=3, row=1, sticky=tk.EW, padx=5, pady=5)
+        specieslabel_combo.bind('<<ComboboxSelected>>')
 
         # create combo box for access type i.e. public, row, private
         
-        self.accesslabel_text = tk.StringVar()
-        self.access = ('Public-DNR', 'Public-County',
+        accesslabel_text = tk.StringVar()
+        access = ('Public-DNR', 'Public-County',
               'Public-Other', 'ROW-Bridge', 'Private')
-        self.accesslabel = ttk.Label(
+        accesslabel = ttk.Label(
             self, text='Enter Access Type:', style='Data.TLabel')
-        self.accesslabel.grid(column=0, row=2, sticky=tk.W,
+        accesslabel.grid(column=0, row=2, sticky=tk.W,
                      padx=5, pady=5, ipady=3, ipadx=3)
-        self.accesslabel_combo = ttk.Combobox(
-            self, textvariable=self.accesslabel_text)
-        self.accesslabel_combo['values'] = self.access
-        self.accesslabel_combo['state'] = 'readonly'
-        self.accesslabel_combo.grid(column=1, row=2, sticky=tk.EW, padx=5, pady=5)
-        self.accesslabel_combo.bind('<<ComboboxSelected>>')
+        accesslabel_combo = ttk.Combobox(
+            self, textvariable=accesslabel_text)
+        accesslabel_combo['values'] = access
+        accesslabel_combo['state'] = 'readonly'
+        accesslabel_combo.grid(column=1, row=2, sticky=tk.EW, padx=5, pady=5)
+        accesslabel_combo.bind('<<ComboboxSelected>>')
 
     # combo box for ownership type i.e public, private, state, county, local, nonprofit etc
         
-        self.ownershiptype_text = tk.StringVar()
-        self.ownership = ('Public-State', 'Public-County', 'Public-Local',
+        ownershiptype_text = tk.StringVar()
+        ownership = ('Public-State', 'Public-County', 'Public-Local',
                  'Private-Permission', 'Private-With Easement', 'Private-Public(i.e.MFL Open)')
-        self.ownershiplabel = ttk.Label(self, text='Enter Owner Type:')
-        self.ownershiplabel.grid(column=0, row=1, sticky=tk.W,
+        ownershiplabel = ttk.Label(self, text='Enter Owner Type:')
+        ownershiplabel.grid(column=0, row=1, sticky=tk.W,
                         padx=5, pady=5, ipady=3, ipadx=3)
-        self.ownershiplabel_combo = ttk.Combobox(
-            self, textvariable=self.ownershiptype_text)
-        self.ownershiplabel_combo['values'] = self.ownership
-        self.ownershiplabel_combo['state'] = 'readonly'
-        self.ownershiplabel_combo.grid(column=1, row=1, sticky=tk.EW, padx=5, pady=5)
-        self.ownershiplabel_combo.bind('<<ComboboxSelected>>')
+        ownershiplabel_combo = ttk.Combobox(
+            self, textvariable=ownershiptype_text)
+        ownershiplabel_combo['values'] = ownership
+        ownershiplabel_combo['state'] = 'readonly'
+        ownershiplabel_combo.grid(column=1, row=1, sticky=tk.EW, padx=5, pady=5)
+        ownershiplabel_combo.bind('<<ComboboxSelected>>')
 
     # create a entry box for name of acces.
 
-        self.accessnamelabel_text = tk.StringVar()
-        self.accesslabel = ttk.Label(self, text='Enter Access Name:',
+        accessnamelabel_text = tk.StringVar()
+        accesslabel = ttk.Label(self, text='Enter Access Name:',
                             style='Data.TLabel')
-        self.accesslabel.grid(column=0, row=3, sticky=tk.W,
+        accesslabel.grid(column=0, row=3, sticky=tk.W,
                      padx=5, pady=5, ipady=3, ipadx=3)
-        self.accesslabel_entry = ttk.Entry(
-            self, takefocus=0, cursor='hand1', textvariable=self.accessnamelabel_text)
-        self.accesslabel_entry.grid(column=1, row=3, sticky=tk.EW, padx=5, pady=5)
+        accesslabel_entry = ttk.Entry(
+            self, takefocus=0, cursor='hand1', textvariable=accessnamelabel_text)
+        accesslabel_entry.grid(column=1, row=3, sticky=tk.EW, padx=5, pady=5)
     # create a datepicker from tkcalender.
     # add calendar date picker
         def pickadate():
@@ -254,27 +254,27 @@ class App(tk.Tk):
 
 
         # add an exit button
-        self.close_button = ttk.Button(
+        close_button = ttk.Button(
             self, style='danger.Outline.TButton', text='Exit', command=self.destroy)
-        self.close_button.grid(column=0, row=5, sticky=tk.EW,
+        close_button.grid(column=0, row=5, sticky=tk.EW,
                       padx=5, pady=5)
 
         # add date picker button
-        self.date_button = ttk.Button(
+        date_button = ttk.Button(
             self,style='secondary.Outline.TButton', text='Pick Date', command=pickadate)
-        self.date_button.grid(column=0, row=4, sticky=tk.EW,
+        date_button.grid(column=0, row=4, sticky=tk.EW,
                        padx=5, pady=5)
 
         # add a query button
-        self.query_button = ttk.Button(
+        query_button = ttk.Button(
             self, style='primary.Outline.TButton', text='Select Records', command=totreeview)
-        self.query_button.grid(column=3, row=4, sticky=tk.EW,columnspan=2,
+        query_button.grid(column=3, row=4, sticky=tk.EW,columnspan=2,
                        padx=5, pady=5)
 
         #add submit button
-        self.submit_button = ttk.Button(
+        submit_button = ttk.Button(
             self, style='primary.Outline.TButton', text='Submit Records', command=submit)
-        self.submit_button.grid(column=3, row=5, sticky=tk.EW,
+        submit_button.grid(column=3, row=5, sticky=tk.EW,
                        padx=5, pady=5)               
         
         #create our treeview for the totreevirw func
