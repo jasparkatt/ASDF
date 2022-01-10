@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import font, ttk
-from tkinter.constants import CENTER, END, LEFT, E
+from tkinter.constants import CENTER, END, LEFT, E, W
 
 import folium
 import psycopg2
@@ -27,15 +27,66 @@ class App(tk.Tk):
         self.columnconfigure(3, weight=1)
         # self.columnconfigure(4,weight=1)
 
-        # style from ttkbootstrap
-        self.style = Style(
-            theme='light3', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
-        # some configuration settings
-        self.style.configure('Outline.TButton', font=('Overpass Mono', 10))
-        self.style.configure('mystyle.Treeview',
-                             anchor='center', font=('Roboto Mono', 9))
-        self.style.configure('mystyle.Treeview.Heading',
-                             anchor='center', font=('Tahoma', 10, 'bold'))
+        self.style = ttk.Style()
+        self.style.theme_create('style', parent='winnative',
+                           settings={
+                               'TButton': {
+                                   'configure': {
+                                       'background': '#000000',
+                                       'foreground': '#7f7f7f',
+                                       'font': ('Roboto Mono', 9, 'italic'),
+                                       'anchor': 'center'
+                                   }
+                               },
+                               'TLabel': {
+                                   'configure': {
+                                       'font': ('Roboto Mono', 9, 'italic'),
+                                       'foreground': '#ffffff',
+                                       'relief': 'ridge',
+                                       'borderwidth': 4,
+                                       'anchor': 'center',
+                                       'background': '#000000'
+
+                                   }
+                               },
+                               'Treeview': {
+                                   'configure': {
+                                       'font': ('Overpass Mono', 9),
+                                       'foreground': '#000000',
+                                       'background': 'silver'
+
+                                   }
+                               },
+                               'Treeview.Heading': {
+                                   'configure': {
+                                       'font': (('Roboto Mono', 10, 'bold'))
+                                   }
+                               }
+
+
+                           })
+
+        self.style.theme_use('style')
+        # self.style.configure('mystyle.Treeview',background='silver',foreground='black',font=('Overpass Mono', 9))
+        # self.style.configure('mystyle.Treeview.Heading',font=('Roboto Mono', 10, 'bold'))
+
+        self.style.map("TButton",
+                  foreground=[('pressed', '#999999'), ('active', '#191919')],
+                  background=[('pressed', '!disabled', '#ffffff'),
+                              ('active', '#000000')]
+                  )
+
+        # # style from ttkbootstrap
+        # self.style = Style(
+        #     theme='light3', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
+        # # some configuration settings
+        # self.style.configure('Data.TLabel', foreground='grey',
+        #                 font=('PT Mono', 8))
+        # self.style.configure('Outline.TButton', font=('Overpass Mono', 10))
+        # self.style.configure('mystyle.Treeview',
+        #                      anchor='center', font=('Roboto Mono', 9))
+        # self.style.configure('mystyle.Treeview.Heading',
+        #                      anchor='center', font=('Tahoma', 10, 'bold'))
         # self.style.configure('custom.TEntry', background='green', foreground='white', font=('Helvetica', 24))
 
         # create func to connect to sqlite3 db and initialize table if needed
@@ -77,19 +128,23 @@ class App(tk.Tk):
             conn.close()
 
         # this func below dupes the totreeview func. Turn this into something else.
-        # def queryrecord():
-        #     conn = sqlite3.connect('./db/ASDF.db')
-        #     c = conn.cursor()
+        def delete():
+            # Create a database or connect to one
+            conn = psycopg2.connect(
+                database=PG_NAME, user=PG_USER, password=PG_PASSWORD, host=PG_HOST, port=PG_PORT)
+            c = conn.cursor()
 
-        #     # do our query sql here
-        #     c.execute("SELECT *, rowid FROM asdf_master")
-        #     records = c.fetchall()
-        #     # QA QC print statement. WIll need to figure out how to return this to a treeveiw here.
-        #     print(records)
+            # Delete a record
+            c.execute("DELETE from asdf_master WHERE id = " + self.delete_box.get())
 
-        #     #commit changes and close conn
-        #     conn.commit()
-        #     conn.close()
+            self.delete_box.delete(0, END)
+
+            # Commit Changes
+            conn.commit()
+
+            # Close Connection
+            conn.close()
+
 
         # define our submit func for the submit button
 
@@ -133,7 +188,7 @@ class App(tk.Tk):
                        'Waukesha', 'Waupaca', 'Waushara', 'Winnebago', 'Wood'
                        )
         self.countylabel = ttk.Label(
-            self, text='Enter County Name:', style='Data.TLabel')
+            self, text='Enter County Name:', style='TLabel')
         self.countylabel.grid(column=0, row=0, sticky=tk.EW,
                               padx=5, pady=5, ipady=3, ipadx=3)
         self.countylabel_combo = ttk.Combobox(
@@ -148,7 +203,7 @@ class App(tk.Tk):
         self.streamlabel_text = tk.StringVar()
 
         self.streamlabel = ttk.Label(
-            self, text='Water Fished(Name):', style='Data.TLabel')
+            self, text='Water Fished(Name):', style='TLabel')
         self.streamlabel.grid(column=2, row=0, sticky=tk.EW,
                               padx=5, pady=5, ipady=3, ipadx=3)
         self.streamlabel_entry = ttk.Entry(
@@ -161,7 +216,7 @@ class App(tk.Tk):
         self.watertypes = ('Cold', 'Cool', 'Warm', 'Cold-Cool', 'Cool-Warm')
         self.watertype_text = tk.StringVar()
         self.watertypelabel = ttk.Label(
-            self, text='Water Type(Temp):', style='Data.TLabel')
+            self, text='Water Type(Temp):', style='TLabel')
         self.watertypelabel.grid(column=2, row=2, sticky=tk.EW,
                                  padx=5, pady=5, ipady=3, ipadx=3)
         self.watertypelabel_combo = ttk.Combobox(
@@ -178,7 +233,7 @@ class App(tk.Tk):
         self.waterclass = ('Class 1', 'Class 2', 'Class 3', 'Non-Trout Water')
         self.waterclass_text = tk.StringVar()
         self.waterclasslabel = ttk.Label(
-            self, text='Water Class(Trout?):', style='Data.TLabel')
+            self, text='Water Class(Trout?):', style='TLabel')
         self.waterclasslabel.grid(column=2, row=3, sticky=tk.EW,
                                   padx=5, pady=5, ipady=3, ipadx=3)
         self.waterclasslabel_combo = ttk.Combobox(
@@ -195,7 +250,7 @@ class App(tk.Tk):
                         'Largemouth Bass', 'Bluegill', 'Pumpkinseed', 'Perch', 'Walleye', 'Northern Pike', 'Musky', 'Bullhead')
         self.specieslabel_text = tk.StringVar()
         self.specieslabel = ttk.Label(
-            self, text='Select Species Caught:', style='Data.TLabel')
+            self, text='Select Species Caught:', style='TLabel')
         self.specieslabel.grid(column=2, row=1, sticky=tk.EW,
                                padx=5, pady=5, ipady=3, ipadx=3)
         self.specieslabel_combo = ttk.Combobox(
@@ -212,7 +267,7 @@ class App(tk.Tk):
         self.access = ('Public-DNR', 'Public-County',
                        'Public-Other', 'ROW-Bridge', 'Private')
         self.accesslabel = ttk.Label(
-            self, text='Enter Access Type:', style='Data.TLabel')
+            self, text='Enter Access Type:', style='TLabel')
         self.accesslabel.grid(column=0, row=2, sticky=tk.W,
                               padx=5, pady=5, ipady=3, ipadx=3)
         self.accesslabel_combo = ttk.Combobox(
@@ -228,7 +283,7 @@ class App(tk.Tk):
         self.ownershiptype_text = tk.StringVar()
         self.ownership = ('Public-State', 'Public-County', 'Public-Local',
                           'Private-Permission', 'Private-With Easement', 'Private-Public(i.e.MFL Open)')
-        self.ownershiplabel = ttk.Label(self, text='Enter Owner Type:')
+        self.ownershiplabel = ttk.Label(self, text='Enter Owner Type:',style='TLabel')
         self.ownershiplabel.grid(column=0, row=1, sticky=tk.W,
                                  padx=5, pady=5, ipady=3, ipadx=3)
         self.ownershiplabel_combo = ttk.Combobox(
@@ -243,13 +298,19 @@ class App(tk.Tk):
 
         self.accessnamelabel_text = tk.StringVar()
         self.accesslabel = ttk.Label(self, text='Enter Access Name:',
-                                     style='Data.TLabel')
+                                     style='TLabel')
         self.accesslabel.grid(column=0, row=3, sticky=tk.W,
                               padx=5, pady=5, ipady=3, ipadx=3)
         self.accesslabel_entry = ttk.Entry(
             self, takefocus=0, cursor='hand1', textvariable=self.accessnamelabel_text)
         self.accesslabel_entry.grid(
             column=1, row=3, sticky=tk.EW, padx=5, pady=5)
+
+        # create delete box
+        self.delete_box = ttk.Entry(self)
+        self.delete_box.grid(column=1,row=4,padx=5, pady=5,sticky=tk.EW)
+        self.delete_box_label = ttk.Label(self,text='Delete Record(ID)',style='TLabel')
+        self.delete_box_label.grid(column=2, row=4, sticky=tk.W, padx=5, pady=5, ipady=3, ipadx=3)    
     # create a datepicker from tkcalender.
     # add calendar date picker
 
@@ -261,38 +322,42 @@ class App(tk.Tk):
                                  foreground='white', borderwidth=2, year=2022)
             self.cal.pack(padx=10, pady=10)
             self.cal.bind("<<DateEntrySelected>>")
-            ttk.Button(self.top, style='danger.Outline.TButton', text='Exit',
+            ttk.Button(self.top, style='TButton', text='Exit',
                        command=self.top.destroy).pack(pady=3, padx=3, side='bottom')
-
+            
         # add an exit button
         self.close_button = ttk.Button(
-            self, style='danger.Outline.TButton', text='Exit', command=self.destroy)
+            self, style='TButton', text='Exit', command=self.destroy)
         self.close_button.grid(column=0, row=5, sticky=tk.EW,
                                padx=5, pady=5)
 
         # add date picker button
         self.date_button = ttk.Button(
-            self, style='secondary.Outline.TButton', text='Pick Date', command=pickadate)
+            self, style='TButton', text='Pick Date', command=pickadate)
         self.date_button.grid(column=0, row=4, sticky=tk.EW,
                               padx=5, pady=5)
 
         # add a query button
         self.query_button = ttk.Button(
-            self, style='primary.Outline.TButton', text='Select Records', command=totreeview)
+            self, style='TButton', text='Select Records', command=totreeview)
         self.query_button.grid(column=3, row=4, sticky=tk.EW, columnspan=2,
                                padx=5, pady=5)
 
         # add submit button
         self.submit_button = ttk.Button(
-            self, style='primary.Outline.TButton', text='Submit Records', command=submit)
+            self, style='TButton', text='Submit Records', command=submit)
         self.submit_button.grid(column=3, row=5, sticky=tk.EW,
                                 padx=5, pady=5)
+
+        self.delete_button = ttk.Button(
+            self, text='DELETE RECORD',style='TButton',command=delete)
+        self.delete_button.grid(column=1, row=5, padx=2, pady=2, sticky=tk.EW)                        
 
         # create our treeview for the totreevirw func
         self.columns = ('ID', 'COUNTY_NM', 'OWNER_TY', 'ACCESS_TY', 'ACCESS_NM',
                         'WATER_NM', 'WATER_TY', 'WATER_CL', 'SPECIES', 'DATE')
         self.tree = ttk.Treeview(columns=self.columns,
-                                 show='headings', style='mystyle.Treeview')
+                                 show='headings', style='Treeview',takefocus=True,selectmode='browse')
         for self.column in self.columns:
             self.tree.column(self.column, anchor=CENTER, width=230)
 
