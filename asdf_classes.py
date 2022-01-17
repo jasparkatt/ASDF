@@ -1,12 +1,11 @@
-from fileinput import close
+
 import tkinter as tk
-from tkinter import font, ttk
-from tkinter.constants import CENTER, END, LEFT, E, W
+from tkinter import ttk
+from tkinter.constants import *
 
 import folium
 import psycopg2
 from tkcalendar import DateEntry
-from ttkbootstrap import Style
 
 from settings import *
 
@@ -14,21 +13,23 @@ from settings import *
 
 
 class DatabaseConn():
+    """class to handle      
+    postgres db connection stuff"""
+
     def __init__(self):
-        self.conn = psycopg2.connect(database=PG_NAME, user=PG_USER, password=PG_PASSWORD, host=PG_HOST, port=PG_PORT)
+        self.conn = psycopg2.connect(
+            database=PG_NAME, user=PG_USER, password=PG_PASSWORD, host=PG_HOST, port=PG_PORT)
         self.cur = self.conn.cursor()
 
     def query(self, query):
-        self.cur.execute(query)    
+        self.cur.execute(query)
 
     def commit(self):
         self.conn.commit()
 
     def close(self):
         self.cur.close()
-        self.conn.close()               
-
-
+        self.conn.close()
 
 
 class App(tk.Tk):
@@ -45,62 +46,61 @@ class App(tk.Tk):
         self.columnconfigure(2, weight=1)
         self.columnconfigure(3, weight=1)
         # self.columnconfigure(4,weight=1)
-        self.configure(background='#E5D0CC',relief='sunken')
-
+        self.configure(background='#E5D0CC', relief='sunken')
+        # declare and create our style; customize base widget params
         self.style = ttk.Style()
-        self.style.theme_create('style', parent='winnative',
-                           settings={
-                               'TButton': {
-                                   'configure': {
-                                       'background': '#000000',
-                                       'foreground': '#172121',
-                                       'font': ('Roboto Mono', 9, 'italic'),
-                                       'anchor': 'center'
-                                   }
-                               },
-                               'TLabel': {
-                                   'configure': {
-                                       'font': ('Roboto Mono', 9, 'italic'),
-                                       'foreground': '#172121',
-                                       'relief': 'ridge',
-                                       'borderwidth': 4,
-                                       'anchor': 'center',
-                                       'background': '#F9FBF2'
+        self.style.theme_create('HotChocolate', parent='winnative',
+                                settings={
+                                    'TButton': {
+                                        'configure': {
+                                            'background': '#000000',
+                                            'foreground': '#172121',
+                                            'font': ('Palatino Linotype', 11),
+                                            'anchor': 'center',
+                                            'style': 'TButton'
+                                        },
+                                        'map': {
+                                            'foreground': [('pressed', 'red'),
+                                                           ('active', 'blue')],
+                                            'background': [('pressed', '!disabled', '#ffffff'),
+                                                           ('active', '#000000')]
+                                        }
+                                    },
+                                    'TLabel': {
+                                        'configure': {
+                                            'font': ('Roboto Mono', 9, 'italic'),
+                                            'foreground': '#172121',
+                                            'relief': 'ridge',
+                                            'borderwidth': 4,
+                                            'anchor': 'center',
+                                            'background': '#F9FBF2'
 
-                                   }
-                               },
-                               'Treeview': {
-                                   'configure': {
-                                       'font': ('PT Root UI', 9, 'italic bold')
+                                        }
+                                    },
+                                    'Treeview': {
+                                        'configure': {
+                                            'font': ('PT Root UI', 9, 'italic bold')
 
-                                   }
-                               },
-                               'Treeview.Heading': {
-                                   'configure': {
-                                       'font': ('Roboto Mono', 10, 'bold'),
-                                       'background':'#000000',
-                                       'foreground':'#E5E1EE'                                  
-                                       }
-                               }
+                                        },
+                                        'map': {
+                                            'background': [('!selected', '#A7A284'),
+                                                           ('selected', '#C9B7AD')],
+                                            'foreground': [('selected', '#292F36')],
+                                            'font': [('selected', ("Modern438Smc", 11, 'bold'))]
+                                        }
+                                    },
+                                    'Treeview.Heading': {
+                                        'configure': {
+                                            'font': ('Roboto Mono', 10, 'bold'),
+                                            'background': '#000000',
+                                            'foreground': '#E5E1EE'
+                                        }
+                                    }
 
 
-                           })
+                                })
 
-        self.style.theme_use('style')
-        # self.style.configure('mystyle.Treeview',background='silver',foreground='black',font=('Overpass Mono', 9))
-        # self.style.configure('mystyle.Treeview.Heading',font=('Roboto Mono', 10, 'bold'))
-
-        self.style.map("TButton",
-                  foreground=[('pressed', '#999999'), ('active', '#191919')],
-                  background=[('pressed', '!disabled', '#ffffff'),
-                              ('active', '#000000')]
-                  )
-        self.style.map("Treeview",
-                  background=[('!selected', '#A7A284'), ('selected', '#C9B7AD')],
-                  foreground=[('selected', '#292F36')],
-                  font=[('selected', ("Modern438Smc", 11, 'bold'))]
-                  )           
-
+        self.style.theme_use('HotChocolate')
 
         # use our DatabaseConnect class to connect to sqlite3 db and initialize table if needed
 
@@ -118,11 +118,11 @@ class App(tk.Tk):
             SPECIES TEXT,
             DATE TEXT
             )""")
-        db.commit()    
+        db.commit()
         db.close()
 
-
         # define our query record func for qeury button
+
         def totreeview():
             self.tree.delete(*self.tree.get_children())
             db = DatabaseConn()
@@ -137,8 +137,9 @@ class App(tk.Tk):
         def delete():
             # Create a database or connect to one
             db = DatabaseConn()
-            db.query("DELETE from asdf_master WHERE id = " + self.delete_box.get())
-            
+            db.query("DELETE from asdf_master WHERE id = " +
+                     self.delete_box.get())
+
             # Delete a record
             self.delete_box.delete(0, END)
 
@@ -150,7 +151,7 @@ class App(tk.Tk):
         # define our submit func for the submit button
 
         def submit():
-            db = DatabaseConn()            
+            db = DatabaseConn()
             sql_bit = """INSERT INTO asdf_master (COUNTY_NM,
             OWNER_TY,
             ACCESS_TY,
@@ -160,7 +161,7 @@ class App(tk.Tk):
             WATER_CL,
             SPECIES,
             DATE) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-            
+
             data_bit = (self.countylabel_combo.get(), self.ownershiplabel_combo.get(), self.accesslabel_combo.get(), self.accesslabel_entry.get(
             ), self.streamlabel_entry.get(), self.watertypelabel_combo.get(), self.waterclasslabel_combo.get(), self.specieslabel_combo.get(), self.cal.get())
             # insert new data into our table
@@ -283,7 +284,8 @@ class App(tk.Tk):
         self.ownershiptype_text = tk.StringVar()
         self.ownership = ('Public-State', 'Public-County', 'Public-Local',
                           'Private-Permission', 'Private-With Easement', 'Private-Public(i.e.MFL Open)')
-        self.ownershiplabel = ttk.Label(self, text='Enter Owner Type:',style='TLabel')
+        self.ownershiplabel = ttk.Label(
+            self, text='Enter Owner Type:', style='TLabel')
         self.ownershiplabel.grid(column=0, row=1, sticky=tk.EW,
                                  padx=5, pady=5, ipady=3, ipadx=3)
         self.ownershiplabel_combo = ttk.Combobox(
@@ -308,9 +310,7 @@ class App(tk.Tk):
 
         # create delete box
         self.delete_box = ttk.Entry(self)
-        self.delete_box.grid(column=1,row=4,padx=5, pady=5,sticky=tk.EW)
-        self.delete_box_label = ttk.Label(self,text='Delete Record(ID)',style='TLabel')
-        self.delete_box_label.grid(column=2, row=4, sticky=tk.W, padx=5, pady=5, ipady=3, ipadx=3)    
+        self.delete_box.grid(column=1, row=8, padx=5, pady=5, sticky=tk.EW)
     # create a datepicker from tkcalender.
     # add calendar date picker
 
@@ -322,42 +322,42 @@ class App(tk.Tk):
                                  foreground='white', borderwidth=2, year=2022)
             self.cal.pack(padx=10, pady=10)
             self.cal.bind("<<DateEntrySelected>>")
-            ttk.Button(self.top, style='TButton', text='Exit',
+            ttk.Button(self.top, text='Exit',
                        command=self.top.destroy).pack(pady=3, padx=3, side='bottom')
-            
+
         # add an exit button
         self.close_button = ttk.Button(
-            self, style='TButton', text='Exit', command=self.destroy)
+            self, text='Exit', command=self.destroy)
         self.close_button.grid(column=0, row=5, sticky=tk.EW,
                                padx=5, pady=5)
 
         # add date picker button
         self.date_button = ttk.Button(
-            self, style='TButton', text='Pick Date', command=pickadate)
+            self, text='Pick Date', command=pickadate)
         self.date_button.grid(column=0, row=4, sticky=tk.EW,
                               padx=5, pady=5)
 
         # add a query button
         self.query_button = ttk.Button(
-            self, style='TButton', text='Select Records', command=totreeview)
+            self, text='Select Records', command=totreeview)
         self.query_button.grid(column=3, row=4, sticky=tk.EW, columnspan=2,
                                padx=5, pady=5)
 
         # add submit button
         self.submit_button = ttk.Button(
-            self, style='TButton', text='Submit Records', command=submit)
+            self, text='Submit Records', command=submit)
         self.submit_button.grid(column=3, row=5, sticky=tk.EW,
                                 padx=5, pady=5)
 
         self.delete_button = ttk.Button(
-            self, text='DELETE RECORD',style='TButton',command=delete)
-        self.delete_button.grid(column=1, row=5, padx=2, pady=2, sticky=tk.EW)                        
+            self, text='Delete Record(By ID)', command=delete)
+        self.delete_button.grid(column=1, row=9, padx=2, pady=2, sticky=tk.EW)
 
         # create our treeview for the totreevirw func
         self.columns = ('ID', 'COUNTY_NM', 'OWNER_TY', 'ACCESS_TY', 'ACCESS_NM',
                         'WATER_NM', 'WATER_TY', 'WATER_CL', 'SPECIES', 'DATE')
         self.tree = ttk.Treeview(columns=self.columns,
-                                 show='headings', style='Treeview',takefocus=True,selectmode='browse')
+                                 show='headings', style='Treeview', takefocus=True, selectmode='browse')
         for self.column in self.columns:
             self.tree.column(self.column, anchor=CENTER, width=230)
 
@@ -387,10 +387,7 @@ class App(tk.Tk):
         self.treescrollbarv.grid(
             column=5, columnspan=5, sticky=tk.NS, row=6, rowspan=5)
 
-        # commit to and close DB
-        # db.commit()
-        # db.close()
-
+        
 
 if __name__ == "__main__":
     app = App()
