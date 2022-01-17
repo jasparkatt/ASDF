@@ -1,3 +1,4 @@
+from fileinput import close
 import tkinter as tk
 from tkinter import font, ttk
 from tkinter.constants import CENTER, END, LEFT, E, W
@@ -10,6 +11,24 @@ from ttkbootstrap import Style
 from settings import *
 
 # our root window
+
+
+class DatabaseConn():
+    def __init__(self):
+        self.conn = psycopg2.connect(database=PG_NAME, user=PG_USER, password=PG_PASSWORD, host=PG_HOST, port=PG_PORT)
+        self.cur = self.conn.cursor()
+
+    def query(self, query):
+        self.cur.execute(query)    
+
+    def commit(self):
+        self.conn.commit()
+
+    def close(self):
+        self.cur.close()
+        self.conn.close()               
+
+
 
 
 class App(tk.Tk):
@@ -26,6 +45,7 @@ class App(tk.Tk):
         self.columnconfigure(2, weight=1)
         self.columnconfigure(3, weight=1)
         # self.columnconfigure(4,weight=1)
+        self.configure(background='#E5D0CC',relief='sunken')
 
         self.style = ttk.Style()
         self.style.theme_create('style', parent='winnative',
@@ -33,7 +53,7 @@ class App(tk.Tk):
                                'TButton': {
                                    'configure': {
                                        'background': '#000000',
-                                       'foreground': '#7f7f7f',
+                                       'foreground': '#172121',
                                        'font': ('Roboto Mono', 9, 'italic'),
                                        'anchor': 'center'
                                    }
@@ -41,26 +61,26 @@ class App(tk.Tk):
                                'TLabel': {
                                    'configure': {
                                        'font': ('Roboto Mono', 9, 'italic'),
-                                       'foreground': '#ffffff',
+                                       'foreground': '#172121',
                                        'relief': 'ridge',
                                        'borderwidth': 4,
                                        'anchor': 'center',
-                                       'background': '#000000'
+                                       'background': '#F9FBF2'
 
                                    }
                                },
                                'Treeview': {
                                    'configure': {
-                                       'font': ('Overpass Mono', 9),
-                                       'foreground': '#000000',
-                                       'background': 'silver'
+                                       'font': ('PT Root UI', 9, 'italic bold')
 
                                    }
                                },
                                'Treeview.Heading': {
                                    'configure': {
-                                       'font': (('Roboto Mono', 10, 'bold'))
-                                   }
+                                       'font': ('Roboto Mono', 10, 'bold'),
+                                       'background':'#000000',
+                                       'foreground':'#E5E1EE'                                  
+                                       }
                                }
 
 
@@ -75,29 +95,18 @@ class App(tk.Tk):
                   background=[('pressed', '!disabled', '#ffffff'),
                               ('active', '#000000')]
                   )
+        self.style.map("Treeview",
+                  background=[('!selected', '#A7A284'), ('selected', '#C9B7AD')],
+                  foreground=[('selected', '#292F36')],
+                  font=[('selected', ("Modern438Smc", 11, 'bold'))]
+                  )           
 
-        # # style from ttkbootstrap
-        # self.style = Style(
-        #     theme='light3', themes_file='C:/Users/suttr/ASDF/themes/ttkbootstrap_themes_dark.json')
-        # # some configuration settings
-        # self.style.configure('Data.TLabel', foreground='grey',
-        #                 font=('PT Mono', 8))
-        # self.style.configure('Outline.TButton', font=('Overpass Mono', 10))
-        # self.style.configure('mystyle.Treeview',
-        #                      anchor='center', font=('Roboto Mono', 9))
-        # self.style.configure('mystyle.Treeview.Heading',
-        #                      anchor='center', font=('Tahoma', 10, 'bold'))
-        # self.style.configure('custom.TEntry', background='green', foreground='white', font=('Helvetica', 24))
 
-        # create func to connect to sqlite3 db and initialize table if needed
-
-        conn = psycopg2.connect(
-            database=PG_NAME, user=PG_USER, password=PG_PASSWORD, host=PG_HOST, port=PG_PORT)
-        c = conn.cursor()
+        # use our DatabaseConnect class to connect to sqlite3 db and initialize table if needed
 
         # create initial table then comment out but keep it.
-
-        c.execute("""CREATE TABLE IF NOT EXISTS asdf_master (
+        db = DatabaseConn()
+        db.query("""CREATE TABLE IF NOT EXISTS asdf_master (
             ID SERIAL PRIMARY KEY,
             COUNTY_NM TEXT,
             OWNER_TY TEXT,
@@ -109,49 +118,39 @@ class App(tk.Tk):
             SPECIES TEXT,
             DATE TEXT
             )""")
+        db.commit()    
+        db.close()
 
-        # define our delete record func for delete button
 
         # define our query record func for qeury button
         def totreeview():
             self.tree.delete(*self.tree.get_children())
-            conn = psycopg2.connect(
-                database=PG_NAME, user=PG_USER, password=PG_PASSWORD, host=PG_HOST, port=PG_PORT)
-            c = conn.cursor()
-
-            c.execute("SELECT * FROM asdf_master ORDER BY ID")
-            for row in c:
+            db = DatabaseConn()
+            db.query("SELECT * FROM asdf_master ORDER BY ID")
+            for row in db.cur:
                 self.tree.insert("", tk.END, values=(
                     row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]))
-
-            conn.commit()
-            conn.close()
+            db.commit()
+            db.close()
 
         # this func below dupes the totreeview func. Turn this into something else.
         def delete():
             # Create a database or connect to one
-            conn = psycopg2.connect(
-                database=PG_NAME, user=PG_USER, password=PG_PASSWORD, host=PG_HOST, port=PG_PORT)
-            c = conn.cursor()
-
+            db = DatabaseConn()
+            db.query("DELETE from asdf_master WHERE id = " + self.delete_box.get())
+            
             # Delete a record
-            c.execute("DELETE from asdf_master WHERE id = " + self.delete_box.get())
-
             self.delete_box.delete(0, END)
 
-            # Commit Changes
-            conn.commit()
-
-            # Close Connection
-            conn.close()
-
+            # # Commit Changes
+            db.commit()
+            # # Close Connection
+            db.close()
 
         # define our submit func for the submit button
 
         def submit():
-            conn = psycopg2.connect(
-                database=PG_NAME, user=PG_USER, password=PG_PASSWORD, host=PG_HOST, port=PG_PORT)
-            c = conn.cursor()
+            db = DatabaseConn()            
             sql_bit = """INSERT INTO asdf_master (COUNTY_NM,
             OWNER_TY,
             ACCESS_TY,
@@ -161,17 +160,18 @@ class App(tk.Tk):
             WATER_CL,
             SPECIES,
             DATE) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+            
             data_bit = (self.countylabel_combo.get(), self.ownershiplabel_combo.get(), self.accesslabel_combo.get(), self.accesslabel_entry.get(
             ), self.streamlabel_entry.get(), self.watertypelabel_combo.get(), self.waterclasslabel_combo.get(), self.specieslabel_combo.get(), self.cal.get())
             # insert new data into our table
-            c.execute(sql_bit, data_bit)
+            db.cur.execute(sql_bit, data_bit)
 
             self.streamlabel_entry.delete(0, END)
             self.accesslabel_entry.delete(0, END)
 
         # commit changes and close conn
-            conn.commit()
-            conn.close()
+            db.commit()
+            db.close()
 
         # create combobox for county selection
 
@@ -268,7 +268,7 @@ class App(tk.Tk):
                        'Public-Other', 'ROW-Bridge', 'Private')
         self.accesslabel = ttk.Label(
             self, text='Enter Access Type:', style='TLabel')
-        self.accesslabel.grid(column=0, row=2, sticky=tk.W,
+        self.accesslabel.grid(column=0, row=2, sticky=tk.EW,
                               padx=5, pady=5, ipady=3, ipadx=3)
         self.accesslabel_combo = ttk.Combobox(
             self, textvariable=self.accesslabel_text)
@@ -284,7 +284,7 @@ class App(tk.Tk):
         self.ownership = ('Public-State', 'Public-County', 'Public-Local',
                           'Private-Permission', 'Private-With Easement', 'Private-Public(i.e.MFL Open)')
         self.ownershiplabel = ttk.Label(self, text='Enter Owner Type:',style='TLabel')
-        self.ownershiplabel.grid(column=0, row=1, sticky=tk.W,
+        self.ownershiplabel.grid(column=0, row=1, sticky=tk.EW,
                                  padx=5, pady=5, ipady=3, ipadx=3)
         self.ownershiplabel_combo = ttk.Combobox(
             self, textvariable=self.ownershiptype_text)
@@ -299,7 +299,7 @@ class App(tk.Tk):
         self.accessnamelabel_text = tk.StringVar()
         self.accesslabel = ttk.Label(self, text='Enter Access Name:',
                                      style='TLabel')
-        self.accesslabel.grid(column=0, row=3, sticky=tk.W,
+        self.accesslabel.grid(column=0, row=3, sticky=tk.EW,
                               padx=5, pady=5, ipady=3, ipadx=3)
         self.accesslabel_entry = ttk.Entry(
             self, takefocus=0, cursor='hand1', textvariable=self.accessnamelabel_text)
@@ -387,11 +387,9 @@ class App(tk.Tk):
         self.treescrollbarv.grid(
             column=5, columnspan=5, sticky=tk.NS, row=6, rowspan=5)
 
-        # add a delete button
-
         # commit to and close DB
-        conn.commit()
-        conn.close()
+        # db.commit()
+        # db.close()
 
 
 if __name__ == "__main__":

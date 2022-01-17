@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_ea443fc612254476951e571caa784984 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+    <script src="https://cdn.jsdelivr.net/gh/ardhi/Leaflet.MousePosition/src/L.Control.MousePosition.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ardhi/Leaflet.MousePosition/src/L.Control.MousePosition.min.css"/>
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_ea443fc612254476951e571caa784984" ></div>
+        
+</body>
+<script>    
+    
+            var map_ea443fc612254476951e571caa784984 = L.map(
+                "map_ea443fc612254476951e571caa784984",
+                {
+                    center: [45.00142982897709, -89.99916139238691],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 18,
+                    zoomControl: true,
+                    preferCanvas: false,
+                    name: "Esri Satellite",
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_5272ec5bf4714db78a84b30e7d1e8ad5 = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+                {"attribution": ["Esri"], "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            var tile_layer_4a1208b8414a4c0abd7ecf63d481f9f2 = L.tileLayer(
+                "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"http://cartodb.com/attributions\"\u003eCartoDB\u003c/a\u003e, CartoDB \u003ca href =\"http://cartodb.com/attributions\"\u003eattributions\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            var tile_layer_674699db6c444b89af2362b8d0b0ccaa = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            var tile_layer_a189dee014cd4e6a9ab7c4b62cc3d9e5 = L.tileLayer(
+                "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"http://cartodb.com/attributions\"\u003eCartoDB\u003c/a\u003e, CartoDB \u003ca href =\"http://cartodb.com/attributions\"\u003eattributions\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            var mouse_position_719a07c750914aeb9ef12c797f3a2440 = new L.Control.MousePosition(
+                {"emptyString": "Unavailable", "lngFirst": false, "numDigits": 6, "position": "bottomright", "prefix": "", "separator": " : "}
+            );
+            mouse_position_719a07c750914aeb9ef12c797f3a2440.options["latFormatter"] =
+                undefined;
+            mouse_position_719a07c750914aeb9ef12c797f3a2440.options["lngFormatter"] =
+                undefined;
+            map_ea443fc612254476951e571caa784984.addControl(mouse_position_719a07c750914aeb9ef12c797f3a2440);
+        
+    
+            var layer_control_4522f412a4a649fa869f4ab987b5464f = {
+                base_layers : {
+                    "https://server.arcgisonline.com/arcgis/rest/services/world_imagery/mapserver/tile/{z}/{y}/{x}" : tile_layer_5272ec5bf4714db78a84b30e7d1e8ad5,
+                    "cartodbpositron" : tile_layer_4a1208b8414a4c0abd7ecf63d481f9f2,
+                    "openstreetmap" : tile_layer_674699db6c444b89af2362b8d0b0ccaa,
+                    "cartodbdark_matter" : tile_layer_a189dee014cd4e6a9ab7c4b62cc3d9e5,
+                },
+                overlays :  {
+                },
+            };
+            L.control.layers(
+                layer_control_4522f412a4a649fa869f4ab987b5464f.base_layers,
+                layer_control_4522f412a4a649fa869f4ab987b5464f.overlays,
+                {"autoZIndex": true, "collapsed": true, "position": "topright"}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+            tile_layer_4a1208b8414a4c0abd7ecf63d481f9f2.remove();
+            tile_layer_674699db6c444b89af2362b8d0b0ccaa.remove();
+            tile_layer_a189dee014cd4e6a9ab7c4b62cc3d9e5.remove();
+        
+    
+            var circle_marker_8c5a41bc5d3c4140b5529a15299eafcb = L.circleMarker(
+                [45.0, -90.0],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+        var popup_8f57e33bce7246ba88ec2c071febfae0 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_c129b007e63540f5bdc0fda4c6f28876 = $(`<div id="html_c129b007e63540f5bdc0fda4c6f28876" style="width: 100.0%; height: 100.0%;">, Town of Rietbrock, Wisconsin , USA</div>`)[0];
+            popup_8f57e33bce7246ba88ec2c071febfae0.setContent(html_c129b007e63540f5bdc0fda4c6f28876);
+        
+
+        circle_marker_8c5a41bc5d3c4140b5529a15299eafcb.bindPopup(popup_8f57e33bce7246ba88ec2c071febfae0)
+        ;
+
+        
+    
+    
+            circle_marker_8c5a41bc5d3c4140b5529a15299eafcb.bindTooltip(
+                `<div>
+                     <geopy.geocoders.arcgis.ArcGIS object at 0x000001E89ADCED08>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_a3566ed4eb044fc5ae766e8b8ad12137 = L.circle(
+                [45.00142982897709, -89.99916139238691],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 3}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            circle_a3566ed4eb044fc5ae766e8b8ad12137.bindTooltip(
+                `<div>
+                     centroid
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b5495deb57d24668a6fa8b27be3ea21c = L.marker(
+                [45.0, -90.0],
+                {}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            var icon_5442cfa5c2d042c6bc7cc080b4007480 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "beige", "prefix": "glyphicon"}
+            );
+            marker_b5495deb57d24668a6fa8b27be3ea21c.setIcon(icon_5442cfa5c2d042c6bc7cc080b4007480);
+        
+    
+            marker_b5495deb57d24668a6fa8b27be3ea21c.bindTooltip(
+                `<div>
+                     User Input
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_e40c5a324579404c851bffdd69fd8567 = L.circleMarker(
+                [45.00196, -89.9976],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+        var popup_73b2e845ede34f6dac931907e7a134d6 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_7d967498d5be4f91835a974eeea3ab93 = $(`<div id="html_7d967498d5be4f91835a974eeea3ab93" style="width: 100.0%; height: 100.0%;">R439 Lovers Ln, Athens, WI 54411, United States, Athens, WI 54411, USA</div>`)[0];
+            popup_73b2e845ede34f6dac931907e7a134d6.setContent(html_7d967498d5be4f91835a974eeea3ab93);
+        
+
+        circle_marker_e40c5a324579404c851bffdd69fd8567.bindPopup(popup_73b2e845ede34f6dac931907e7a134d6)
+        ;
+
+        
+    
+    
+            circle_marker_e40c5a324579404c851bffdd69fd8567.bindTooltip(
+                `<div>
+                     <geopy.geocoders.here.Here object at 0x000001E89AD88448>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_13b867f6601d44ea9348e207065c384f = L.circle(
+                [45.00142982897709, -89.99916139238691],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 3}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            circle_13b867f6601d44ea9348e207065c384f.bindTooltip(
+                `<div>
+                     centroid
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_59e5aa1e98c847c3a80ce8e9ee944b3f = L.marker(
+                [45.0, -90.0],
+                {}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            var icon_0ad431277b114a50b4fd0d2a11778ccc = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "beige", "prefix": "glyphicon"}
+            );
+            marker_59e5aa1e98c847c3a80ce8e9ee944b3f.setIcon(icon_0ad431277b114a50b4fd0d2a11778ccc);
+        
+    
+            marker_59e5aa1e98c847c3a80ce8e9ee944b3f.bindTooltip(
+                `<div>
+                     User Input
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_216bbcd0d15c452f98a9858774b3d8de = L.circleMarker(
+                [45.001991, -89.997604],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+        var popup_77360c3dbe9c4b59a17912ad588ca851 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_2f6be51b4db046b1972622240ba5aeae = $(`<div id="html_2f6be51b4db046b1972622240ba5aeae" style="width: 100.0%; height: 100.0%;">R439 Lovers Lane, Athens, WI 54411</div>`)[0];
+            popup_77360c3dbe9c4b59a17912ad588ca851.setContent(html_2f6be51b4db046b1972622240ba5aeae);
+        
+
+        circle_marker_216bbcd0d15c452f98a9858774b3d8de.bindPopup(popup_77360c3dbe9c4b59a17912ad588ca851)
+        ;
+
+        
+    
+    
+            circle_marker_216bbcd0d15c452f98a9858774b3d8de.bindTooltip(
+                `<div>
+                     <geopy.geocoders.tomtom.TomTom object at 0x000001E89ADDFB48>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_926de2ddc8514b76a93656d58950da46 = L.circle(
+                [45.00142982897709, -89.99916139238691],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 3}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            circle_926de2ddc8514b76a93656d58950da46.bindTooltip(
+                `<div>
+                     centroid
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_c9168a7c72ec4b808c906461ee055721 = L.marker(
+                [45.0, -90.0],
+                {}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            var icon_2b9311b3df1e4c9681a4ca67b968ff87 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "beige", "prefix": "glyphicon"}
+            );
+            marker_c9168a7c72ec4b808c906461ee055721.setIcon(icon_2b9311b3df1e4c9681a4ca67b968ff87);
+        
+    
+            marker_c9168a7c72ec4b808c906461ee055721.bindTooltip(
+                `<div>
+                     User Input
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_347aea5e209448e1b2cffc2f64613292 = L.circleMarker(
+                [45.0012245, -89.9986037],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+        var popup_f9ee4a4e29004a5da248da1ab36a8533 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_9d9677b7ae014b2b92cd6dfbafc69634 = $(`<div id="html_9d9677b7ae014b2b92cd6dfbafc69634" style="width: 100.0%; height: 100.0%;">R439 Lovers Ln, Athens, WI 54411, United States</div>`)[0];
+            popup_f9ee4a4e29004a5da248da1ab36a8533.setContent(html_9d9677b7ae014b2b92cd6dfbafc69634);
+        
+
+        circle_marker_347aea5e209448e1b2cffc2f64613292.bindPopup(popup_f9ee4a4e29004a5da248da1ab36a8533)
+        ;
+
+        
+    
+    
+            circle_marker_347aea5e209448e1b2cffc2f64613292.bindTooltip(
+                `<div>
+                     <geopy.geocoders.bing.Bing object at 0x000001E89ADE7188>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_af261045dee24ee7be907d8354208bb5 = L.circle(
+                [45.00142982897709, -89.99916139238691],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 3}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            circle_af261045dee24ee7be907d8354208bb5.bindTooltip(
+                `<div>
+                     centroid
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_abf1c335bab24ad3ab7594bcf8a403fd = L.marker(
+                [45.0, -90.0],
+                {}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            var icon_92105fa540ec4a01a5a3922668e089e5 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "beige", "prefix": "glyphicon"}
+            );
+            marker_abf1c335bab24ad3ab7594bcf8a403fd.setIcon(icon_92105fa540ec4a01a5a3922668e089e5);
+        
+    
+            marker_abf1c335bab24ad3ab7594bcf8a403fd.bindTooltip(
+                `<div>
+                     User Input
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_cccf76333a89465fad8ed329352f4b87 = L.circleMarker(
+                [45.0010816, -89.9981596],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+        var popup_b72cbdaefab54e4a9b248b33d5e06fa1 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_4b4c11b1fe454e1692c183bb7d3f5887 = $(`<div id="html_4b4c11b1fe454e1692c183bb7d3f5887" style="width: 100.0%; height: 100.0%;">124939 Lovers Lane, Athens, Wisconsin 54411, United States</div>`)[0];
+            popup_b72cbdaefab54e4a9b248b33d5e06fa1.setContent(html_4b4c11b1fe454e1692c183bb7d3f5887);
+        
+
+        circle_marker_cccf76333a89465fad8ed329352f4b87.bindPopup(popup_b72cbdaefab54e4a9b248b33d5e06fa1)
+        ;
+
+        
+    
+    
+            circle_marker_cccf76333a89465fad8ed329352f4b87.bindTooltip(
+                `<div>
+                     <geopy.geocoders.mapbox.MapBox object at 0x000001E89ADE7808>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_07ec987b5eac42baa88bb83cb61ce164 = L.circle(
+                [45.00142982897709, -89.99916139238691],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 3}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            circle_07ec987b5eac42baa88bb83cb61ce164.bindTooltip(
+                `<div>
+                     centroid
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_7455766567144c0daecf7dfb94a60117 = L.marker(
+                [45.0, -90.0],
+                {}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            var icon_1d2ed72ac3194c0d83be769b76e15d35 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "beige", "prefix": "glyphicon"}
+            );
+            marker_7455766567144c0daecf7dfb94a60117.setIcon(icon_1d2ed72ac3194c0d83be769b76e15d35);
+        
+    
+            marker_7455766567144c0daecf7dfb94a60117.bindTooltip(
+                `<div>
+                     User Input
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_4cbfaecc8e2a4287931219450a4e1d72 = L.circleMarker(
+                [45.00196178977091, -90.00000312386906],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+        var popup_29bd3e2174eb468d9723491272952196 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_75e3f9cd729a4b91b91b1972a52c622c = $(`<div id="html_75e3f9cd729a4b91b91b1972a52c622c" style="width: 100.0%; height: 100.0%;">Lovers Lane, Town of Rietbrock, Marathon County, Wisconsin, 54411, United States</div>`)[0];
+            popup_29bd3e2174eb468d9723491272952196.setContent(html_75e3f9cd729a4b91b91b1972a52c622c);
+        
+
+        circle_marker_4cbfaecc8e2a4287931219450a4e1d72.bindPopup(popup_29bd3e2174eb468d9723491272952196)
+        ;
+
+        
+    
+    
+            circle_marker_4cbfaecc8e2a4287931219450a4e1d72.bindTooltip(
+                `<div>
+                     <geopy.geocoders.nominatim.Nominatim object at 0x000001E89ADE7F08>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_20c075cb9fff43a18bf83e9ff5a93188 = L.circle(
+                [45.00142982897709, -89.99916139238691],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 3}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            circle_20c075cb9fff43a18bf83e9ff5a93188.bindTooltip(
+                `<div>
+                     centroid
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_cd274c4c14d14832804b27ff128ba3ff = L.marker(
+                [45.0, -90.0],
+                {}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            var icon_22812adfbd934e85a1773fb1d3486ad0 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "beige", "prefix": "glyphicon"}
+            );
+            marker_cd274c4c14d14832804b27ff128ba3ff.setIcon(icon_22812adfbd934e85a1773fb1d3486ad0);
+        
+    
+            marker_cd274c4c14d14832804b27ff128ba3ff.bindTooltip(
+                `<div>
+                     User Input
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_fbdc3e6f48484087b27d03afaaec25ed = L.circleMarker(
+                [45.00108, -89.99759],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+        var popup_eed0143ad41040bfb34def9d89318229 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_355cafedca614c4da9f01763c7558665 = $(`<div id="html_355cafedca614c4da9f01763c7558665" style="width: 100.0%; height: 100.0%;">R439 Lovers Ln, Athens, Village of, WI 54411, United States</div>`)[0];
+            popup_eed0143ad41040bfb34def9d89318229.setContent(html_355cafedca614c4da9f01763c7558665);
+        
+
+        circle_marker_fbdc3e6f48484087b27d03afaaec25ed.bindPopup(popup_eed0143ad41040bfb34def9d89318229)
+        ;
+
+        
+    
+    
+            circle_marker_fbdc3e6f48484087b27d03afaaec25ed.bindTooltip(
+                `<div>
+                     <geopy.geocoders.here.HereV7 object at 0x000001E89ADEE608>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_5cf318b6ab8f4d2998160249848b9679 = L.circle(
+                [45.00142982897709, -89.99916139238691],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 3}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            circle_5cf318b6ab8f4d2998160249848b9679.bindTooltip(
+                `<div>
+                     centroid
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_5cffe5e561464d0695c02b1654888118 = L.marker(
+                [45.0, -90.0],
+                {}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            var icon_523203dbd0e14963a8a83dceff4b86cf = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "beige", "prefix": "glyphicon"}
+            );
+            marker_5cffe5e561464d0695c02b1654888118.setIcon(icon_523203dbd0e14963a8a83dceff4b86cf);
+        
+    
+            marker_5cffe5e561464d0695c02b1654888118.bindTooltip(
+                `<div>
+                     User Input
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_3e892a9a8b8e40feb4ab018e18334c1a = L.circleMarker(
+                [45.001082, -89.99816],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+        var popup_72f06969ca5942d4bde72dcd37f88ab6 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_873e10ea68184f0194a8ea04575400af = $(`<div id="html_873e10ea68184f0194a8ea04575400af" style="width: 100.0%; height: 100.0%;">124939 Lovers Ln, Athens, WI 54411</div>`)[0];
+            popup_72f06969ca5942d4bde72dcd37f88ab6.setContent(html_873e10ea68184f0194a8ea04575400af);
+        
+
+        circle_marker_3e892a9a8b8e40feb4ab018e18334c1a.bindPopup(popup_72f06969ca5942d4bde72dcd37f88ab6)
+        ;
+
+        
+    
+    
+            circle_marker_3e892a9a8b8e40feb4ab018e18334c1a.bindTooltip(
+                `<div>
+                     <geopy.geocoders.geocodio.Geocodio object at 0x000001E89ADEED48>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_a1bcf446bb39444991a1448c6a797460 = L.circle(
+                [45.00142982897709, -89.99916139238691],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 3}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            circle_a1bcf446bb39444991a1448c6a797460.bindTooltip(
+                `<div>
+                     centroid
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_107e5fce14c041b38930bf9ca47e48db = L.marker(
+                [45.0, -90.0],
+                {}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            var icon_c421139c62094f93b0cd1088daf459d5 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "beige", "prefix": "glyphicon"}
+            );
+            marker_107e5fce14c041b38930bf9ca47e48db.setIcon(icon_c421139c62094f93b0cd1088daf459d5);
+        
+    
+            marker_107e5fce14c041b38930bf9ca47e48db.bindTooltip(
+                `<div>
+                     User Input
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_09855c1ffaa6404d83c5f3e0f7c51de8 = L.circleMarker(
+                [45.0019556, -90.0038904],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+        var popup_1c3fcfb46174472ea53f6f0a8b7df12b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_ef6a1755e119481897e84f91498f081a = $(`<div id="html_ef6a1755e119481897e84f91498f081a" style="width: 100.0%; height: 100.0%;">Lovers Lane, Marathon County, Wisconsin</div>`)[0];
+            popup_1c3fcfb46174472ea53f6f0a8b7df12b.setContent(html_ef6a1755e119481897e84f91498f081a);
+        
+
+        circle_marker_09855c1ffaa6404d83c5f3e0f7c51de8.bindPopup(popup_1c3fcfb46174472ea53f6f0a8b7df12b)
+        ;
+
+        
+    
+    
+            circle_marker_09855c1ffaa6404d83c5f3e0f7c51de8.bindTooltip(
+                `<div>
+                     <geopy.geocoders.maptiler.MapTiler object at 0x000001E89AF34488>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_5ec721fab43d498a913cbf8d9e462b0b = L.circle(
+                [45.00142982897709, -89.99916139238691],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 3}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            circle_5ec721fab43d498a913cbf8d9e462b0b.bindTooltip(
+                `<div>
+                     centroid
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_f36c2bd871634413a823280595106baf = L.marker(
+                [45.0, -90.0],
+                {}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            var icon_9330c24712c148309849c725dd2dbbe2 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "beige", "prefix": "glyphicon"}
+            );
+            marker_f36c2bd871634413a823280595106baf.setIcon(icon_9330c24712c148309849c725dd2dbbe2);
+        
+    
+            marker_f36c2bd871634413a823280595106baf.bindTooltip(
+                `<div>
+                     User Input
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_83d37f7ec4a24c5f8c2564673b1094fe = L.circleMarker(
+                [45.0019618, -90.0000031],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+        var popup_c6a9ce95771b41a3a699557c582731ba = L.popup({"maxWidth": "100%"});
+
+        
+            var html_dde479a289e94c528ba933240b686dbd = $(`<div id="html_dde479a289e94c528ba933240b686dbd" style="width: 100.0%; height: 100.0%;">Lovers Lane, Rietbrock, WI 54411, United States of America</div>`)[0];
+            popup_c6a9ce95771b41a3a699557c582731ba.setContent(html_dde479a289e94c528ba933240b686dbd);
+        
+
+        circle_marker_83d37f7ec4a24c5f8c2564673b1094fe.bindPopup(popup_c6a9ce95771b41a3a699557c582731ba)
+        ;
+
+        
+    
+    
+            circle_marker_83d37f7ec4a24c5f8c2564673b1094fe.bindTooltip(
+                `<div>
+                     <geopy.geocoders.opencage.OpenCage object at 0x000001E89AF34B48>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_2a4150fa21d7442ca2f9bf95ed314e45 = L.circle(
+                [45.00142982897709, -89.99916139238691],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 3}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            circle_2a4150fa21d7442ca2f9bf95ed314e45.bindTooltip(
+                `<div>
+                     centroid
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_7afa719e867c44a69744c99ecb48e0ad = L.marker(
+                [45.0, -90.0],
+                {}
+            ).addTo(map_ea443fc612254476951e571caa784984);
+        
+    
+            var icon_52caa819c3a6460c80eefc1e3e090c21 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "beige", "prefix": "glyphicon"}
+            );
+            marker_7afa719e867c44a69744c99ecb48e0ad.setIcon(icon_52caa819c3a6460c80eefc1e3e090c21);
+        
+    
+            marker_7afa719e867c44a69744c99ecb48e0ad.bindTooltip(
+                `<div>
+                     User Input
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
