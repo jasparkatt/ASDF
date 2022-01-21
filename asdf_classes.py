@@ -49,7 +49,7 @@ class App(tk.Tk):
         self.configure(background='#E5D0CC', relief='sunken')
         # declare and create our style; customize base widget params
         self.style = ttk.Style()
-        self.style.theme_create('HotChocolate', parent='winnative',
+        self.style.theme_create('HotChocolate', parent='',
                                 settings={
                                     'TButton': {
                                         'configure': {
@@ -373,19 +373,19 @@ class App(tk.Tk):
         self.tree.heading('SPECIES', text='Fish Caught')
         self.tree.heading('DATE', text='Date')
         self.tree.grid(row=6, columnspan=4, sticky=tk.NSEW,
-                       padx=5, pady=5, ipadx=3, ipady=3)
+                       padx=3, pady=3, ipadx=1, ipady=1)
 
         # add horz and vert scroll bars to treeview
         self.treescrollbarh = ttk.Scrollbar(
             self, orient='horizontal', command=self.tree.xview)
-        self.tree.configure(xscrollcommand=self.treescrollbarh.set, height=8)
+        self.tree.configure(xscrollcommand=self.treescrollbarh.set, height=6)
         self.treescrollbarh.grid(row=7, columnspan=4, sticky=tk.EW, rowspan=1)
 
         self.treescrollbarv = ttk.Scrollbar(
             self, orient='vertical', command=self.tree.yview)
         self.tree.configure(yscrollcommand=self.treescrollbarv.set)
         self.treescrollbarv.grid(
-            column=5, columnspan=5, sticky=tk.NS, row=6, rowspan=5)
+            column=5, columnspan=5, sticky=tk.NS, row=6, rowspan=1)
 
         
 
