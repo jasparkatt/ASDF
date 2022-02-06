@@ -53,7 +53,7 @@ class App(tk.Tk):
                                 settings={
                                     'TButton': {
                                         'configure': {
-                                            'background': '#000000',
+                                            'background': '#F9FBF2',
                                             'foreground': '#172121',
                                             'font': ('Palatino Linotype', 11),
                                             'anchor': 'center',
@@ -63,7 +63,7 @@ class App(tk.Tk):
                                             'foreground': [('pressed', 'red'),
                                                            ('active', 'blue')],
                                             'background': [('pressed', '!disabled', '#ffffff'),
-                                                           ('active', '#000000')]
+                                                           ('active', '#F0F2A6')]
                                         }
                                     },
                                     'TLabel': {
