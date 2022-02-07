@@ -299,6 +299,14 @@ class DataPage(tk.Frame):
             db.commit()
             db.close()
 
+        # update a record
+        def update_record():
+            # get hilited record in treeview
+            # selected = self.tree.focus()
+            # update tht record
+            # self.tree.item(selected, text = "", values = ("""put all yuor variables here from form"""))
+            pass
+
         # create combobox for county selection
 
         self.countylabel_text = tk.StringVar()
@@ -451,9 +459,9 @@ class DataPage(tk.Frame):
                        command=self.top.destroy).pack(pady=1, padx=1, side='bottom')
 
         # add an exit button
-        self.close_button = MyButton(
-            self, text='Exit', command=self.destroy)
-        self.close_button.grid(column=0, row=6, sticky=tk.EW,
+        self.submit_button = MyButton(
+            self, text='Submit', command=submit)
+        self.submit_button.grid(column=0, row=6, sticky=tk.EW,
                                padx=1, pady=1)
 
         # add date picker button
@@ -467,6 +475,12 @@ class DataPage(tk.Frame):
             self, text='Select Records', command=totreeview)
         self.query_button.grid(column=2, row=6, sticky=tk.EW, columnspan=2,
                                padx=1, pady=1)
+
+        # add a query button
+        self.update_button = MyButton(
+            self, text='Update Records', command=update_record)
+        self.update_button.grid(column=3, row=6, sticky=tk.EW, columnspan=2,
+                               padx=1, pady=1)                       
 
         self.delete_button = MyButton(
             self, text='Delete Record(By ID)', command=delete)
