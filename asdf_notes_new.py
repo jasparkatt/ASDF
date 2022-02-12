@@ -69,7 +69,7 @@ class MyEntry(ttk.Entry):
 
     def __init__(self, master, **kwargs):
         kwargs['font'] = ['Anonymous Pro', 9, 'italic']
-        kwargs['cursor']= 'left_side'
+        kwargs['cursor'] = 'left_side'
         super().__init__(master, **kwargs)
 
 
@@ -92,7 +92,6 @@ class App(tk.Tk):
                                     'Treeview': {
                                         'configure': {
                                             'font': ('PT Root UI', 9, 'italic bold')
-
                                         },
                                         'map': {
                                             'background': [('!selected', '#A7A284'),
@@ -184,7 +183,6 @@ class HomePage(tk.Frame):
         label.grid(column=0, row=0, columnspan=3)
 
         # logic
-        
 
         MyButton(self, style='TButton', cursor='hand1', text="Open Data Page",
                  command=lambda: master.switch_frame(DataPage)).grid(row=2, column=0, columnspan=1, sticky=tk.EW)
@@ -215,14 +213,15 @@ class DataPage(tk.Frame):
         self.rowconfigure(7, weight=1)
         self.rowconfigure(8, weight=1)
         self.rowconfigure(9, weight=1)
-        #self.configure(background='#FAF7E7')
+        # self.configure(background='#FAF7E7')
 
-        #create a font just for entry box. Cant do it thru ttk.style('TEntry) for some reason
-        entry_font = TkFont.Font(family='Overpass Mono', size=10, weight='normal', slant='italic')
+        # create a font just for entry box. Cant do it thru ttk.style('TEntry) for some reason
+        entry_font = TkFont.Font(
+            family='Overpass Mono', size=10, weight='normal', slant='italic')
 
-         # set up img stuff and put it in a label
+        # set up img stuff and put it in a label
         img = ImageTk.PhotoImage(Image.open(
-            './assets/TUCaresphoto.jpg').resize((800,420), Image.ANTIALIAS))
+            './assets/TUCaresphoto.jpg').resize((800, 420), Image.ANTIALIAS))
         label = MyLabel(self, text="ASDF Data Page", image=img,
                         compound='bottom', style='Heading.TLabel')
         # Keep a reference in case this code put is in a function.
@@ -322,43 +321,39 @@ class DataPage(tk.Frame):
                        'Waukesha', 'Waupaca', 'Waushara', 'Winnebago', 'Wood'
                        )
         self.countylabel = MyLabel(
-            self, text='Enter County Name:', style='TLabel')
-        self.countylabel.grid(column=0, row=4, sticky=tk.EW,
-                              padx=1, pady=1, ipady=1, ipadx=1)
+            self, text='Enter County Name:', style='TLabel').grid(column=0, row=4, sticky=tk.EW,
+                                                                  padx=1, pady=1, ipady=1, ipadx=1)
         self.countylabel_combo = ttk.Combobox(
             self, textvariable=self.countylabel_text)
         self.countylabel_combo['values'] = self.county
         self.countylabel_combo['state'] = 'readonly'
         self.countylabel_combo.grid(
-            column=1, row=4, sticky=tk.EW, ipadx=1, ipady=1, padx=1,pady=1)
+            column=1, row=4, sticky=tk.EW, ipadx=1, ipady=1, padx=1, pady=1)
         self.countylabel_combo.bind('<<ComboboxSelected>>')
 
         # enter water body name
         self.streamlabel_text = tk.StringVar()
 
         self.streamlabel = MyLabel(
-            self, text='Water Fished(Name):', style='TLabel')
-        self.streamlabel.grid(column=2, row=1, sticky=tk.EW,
-                              padx=1, pady=1, ipady=1, ipadx=1)
+            self, text='Water Fished(Name):', style='TLabel').grid(column=2, row=1, sticky=tk.EW,
+                                                                   padx=1, pady=1, ipady=1, ipadx=1)
         self.streamlabel_entry = MyEntry(
-            self, takefocus=0, cursor='hand1', textvariable=self.streamlabel_text, style='TEntry')
-        self.streamlabel_entry.grid(
-            column=3, row=1, sticky=tk.EW, ipadx=1, ipady=1, padx=1,pady=1)
+            self, takefocus=0, cursor='hand1', textvariable=self.streamlabel_text, style='TEntry').grid(
+            column=3, row=1, sticky=tk.EW, ipadx=1, ipady=1, padx=1, pady=1)
 
         # enter water type
         self.watertype_text = tk.StringVar()
         self.watertypes = ('Cold', 'Cool', 'Warm', 'Cold-Cool', 'Cool-Warm')
-        
+
         self.watertypelabel = MyLabel(
-            self, text='Water Type(Temp):', style='TLabel')
-        self.watertypelabel.grid(column=0, row=2, sticky=tk.EW,
-                                 padx=1, pady=1, ipady=1, ipadx=1)
+            self, text='Water Type(Temp):', style='TLabel').grid(column=0, row=2, sticky=tk.EW,
+                                                                 padx=1, pady=1, ipady=1, ipadx=1)
         self.watertypelabel_combo = ttk.Combobox(
             self, textvariable=self.watertype_text)
         self.watertypelabel_combo['values'] = self.watertypes
         self.watertypelabel_combo['state'] = 'readonly'
         self.watertypelabel_combo.grid(
-            column=1, row=2, sticky=tk.EW, ipadx=1, ipady=1, padx=1,pady=1)
+            column=1, row=2, sticky=tk.EW, ipadx=1, ipady=1, padx=1, pady=1)
         self.watertypelabel_combo.bind(
             '<<ComboboxSelected>>')  # enter water type
 
@@ -367,15 +362,14 @@ class DataPage(tk.Frame):
         self.waterclass = ('Class 1', 'Class 2', 'Class 3', 'Non-Trout Water')
         self.waterclass_text = tk.StringVar()
         self.waterclasslabel = MyLabel(
-            self, text='Water Class(Trout?):', style='TLabel')
-        self.waterclasslabel.grid(column=2, row=2, sticky=tk.EW,
-                                  padx=1, pady=1, ipady=1, ipadx=1)
+            self, text='Water Class(Trout?):', style='TLabel').grid(column=2, row=2, sticky=tk.EW,
+                                                                    padx=1, pady=1, ipady=1, ipadx=1)
         self.waterclasslabel_combo = ttk.Combobox(
             self, textvariable=self.waterclass_text)
         self.waterclasslabel_combo['values'] = self.waterclass
         self.waterclasslabel_combo['state'] = 'readonly'
         self.waterclasslabel_combo.grid(
-            column=3, row=2, sticky=tk.EW, ipadx=1, ipady=1, padx=1,pady=1)
+            column=3, row=2, sticky=tk.EW, ipadx=1, ipady=1, padx=1, pady=1)
         self.waterclasslabel_combo.bind('<<ComboboxSelected>>')
 
         # tkinter stuff for species select
@@ -384,15 +378,14 @@ class DataPage(tk.Frame):
                         'Largemouth Bass', 'Bluegill', 'Pumpkinseed', 'Perch', 'Walleye', 'Northern Pike', 'Musky', 'Bullhead')
         self.specieslabel_text = tk.StringVar()
         self.specieslabel = MyLabel(
-            self, text='Select Species Caught:', style='TLabel')
-        self.specieslabel.grid(column=0, row=3, sticky=tk.EW,
-                               padx=1, pady=1, ipady=1, ipadx=1)
+            self, text='Select Species Caught:', style='TLabel').grid(column=0, row=3, sticky=tk.EW,
+                                                                      padx=1, pady=1, ipady=1, ipadx=1)
         self.specieslabel_combo = ttk.Combobox(
             self, textvariable=self.specieslabel_text)
         self.specieslabel_combo['values'] = self.species
         self.specieslabel_combo['state'] = 'readonly'
         self.specieslabel_combo.grid(
-            column=1, row=3, sticky=tk.EW, ipadx=1, ipady=1, padx=1,pady=1)
+            column=1, row=3, sticky=tk.EW, ipadx=1, ipady=1, padx=1, pady=1)
         self.specieslabel_combo.bind('<<ComboboxSelected>>')
 
         # create combo box for access type i.e. public, row, private
@@ -401,15 +394,14 @@ class DataPage(tk.Frame):
         self.access = ('Public-DNR', 'Public-County',
                        'Public-Other', 'ROW-Bridge', 'Private')
         self.accesslabel = MyLabel(
-            self, text='Enter Access Type:', style='TLabel')
-        self.accesslabel.grid(column=2, row=4, sticky=tk.EW,
-                              padx=1, pady=1, ipady=1, ipadx=1)
+            self, text='Enter Access Type:', style='TLabel').grid(column=2, row=4, sticky=tk.EW,
+                                                                  padx=1, pady=1, ipady=1, ipadx=1)
         self.accesslabel_combo = ttk.Combobox(
             self, textvariable=self.accesslabel_text)
         self.accesslabel_combo['values'] = self.access
         self.accesslabel_combo['state'] = 'readonly'
         self.accesslabel_combo.grid(
-            column=3, row=4, sticky=tk.EW, ipadx=1, ipady=1, padx=1,pady=1)
+            column=3, row=4, sticky=tk.EW, ipadx=1, ipady=1, padx=1, pady=1)
         self.accesslabel_combo.bind('<<ComboboxSelected>>')
 
     # combo box for ownership type i.e public, private, state, county, local, nonprofit etc
@@ -418,35 +410,30 @@ class DataPage(tk.Frame):
         self.ownership = ('Public-State', 'Public-County', 'Public-Local',
                           'Private-Permission', 'Private-With Easement', 'Private-Public(i.e.MFL Open)')
         self.ownershiplabel = MyLabel(
-            self, text='Enter Owner Type:', style='TLabel')
-        self.ownershiplabel.grid(column=2, row=3, sticky=tk.EW,
-                                 padx=1, pady=1, ipady=1, ipadx=1)
+            self, text='Enter Owner Type:', style='TLabel').grid(column=2, row=3, sticky=tk.EW,
+                                                                 padx=1, pady=1, ipady=1, ipadx=1)
         self.ownershiplabel_combo = ttk.Combobox(
             self, textvariable=self.ownershiptype_text)
         self.ownershiplabel_combo['values'] = self.ownership
         self.ownershiplabel_combo['state'] = 'readonly'
         self.ownershiplabel_combo.grid(
-            column=3, row=3, sticky=tk.EW, ipadx=1, ipady=1, padx=1,pady=1)
+            column=3, row=3, sticky=tk.EW, ipadx=1, ipady=1, padx=1, pady=1)
         self.ownershiplabel_combo.bind('<<ComboboxSelected>>')
 
     # create a entry box for name of acces.
 
         self.accessnamelabel_text = tk.StringVar()
         self.accesslabel = MyLabel(self, text='Enter Access Name:',
-                                     style='TLabel')
-        self.accesslabel.grid(column=0, row=1, sticky=tk.EW,
-                              padx=1, pady=1, ipady=1, ipadx=1)
+                                   style='TLabel').grid(column=0, row=1, sticky=tk.EW,
+                                                        padx=1, pady=1, ipady=1, ipadx=1)
         self.accesslabel_entry = MyEntry(
-            self, takefocus=0, cursor='hand1', textvariable=self.accessnamelabel_text, style='TEntry')
-        self.accesslabel_entry.grid(
-            column=1, row=1, sticky=tk.EW, ipadx=1, ipady=1, padx=1,pady=1)
+            self, takefocus=0, cursor='hand1', textvariable=self.accessnamelabel_text, style='TEntry').grid(
+            column=1, row=1, sticky=tk.EW, ipadx=1, ipady=1, padx=1, pady=1)
 
         # create delete box
-        self.delete_box = MyEntry(self,style='TEntry',cursor='lft_ptr')
-        self.delete_box.grid(column=3, row=5,ipadx=1, ipady=1, padx=1,pady=1, sticky=tk.EW)
-        
-        
-        
+        self.delete_box = MyEntry(self, style='TEntry', cursor='lft_ptr').grid(
+            column=3, row=5, ipadx=1, ipady=1, padx=1, pady=1, sticky=tk.EW)
+
         def pickadate():
             self.top = tk.Toplevel()
             self.top.geometry('278x154+3+3')
@@ -456,47 +443,42 @@ class DataPage(tk.Frame):
             self.cal.pack(padx=10, pady=10)
             self.cal.bind("<<DateEntrySelected>>")
             MyButton(self.top, text='Exit',
-                       command=self.top.destroy).pack(pady=1, padx=1, side='bottom')
+                     command=self.top.destroy).pack(pady=1, padx=1, side='bottom')
 
         # add an exit button
         self.submit_button = MyButton(
-            self, text='Submit', command=submit)
-        self.submit_button.grid(column=0, row=6, sticky=tk.EW,
-                               padx=1, pady=1)
+            self, text='Submit', command=submit).grid(column=0, row=6, sticky=tk.EW,
+                                                      padx=1, pady=1)
 
         # add date picker button
         self.date_button = MyButton(
-            self, text='Pick Date', command=pickadate)
-        self.date_button.grid(column=1, row=6, sticky=tk.EW,
-                              padx=1, pady=1)
+            self, text='Pick Date', command=pickadate).grid(column=1, row=6, sticky=tk.EW,
+                                                            padx=1, pady=1)
 
         # add a query button
         self.query_button = MyButton(
-            self, text='Select Records', command=totreeview)
-        self.query_button.grid(column=2, row=6, sticky=tk.EW, columnspan=2,
-                               padx=1, pady=1)
+            self, text='Select Records', command=totreeview).grid(column=2, row=6, sticky=tk.EW, columnspan=2,
+                                                                  padx=1, pady=1)
 
         # add a query button
         self.update_button = MyButton(
-            self, text='Update Records', command=update_record)
-        self.update_button.grid(column=3, row=6, sticky=tk.EW, columnspan=2,
-                               padx=1, pady=1)                       
+            self, text='Update Records', command=update_record).grid(column=3, row=6, sticky=tk.EW, columnspan=2,
+                                                                     padx=1, pady=1)
 
         self.delete_button = MyButton(
-            self, text='Delete Record(By ID)', command=delete)
-        self.delete_button.grid(column=2, row=5, padx=1, pady=1, sticky=tk.EW)                                   
+            self, text='Delete Record(By ID)', command=delete).grid(column=2, row=5, padx=1, pady=1, sticky=tk.EW)
 
         MyButton(self, style='Home.TButton', text="ASDF Home Page",
-                 command=lambda: master.switch_frame(HomePage)).grid(row=7, column=1, columnspan=1,padx=1, pady=1, sticky=tk.EW)
+                 command=lambda: master.switch_frame(HomePage)).grid(row=7, column=1, columnspan=1, padx=1, pady=1, sticky=tk.EW)
 
         MyButton(self, style='Home.TButton', text="ASDF Map Page",
-                 command=lambda: master.switch_frame(MapPage)).grid(row=7, column=0, columnspan=1,padx=1, pady=1, sticky=tk.EW)         
+                 command=lambda: master.switch_frame(MapPage)).grid(row=7, column=0, columnspan=1, padx=1, pady=1, sticky=tk.EW)
 
         # shows how each frame resizes
         # create our treeview for the totreevirw func
         self.columns = ('ID', 'COUNTY_NM', 'OWNER_TY', 'ACCESS_TY', 'ACCESS_NM',
                         'WATER_NM', 'WATER_TY', 'WATER_CL', 'SPECIES', 'DATE')
-        self.tree = ttk.Treeview(self,columns=self.columns,
+        self.tree = ttk.Treeview(self, columns=self.columns,
                                  show='headings', style='Treeview', takefocus=True, selectmode='browse')
         # for self.column in self.columns:
         #     self.tree.column(self.column, anchor=CENTER)
@@ -529,14 +511,23 @@ class DataPage(tk.Frame):
         self.treescrollbarh = ttk.Scrollbar(
             self, orient='horizontal', command=self.tree.xview)
         self.tree.configure(xscrollcommand=self.treescrollbarh.set, height=4)
-        self.treescrollbarh.grid(row=9, columnspan=4, sticky=tk.EW, rowspan=1,padx=1, pady=1, ipadx=1, ipady=1)
+        self.treescrollbarh.grid(
+            row=9, columnspan=4, sticky=tk.EW, rowspan=1, padx=1, pady=1, ipadx=1, ipady=1)
 
-class MapPage(tk.Frame):
+
+class MapPage(tk.Canvas):
     def __init__(self, master):
-        tk.Frame.__init__(self, master)
+        tk.Canvas.__init__(self, master)
+        """page class for mapping our data pts"""
+
+        self.configure(background='gold')
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
-        
+        self.columnconfigure(2, weight=1)
+        self.rowconfigure(0, weight=1)
+        self.rowconfigure(1, weight=1)
+        self.rowconfigure(2, weight=1)
+
         # set up img stuff and put it in a label
         img = ImageTk.PhotoImage(Image.open(
             './assets/wi.png').resize((500, 350), Image.ANTIALIAS))
@@ -547,14 +538,23 @@ class MapPage(tk.Frame):
         label.place(relx=0.5, rely=0.5)
         label.grid(column=0, row=0, columnspan=3)
 
-        
-        
+        def select_cnty():
+            pass
+
+        def select_wtrnm():
+            pass
+        # MyLabel(self, style='TLabel',)
+        MyButton(self, style='TButton', text='Select by County', command=select_cnty).grid(
+            row=1, column=0, columnspan=1, sticky=tk.EW)
+
+        MyButton(self, style='TButton', text='Select by County', command=select_wtrnm).grid(
+            row=1, column=1, columnspan=1, sticky=tk.EW)
+
         MyButton(self, style='Home.TButton', text="ASDF Home Page",
                  command=lambda: master.switch_frame(HomePage)).grid(row=2, column=0, columnspan=1, sticky=tk.EW)
 
         MyButton(self, style='Home.TButton', text="ASDF Data Page",
                  command=lambda: master.switch_frame(DataPage)).grid(row=2, column=1, columnspan=1, sticky=tk.EW)
-          
 
 
 if __name__ == "__main__":
