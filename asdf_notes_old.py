@@ -169,6 +169,7 @@ class HomePage(tk.Frame):
         tk.Frame.__init__(self, master)
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
+        
         # self.columnconfigure(2,weight=1)
         self.configure(background='orange')
 
@@ -194,15 +195,16 @@ class HomePage(tk.Frame):
         # my_text.grid(row=1, columnspan=3, sticky=tk.EW)
 
 
-class DataPage(tk.Frame):
+class DataPage(tk.Canvas):
     def __init__(self, master):
-        tk.Frame.__init__(self, master)
+        tk.Canvas.__init__(self, master)
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
         self.columnconfigure(2, weight=1)
         self.columnconfigure(3, weight=1)
+        self.columnconfigure(4,weight=1)
         # self.columnconfigure(4, weight=1)
-        # self.columnconfigure(5, weight=1)
+        self.columnconfigure(5, weight=1)
         self.rowconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
         self.rowconfigure(2, weight=1)
@@ -221,13 +223,13 @@ class DataPage(tk.Frame):
 
         # set up img stuff and put it in a label
         img = ImageTk.PhotoImage(Image.open(
-            './assets/TUCaresphoto.jpg').resize((800, 420), Image.ANTIALIAS))
+            './assets/TUCaresphoto.jpg').resize((800, 300), Image.ANTIALIAS))
         label = MyLabel(self, text="ASDF Data Page", image=img,
                         compound='bottom', style='Heading.TLabel')
         # Keep a reference in case this code put is in a function.
         label.img = img
         label.place(relx=0.5, rely=0.5)
-        label.grid(column=0, row=0, columnspan=5, rowspan=9)
+        label.grid(column=0, row=0,columnspan=7,rowspan=1)
         # do stuff here/logic
         db = DatabaseConn()
         db.query("""CREATE TABLE IF NOT EXISTS asdf_master (
@@ -320,40 +322,38 @@ class DataPage(tk.Frame):
                        'Taylor', 'Trempealeau', 'Vernon', 'Vilas', 'Walworth', 'Washburn', 'Washington',
                        'Waukesha', 'Waupaca', 'Waushara', 'Winnebago', 'Wood'
                        )
-        self.countylabel = MyLabel(
-            self, text='Enter County Name:', style='TLabel').grid(column=0, row=4, sticky=tk.EW,
-                                                                  padx=1, pady=1, ipady=1, ipadx=1)
+       
+        MyLabel(self, text='Enter County Name:', style='TLabel').grid(column=0, row=1, sticky=tk.EW,
+                                                                  padx=1, pady=1)
         self.countylabel_combo = ttk.Combobox(
             self, textvariable=self.countylabel_text)
         self.countylabel_combo['values'] = self.county
         self.countylabel_combo['state'] = 'readonly'
         self.countylabel_combo.grid(
-            column=1, row=4, sticky=tk.EW, ipadx=1, ipady=1, padx=1, pady=1)
+            column=1, row=1, sticky=tk.EW, padx=1, pady=1)
         self.countylabel_combo.bind('<<ComboboxSelected>>')
 
         # enter water body name
         self.streamlabel_text = tk.StringVar()
 
-        self.streamlabel = MyLabel(
-            self, text='Water Fished(Name):', style='TLabel').grid(column=2, row=1, sticky=tk.EW,
-                                                                   padx=1, pady=1, ipady=1, ipadx=1)
-        self.streamlabel_entry = MyEntry(
-            self, takefocus=0, cursor='hand1', textvariable=self.streamlabel_text, style='TEntry').grid(
-            column=3, row=1, sticky=tk.EW, ipadx=1, ipady=1, padx=1, pady=1)
+        MyLabel(self, text='Water Fished(Name):', style='TLabel').grid(column=2, row=1, sticky=tk.EW,
+                                                                   padx=1, pady=1)
+
+        MyEntry(self, takefocus=0, cursor='hand1', textvariable=self.streamlabel_text, style='TEntry').grid(
+            column=3, row=1, sticky=tk.EW, padx=1, pady=1)
 
         # enter water type
         self.watertype_text = tk.StringVar()
         self.watertypes = ('Cold', 'Cool', 'Warm', 'Cold-Cool', 'Cool-Warm')
 
-        self.watertypelabel = MyLabel(
-            self, text='Water Type(Temp):', style='TLabel').grid(column=0, row=2, sticky=tk.EW,
-                                                                 padx=1, pady=1, ipady=1, ipadx=1)
+        MyLabel(self, text='Water Type(Temp):', style='TLabel').grid(column=4, row=1, sticky=tk.EW,
+                                                                 padx=1, pady=1)
         self.watertypelabel_combo = ttk.Combobox(
             self, textvariable=self.watertype_text)
         self.watertypelabel_combo['values'] = self.watertypes
         self.watertypelabel_combo['state'] = 'readonly'
         self.watertypelabel_combo.grid(
-            column=1, row=2, sticky=tk.EW, ipadx=1, ipady=1, padx=1, pady=1)
+            column=5, row=1, sticky=tk.EW,padx=1, pady=1)
         self.watertypelabel_combo.bind(
             '<<ComboboxSelected>>')  # enter water type
 
@@ -446,33 +446,29 @@ class DataPage(tk.Frame):
                      command=self.top.destroy).pack(pady=1, padx=1, side='bottom')
 
         # add an exit button
-        self.submit_button = MyButton(
-            self, text='Submit', command=submit).grid(column=0, row=6, sticky=tk.EW,
+        MyButton(self, text='Submit', command=submit).grid(column=0, row=9, sticky=tk.EW,
                                                       padx=1, pady=1)
 
         # add date picker button
-        self.date_button = MyButton(
-            self, text='Pick Date', command=pickadate).grid(column=1, row=6, sticky=tk.EW,
+        MyButton(self, text='Pick Date', command=pickadate).grid(column=1, row=9, sticky=tk.EW,
                                                             padx=1, pady=1)
 
         # add a query button
-        self.query_button = MyButton(
-            self, text='Select Records', command=totreeview).grid(column=2, row=6, sticky=tk.EW, columnspan=2,
+        MyButton(self, text='Select Records', command=totreeview).grid(column=2, row=9, sticky=tk.EW, columnspan=2,
                                                                   padx=1, pady=1)
 
         # add a query button
-        self.update_button = MyButton(
-            self, text='Update Records', command=update_record).grid(column=3, row=6, sticky=tk.EW, columnspan=2,
+        MyButton(self, text='Update Records', command=update_record).grid(column=3, row=10, sticky=tk.EW, columnspan=1,
                                                                      padx=1, pady=1)
 
-        self.delete_button = MyButton(
-            self, text='Delete Record(By ID)', command=delete).grid(column=2, row=5, padx=1, pady=1, sticky=tk.EW)
+        MyButton(self, text='Delete Record(By ID)', command=delete).grid(column=2, row=10, columnspan=1, padx=1, pady=1, sticky=tk.EW)
 
         MyButton(self, style='Home.TButton', text="ASDF Home Page",
-                 command=lambda: master.switch_frame(HomePage)).grid(row=7, column=1, columnspan=1, padx=1, pady=1, sticky=tk.EW)
+                 command=lambda: master.switch_frame(HomePage)).grid(row=10, column=1, columnspan=1, padx=1, pady=1, sticky=tk.EW)
 
         MyButton(self, style='Home.TButton', text="ASDF Map Page",
-                 command=lambda: master.switch_frame(MapPage)).grid(row=7, column=0, columnspan=1, padx=1, pady=1, sticky=tk.EW)
+                 command=lambda: master.switch_frame(MapPage)).grid(row=10, column=0, columnspan=1, padx=1, pady=1, sticky=tk.EW)
+                 
 
         # shows how each frame resizes
         # create our treeview for the totreevirw func
@@ -504,15 +500,15 @@ class DataPage(tk.Frame):
         self.tree.column('SPECIES', minwidth=0, width=10, anchor=CENTER)
         self.tree.heading('DATE', text='Date')
         self.tree.column('DATE', minwidth=0, width=6, anchor=CENTER)
-        self.tree.grid(row=8, columnspan=4, sticky=tk.NSEW,
+        self.tree.grid(row=7, columnspan=6, sticky=tk.NSEW,
                        padx=1, pady=1, ipadx=1, ipady=1)
 
         # add horz and vert scroll bars to treeview
         self.treescrollbarh = ttk.Scrollbar(
             self, orient='horizontal', command=self.tree.xview)
-        self.tree.configure(xscrollcommand=self.treescrollbarh.set, height=4)
+        self.tree.configure(xscrollcommand=self.treescrollbarh.set, height=5)
         self.treescrollbarh.grid(
-            row=9, columnspan=4, sticky=tk.EW, rowspan=1, padx=1, pady=1, ipadx=1, ipady=1)
+            row=8, columnspan=6, sticky=tk.EW, rowspan=1, padx=1, pady=1, ipadx=1, ipady=1)
 
 
 class MapPage(tk.Canvas):
