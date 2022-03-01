@@ -9,3 +9,5 @@ __pycache__
 settings.py
 Tkinter_template2 copy.py
 mik.py
+blob_storage/
+webrtc_event_logs/
